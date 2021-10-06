@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas">error: browser does not support canvas</canvas>
+    <script>
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = "1000";
+        canvas.height = "1000";
+
+        ctx.fillStyle = "green";
+        ctx.fillRect(10, 10, 150, 100);
+
+
+        class DISPLAY {
+            #LOCK;
+
+            constructor(width, height) {
+                this.WIDTH = width;
+                this.HEIGHT = height;
+                this.PLANE;
+                this.ZOOM;
+                this.#LOCK;
+            }
+
+            putPixel(x, y, color) {
+
+            }
+
+            line(x1, y1, x2, y2, color) {
+
+            }
+
+            circle(x1, y1, radius, color) {
+
+            }
+
+            rectangle(x1, y1, x2, y2, color) {
+
+            }
+
+            clear(color) {
+
+            }
+
+            resize(width, height) {
+
+            }
+
+            textOut(x, y, color, string) {
+
+            }
+
+            scrollLeft() {
+
+            }
+
+            scrollRight() {
+
+            }
+
+            scrollUp() {
+
+            }
+
+            scrollDown() {
+
+            }
+
+            pscrollLeft() {
+
+            }
+
+            pscrollRight() {
+
+            }
+
+            pscrollUp() {
+
+            }
+
+            pscrollDown() {
+
+            }
+
+        }
+
+
+
+        // function render() {
+
+
+
+        //     requestAnimationFrame(render);
+        // }
+        // requestAnimationFrame(render);
+
+    </script>
+</body>
+
+</html>
