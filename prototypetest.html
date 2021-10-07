@@ -6,6 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #canvas {
+            height: 100vmin;
+            width: 100vmin;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,22 +43,23 @@
         canvas.height = "1000";
 
         ctx.fillStyle = "green";
-        ctx.fillRect(10, 10, 150, 100);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
         class DISPLAY {
             #LOCK;
+            // #DSP;
 
             constructor(width, height) {
                 this.WIDTH = width;
                 this.HEIGHT = height;
-                this.PLANE;
-                this.ZOOM;
+                this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));;
+                this.ZOOM = 0;
                 this.#LOCK;
             }
 
             putPixel(x, y, color) {
-
+                this.PLANE[x][y] = color;
             }
 
             line(x1, y1, x2, y2, color) {
@@ -54,7 +75,7 @@
             }
 
             clear(color) {
-
+                this.PLANE = this.PLANE.map(element1 => element1.map(element2 => color));
             }
 
             resize(width, height) {
@@ -101,13 +122,19 @@
 
 
 
-        // function render() {
+        function render() {
+            let scaleX = window.innerWidth / canvas.width;
+            let scaleY = window.innerHeight / canvas.height;
+
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // canvas.style.transformOrigin = '0 0';
+
+            // canvas.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
 
 
-
-        //     requestAnimationFrame(render);
-        // }
-        // requestAnimationFrame(render);
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
 
     </script>
 </body>
