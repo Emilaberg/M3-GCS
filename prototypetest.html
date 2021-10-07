@@ -27,94 +27,10 @@
             width: 100vmin;
         }
 
-        /* Error */
-        .error{
-            color: #ff2616;
-        }
-        .errorDiv{
-            border: 1px solid #ff2616;
-            padding: 20px;
-            text-transform: lowercase;
-            background-color: #fff;
-            box-shadow: 10px 10px #ff2616;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-        }
-        .errorMessage{
-            text-transform: capitalize;
-            padding-left: 20px;
-            font-size: 40px;
-            color: #ff2616;
-        }
-        .errorP{
-            padding: 20px 0;
-            width: 300px;
-        }
-
-        /* Succcess */
-        .successDiv{
-            background-color: #fff;
-            border: 1px solid #4aff3d;
-            padding: 15px;
-            box-shadow: 10px 10px #4aff3d;
-            position: absolute;
-            right: 2%;
-            bottom: 4%;
-        }
-
-        .success{
-            color: #4aff3d;
-        }
-
-        .successMessage{
-            color: #4aff3d;
-            font-size: 40px;
-            text-transform: capitalize;
-            padding-left: 20px;
-        }
-
-        /* Zoom */
-        .zoom{
-            
-        }
-        .zoomIn{
-            border: 1px solid #333;
-            width: 35px;
-            height: 35px;
-            border-radius: 17.5px;
-        }
-        .zoomOut{
-            border: 1px solid #333;
-            width: 35px;
-            height: 35px;
-            border-radius: 17.5px;
-        }
-
     </style>
 </head>
 
 <body>
-
-    <!-- Error -->
-    <div class="errorDiv"> 
-        <i class="fas fa-3x fa-times error"></i>
-        <span class="errorMessage">Errormessage</span>
-        
-        <p class="errorP">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, est?</p>
-    </div>
-
-    <!-- Success -->
-    <div class="successDiv"> 
-        <i class="fas fa-3x fa-check success"></i>
-        <span class="successMessage">Successful</span>
-    </div>
-
-    <!-- Zoom -->
-    <div class="zoom">
-        <div class="zoomIn"></div>
-        <div class="zoomOut"></div>
-    </div>
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
     <script>
