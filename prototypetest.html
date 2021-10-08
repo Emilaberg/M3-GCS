@@ -6,12 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Noto Sans Display', sans-serif;
         }
 
         body {
@@ -36,7 +40,7 @@
             padding: 20px;
             text-transform: lowercase;
             background-color: #fff;
-            box-shadow: 10px 10px #ff2616;
+            box-shadow: 10px 10px 5px rgba(255, 38, 22, 0.25);
             position: absolute;
             left: 50%;
             transform: translate(-50%);
@@ -57,7 +61,7 @@
             background-color: #fff;
             border: 1px solid #4aff3d;
             padding: 15px;
-            box-shadow: 10px 10px #4aff3d;
+            box-shadow: 10px 10px 5px rgba(43, 255, 42, 0.2);
             position: absolute;
             right: 2%;
             bottom: 4%;
@@ -103,43 +107,58 @@
 
         /* Scroll */
         .scrollDiv{
-            /* position: absolute;
-            top: 1%;
-            right: 2%; */
             display: grid;
-            /* grid-template-columns: auto; */
         }
-
-        .fa-arrow-up{
-            /* position: absolute; */
-            /* top: 1%;
-            right: 2%; */
-        }
-
         .up{
             grid-column: 2;
             grid-row: 1;
+            margin: 6px 4px;
         }
         .left{
             /* grid-column: 1; */
             grid-row: 2;
+            margin: 4px;
         }
         .circle{
             /* grid-column: 1 / span 1; */
             grid-row: 2;
+            margin: 4px;
+            text-align: center;
         }
         .right{
             /* grid-column: 1; */
             grid-row: 2;
+            margin: 4px;
         }
         .down{
             grid-column: 2;
             grid-row: 3;
+            margin: 6px 4px;
         }
         .absolute{
             position: absolute;
-            top: 4%;
-            right: 2%;
+        }
+        .e{
+            /* margin: 4px; */
+            text-align: center;
+        }
+        .e:hover{
+            cursor: pointer;
+        }
+
+        /* Button */
+        .btn{
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        .btn:hover{
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
         }
 
     </style>
@@ -168,124 +187,21 @@
     </div>
 
     <!-- Scroll -->
-    <div class="absolute">
+    <div style="top: 4%; right: 2%;" class="absolute">
         <div class="scrollDiv">
             <div class="e up"><i class="fas fa-arrow-up"></i></div>
             <div class="e left"><i class="fas fa-arrow-left"></i></div>
-            <div class="e circle"><i class="far fa-circle"></i></div>
+            <div class="circle"><i class="far fa-circle"></i></div>
             <div class="e right"><i class="fas fa-arrow-right"></i></div>
             <div class="e down"><i class="fas fa-arrow-down"></i></div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn">preserve</button>
         </div>
     </div>
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
-    <script src="code.js">
-
-        // // Matilda was here
-
-        // // .
-
-        // const canvas = document.getElementById('canvas');
-        // const ctx = canvas.getContext('2d');
-
-        // canvas.width = "1000";
-        // canvas.height = "1000";
-
-        // ctx.fillStyle = "green";
-        // ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-
-        // class DISPLAY {
-        //     #LOCK;
-        //     // #DSP;
-
-        //     constructor(width, height) {
-        //         this.WIDTH = width;
-        //         this.HEIGHT = height;
-        //         this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));;
-        //         this.ZOOM = 0;
-        //         this.#LOCK;
-        //     }
-
-        //     putPixel(x, y, color) {
-        //         this.PLANE[x][y] = color;
-        //     }
-
-        //     line(x1, y1, x2, y2, color) {
-
-        //     }
-
-        //     circle(x1, y1, radius, color) {
-
-        //     }
-
-        //     rectangle(x1, y1, x2, y2, color) {
-
-        //     }
-
-        //     clear(color) {
-        //         this.PLANE = this.PLANE.map(element1 => element1.map(element2 => color));
-        //     }
-
-        //     resize(width, height) {
-
-        //     }
-
-        //     textOut(x, y, color, string) {
-
-        //     }
-
-        //     scrollLeft() {
-
-        //     }
-
-        //     scrollRight() {
-
-        //     }
-
-        //     scrollUp() {
-
-        //     }
-
-        //     scrollDown() {
-
-        //     }
-
-        //     pscrollLeft() {
-
-        //     }
-
-        //     pscrollRight() {
-
-        //     }
-
-        //     pscrollUp() {
-
-        //     }
-
-        //     pscrollDown() {
-
-        //     }
-
-        // }
-
-
-
-        // function render() {
-        //     let scaleX = window.innerWidth / canvas.width;
-        //     let scaleY = window.innerHeight / canvas.height;
-
-        //     ctx.fillRect(0, 0, canvas.width, canvas.height);
-        //     // canvas.style.transformOrigin = '0 0';
-
-        //     // canvas.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
-
-
-        //     requestAnimationFrame(render);
-        // }
-        // requestAnimationFrame(render);
-
-    </script>
+    <script src="code.js"></script>
 </body>
 
 </html>
