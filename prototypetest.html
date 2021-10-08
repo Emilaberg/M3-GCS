@@ -39,12 +39,35 @@
             <div class="e down"><i onclick="" class="fas fa-arrow-down"></i></div>
         </div>
         <div style="margin-top: 20px;">
-            <button class="btn">preserve</button>
+            <button onclick="preserveOnOff()" class="btn preserve-btn">preserve</button>
         </div>
     </div>
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
     <script src="code.js"></script>
+    <script>
+
+        let preserve = false;
+
+        function preserveOnOff(){
+            preserve = !preserve;
+
+            if(preserve == true){
+                document.querySelector('.preserve-btn').style.backgroundColor = '#333';
+                document.querySelector('.preserve-btn').style.color = '#fff';
+
+            }
+            else{
+                document.querySelector('.preserve-btn').style.backgroundColor = '#fff';
+                document.querySelector('.preserve-btn').style.color = '#333';
+            }
+
+            return preserve;
+        }
+
+
+
+    </script>
 </body>
 
 </html>
