@@ -32,7 +32,7 @@
     <!-- Scroll -->
     <div style="top: 4%; right: 2%;" class="absolute">
         <div class="scrollDiv">
-            <div class="e up"><i onclick="" class="fas fa-arrow-up"></i></div>
+            <div class="e up"><i onclick="scroll('up')" class="fas fa-arrow-up"></i></div>
             <div class="e left"><i onclick="" class="fas fa-arrow-left"></i></div>
             <div class="circle"><i class="far fa-circle"></i></div>
             <div class="e right"><i onclick="" class="fas fa-arrow-right"></i></div>
@@ -55,17 +55,14 @@
             if(preserve == true){
                 document.querySelector('.preserve-btn').style.backgroundColor = '#333';
                 document.querySelector('.preserve-btn').style.color = '#fff';
-
             }
             else{
                 document.querySelector('.preserve-btn').style.backgroundColor = '#fff';
                 document.querySelector('.preserve-btn').style.color = '#333';
             }
 
-            return preserve;
+            return;
         }
-
-
 
     </script>
 </body>
