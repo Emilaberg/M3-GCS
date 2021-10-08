@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans Display', sans-serif;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#canvas {
+    height: 100vmin;
+    width: 100vmin;
+}
+
+/* Error */
+.error{
+    color: #ff2616;
+}
+.errorDiv{
+    border: 1px solid #ff2616;
+    padding: 20px;
+    text-transform: lowercase;
+    background-color: #fff;
+    box-shadow: 10px 10px 5px rgba(255, 38, 22, 0.25);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+.errorMessage{
+    text-transform: capitalize;
+    padding-left: 20px;
+    font-size: 40px;
+    color: #ff2616;
+}
+.errorP{
+    padding: 20px 0;
+    width: 300px;
+}
+
+/* Succcess */
+.successDiv{
+    background-color: #fff;
+    border: 1px solid #4aff3d;
+    padding: 15px;
+    box-shadow: 10px 10px 5px rgba(43, 255, 42, 0.2);
+    position: absolute;
+    right: 2%;
+    bottom: 4%;
+}
+
+.success{
+    color: #4aff3d;
+}
+
+.successMessage{
+    color: #4aff3d;
+    font-size: 30px;
+    text-transform: capitalize;
+    padding: 0 10px 0 20px;
+    font-weight: bold;
+}
+
+/* Zoom */
+.zoom{
+    position: absolute;
+    display: flex;
+    bottom: 4%;
+    right: 2%;
+}
+.zoomIn{
+    border: 1px solid #333;
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+.zoomOut{
+    border: 1px solid #333;
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
+    background-color: #fff;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+}
+
+/* Scroll */
+.scrollDiv{
+    display: grid;
+}
+.up{
+    grid-column: 2;
+    grid-row: 1;
+    margin: 6px 4px;
+}
+.left{
+    /* grid-column: 1; */
+    grid-row: 2;
+    margin: 4px;
+}
+.circle{
+    /* grid-column: 1 / span 1; */
+    grid-row: 2;
+    margin: 4px;
+    text-align: center;
+}
+.right{
+    /* grid-column: 1; */
+    grid-row: 2;
+    margin: 4px;
+}
+.down{
+    grid-column: 2;
+    grid-row: 3;
+    margin: 6px 4px;
+}
+.absolute{
+    position: absolute;
+}
+.e{
+    /* margin: 4px; */
+    text-align: center;
+}
+.e:hover{
+    cursor: pointer;
+}
+
+/* Button */
+.btn{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.btn:hover{
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
