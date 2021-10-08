@@ -3,19 +3,11 @@
 
 // .
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
 
-canvas.width = "1000";
-canvas.height = "1000";
-
-ctx.fillStyle = "green";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
 class DISPLAY {
     #LOCK;
-    // #DSP;
 
     constructor(width, height) {
         this.WIDTH = width;
@@ -27,6 +19,7 @@ class DISPLAY {
 
     putPixel(x, y, color) {
         this.PLANE[x][y] = color;
+        // this.PLANE[y*this.width+x] = color
     }
 
     line(x1, y1, x2, y2, color) {
@@ -42,11 +35,11 @@ class DISPLAY {
     }
 
     clear(color) {
-        this.PLANE = this.PLANE.map(element1 => element1.map(element2 => color));
+        return this.PLANE.map(element1 => element1.map(element2 => color));
     }
 
     resize(width, height) {
-
+        this.PLANE = this.PLANE
     }
 
     textOut(x, y, color, string) {
@@ -85,18 +78,26 @@ class DISPLAY {
 
     }
 
+    zoom(zoomVal) {
+
+    }
+
 }
 
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = "1000";
+canvas.height = "1000";
 
 
 function render() {
-    let scaleX = window.innerWidth / canvas.width;
-    let scaleY = window.innerHeight / canvas.height;
-
+    ctx.fillStyle = "green";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // canvas.style.transformOrigin = '0 0';
 
-    // canvas.style.transform = 'scale(' + Math.min(scaleX, scaleY) + ')';
+    ctx.fillStyle = "blue";
+    ctx.fillRect(10, 10, 100, 50);
+    ctx.fillRect(500, 500, 1, 1);
 
 
     requestAnimationFrame(render);
