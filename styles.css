@@ -24,7 +24,9 @@ button{
     color: black;
     text-align: center;
     text-transform: uppercase;
-    
+    letter-spacing: 2px;
+    font-weight: bold;
+    padding: 10px;
 }
 button:hover{
     background-color: #e2e2e2;
