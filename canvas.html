@@ -5,10 +5,151 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header></header>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div class="shapes">
+                    <button class="shapesBtn" onclick="onClick()" ><span id="shapes">shapes</span><i class="fal fa-arrow-alt-down" style="font-size: 18px;"></i></button>
+                    <div class="dropdown" id="options">
+                        <button onclick="renderResize()">resize</button>
+                        <button onclick="renderInputs(0)">circle</button>
+                        <button onclick="renderInputs(1)">rectangle</button>
+                        <button onclick="renderInputs(2)">line</button>
+                    </div>
+                </div>
+                
+                <div class="text-command">
+                    <div>
+                        <button>Command</button>
+                        <button>Text</button>
+                    </div>
+                    
+                    <textarea name="" id="" cols="20" rows="2" placeholder="Text..."></textarea>
+                </div> 
+            </div>
+            
+            <div class="navbar-right">
+                <div class="numbers" id="numbers">
+                </div>
+
+                <div class="inputs">
+                    <span class="colors"></span>
+                    <span class="number"></span>
+                    <hr>
+                </div>
+                
+                <div class="run-clear">
+                    <button onclick="alert('you pressed run')">run</button>
+                    <button id="clear" onclick="alert('you pressed clear')">clear</button>
+                </div>
+            </div>
+
+        </nav>
+    </header>
 
     <canvas></canvas>
 </body>
 </html>
+
+<script>
+    let dropDown = document.getElementById("options");
+    let circle = document.getElementById("shapes");
+
+
+    function onClick()
+    {
+        console.log("yes")
+        
+        if(dropDown.style.visibility == "visible")
+        {
+            dropDown.style.visibility = "hidden";
+        }
+        else
+        {
+            dropDown.style.visibility = "visible";
+        }
+    }
+
+
+    let inputs = {
+        // 
+        X1: {
+            "name":"X1",
+            "type":"text",
+            "placeholder" :"X1",
+        },
+        X2: {
+            "name":"X2",
+            "type":"text",
+            "placeholder":"X2"
+        },
+        Y1: 
+        {
+            "name":"Y1",
+            "type":"text",
+            "placeholder":"Y1"
+        },
+        Y2: 
+        {
+            "name":"Y2",
+            "type":"text",
+            "placeholder":"Y2"
+        },
+        RADIUS: 
+        {
+            "name":"radius",
+            "type":"text",
+            "placeholder":"r",
+        },
+
+    };
+
+    let arr = [
+        //Circle
+        ['X1', 'X2', 'RADIUS'],
+        //Rectangle
+        [ 'X1' , 'X2' , 'Y1' , 'Y2' ],
+        //line
+        [ 'X1' , 'X2' , 'Y1' , 'Y2' ],
+
+        [ 'circle', 'rectangle', 'line']
+
+    ];
+
+    function renderInputs(func)
+    {
+        let el = document.getElementById('numbers');
+
+        el.innerHTML = '';
+
+        for (let i = 0; i < arr[func].length; i++)
+        {
+            el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}">`;
+        }
+
+        circle.innerHTML = arr[3][func];
+        dropDown.style.visibility = "hidden";
+    }
+
+    function renderResize()
+    {
+        let el = document.getElementById('numbers');
+
+        el.innerHTML = '';
+        el.innerHTML += `<button onclick="renderResizeBtn()" style="padding: 10px; box-shadow: black 2px 2px;">resize</button>`;
+        dropDown.style.visibility = "hidden";
+        circle.innerHTML = "resize";
+    }
+
+    function renderResizeBtn()
+    {
+        let el = document.getElementById('numbers');
+
+        el.innerHTML = '';
+        el.innerHTML += `<div style="display: flex; align-items:stretch; gap: 6px; background-color: #fefefe; padding: 6px; border-radius: 4px; box-shadow: rgba(39, 36, 36, 0.287) 4px 4px;"><span style="margin:auto; font-size: 22px;">RESIZE</span><input type="text" placeholder="W"><input type="text" placeholder="H"></div>` 
+    }
+
+</script>
