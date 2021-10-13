@@ -142,15 +142,15 @@ class DISPLAY {
         let temparray = new Array(this.WIDTH);
         for (let x = 0; x < this.WIDTH; x++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            temparray[x] = this.PLANE[x][0];
+            temparray[x] = this.PLANE[x][this.HEIGHT-1];
         }
-        for (let y = 0; y < 0; y++) {
+        for (let y = this.HEIGHT; y > 0; y--) {
             for (let x = 0; x < this.WIDTH; x++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                this.PLANE[x][y+1] = this.PLANE[x][y];
+                this.PLANE[x][y] = this.PLANE[x][y-1];
             }
         }
-        for (let x = 0; x <= this.WIDTH; x++) {
+        for (let x = 0; x < this.WIDTH; x++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
             this.PLANE[x][0] = temparray[x];
         }
@@ -170,7 +170,7 @@ class DISPLAY {
         }
         for (let x = 0; x < this.WIDTH; x++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            temparray[x] = this.PLANE[x][this.HEIGHT-1];
+            this.PLANE[x][this.HEIGHT-1] = temparray[x];
         }
     }
 
