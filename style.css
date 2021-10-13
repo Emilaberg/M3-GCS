@@ -13,8 +13,10 @@ body {
 }
 
 #canvas {
-    height: 100vmin;
-    width: 100vmin;
+    /* min-height: 100vmin;
+    min-width: 100vmin; */
+    height: 4000%;
+    background-color: #4aff3d;
 }
 
 /* Error */
@@ -116,6 +118,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
+    border: 1px solid #333;
 }
 .btn:hover{
     background-color: #333;

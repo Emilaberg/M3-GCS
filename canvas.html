@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,22 +17,23 @@
         <nav class="navbar">
             <div class="navbar-left">
                 <div class="shapes">
-                    <button class="shapesBtn" onclick="onClick()" ><span id="shapes">shapes</span><i class="fal fa-arrow-alt-down" style="font-size: 18px;"></i></button>
+                    <button class="shapesBtn btn" onclick="onClick()" ><span id="shapes">shapes</span><i class="fal fa-arrow-alt-down" style="font-size: 18px;"></i></button>
                     <div class="dropdown" id="options">
-                        <button onclick="renderResize()">resize</button>
-                        <button onclick="renderInputs(0)">circle</button>
-                        <button onclick="renderInputs(1)">rectangle</button>
-                        <button onclick="renderInputs(2)">line</button>
+                        <button class="btn" onclick="renderResize()">resize</button>
+                        <button class="btn" onclick="renderInputs(0)">circle</button>
+                        <button class="btn" onclick="renderInputs(1)">rectangle</button>
+                        <button class="btn" onclick="renderInputs(2)">line</button>
+                        <button class="btn" onclick="renderInputs(3)">pixel</button>
                     </div>
                 </div>
                 
                 <div class="text-command">
-                    <div>
-                        <button>Command</button>
-                        <button>Text</button>
+                    <div style="margin-right: 15px;">
+                        <button onclick="btnOn('command')" class="btn command-btn">Command</button>
+                        <button onclick="btnOn('text')" class="btn text-btn">Text</button>
                     </div>
                     
-                    <textarea name="" id="" cols="20" rows="2" placeholder="Text..."></textarea>
+                    <textarea name="" id="" cols="40" rows="2" placeholder="Text..."></textarea>
                 </div> 
             </div>
             
@@ -44,8 +49,8 @@
                 </div>
                 
                 <div class="run-clear">
-                    <button onclick="alert('you pressed run')">run</button>
-                    <button id="clear" onclick="alert('you pressed clear')">clear</button>
+                    <button class="btn" onclick="alert('you pressed run')">run</button>
+                    <button class="btn" id="clear" onclick="alert('you pressed clear')">clear</button>
                 </div>
             </div>
 
@@ -53,6 +58,7 @@
 
         
     </header>
+
     <!-- Scroll -->
     <div style="top: 15%; right: 2%;" class="absolute">
         <div class="scrollDiv">
@@ -63,14 +69,81 @@
             <div class="e down"><i onclick="" class="fas fa-arrow-down"></i></div>
         </div>
         <div style="margin-top: 20px;">
-            <button onclick="preserveOnOff()" class="btn preserve-btn">preserve</button>
+            <button onclick="btnOn('preserve')" class="btn preserve-btn">preserve</button>
         </div>
     </div>
-    <canvas></canvas>
+
+    <!-- Error -->
+
+    <!-- Error -->
+    <div class="errorDiv"> 
+        <i class="fas fa-2x fa-times error"></i>
+        <span class="errorMessage">Errormessage</span>
+        
+        <p class="errorP">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, est?</p>
+    </div>
+
+    <!-- Success -->
+    <div class="successDiv"> 
+        <i class="fas fa-2x fa-check success"></i>
+        <span class="successMessage">Successful</span>
+    </div>
+
+        <canvas id="canvas">error: browser does not support canvas</canvas>
+
 </body>
 </html>
 
 <script>
+
+    let canvas = document.querySelector('canvas');
+
+    let preserve = false;
+    let command = false;
+    let text = false;
+
+    function btnOn(btn){
+        if(btn == 'preserve'){
+            preserve = !preserve;
+
+            if(preserve == true){
+                document.querySelector(`.${btn}-btn`).style.backgroundColor = '#333';
+                document.querySelector('.preserve-btn').style.color = '#fff';
+            }
+            else{
+                document.querySelector('.preserve-btn').style.backgroundColor = '#fff';
+                document.querySelector('.preserve-btn').style.color = '#333';
+            }
+        }
+        else if(btn == 'command'){
+            command = !command;
+
+            if(command == true){
+                document.querySelector('.command-btn').style.backgroundColor = '#333';
+                document.querySelector('.command-btn').style.color = '#fff';
+            }
+            else{
+                document.querySelector('.command-btn').style.backgroundColor = '#fff';
+                document.querySelector('.command-btn').style.color = '#333';
+            }
+        }
+        else if(btn == 'text'){
+            text = !text;
+
+            if(text == true){
+                document.querySelector('.text-btn').style.backgroundColor = '#333';
+                document.querySelector('.text-btn').style.color = '#fff';
+            }
+            else{
+                document.querySelector('.text-btn').style.backgroundColor = '#fff';
+                document.querySelector('.text-btn').style.color = '#333';
+            }
+        }
+        
+
+        return;
+    }
+
     let dropDown = document.getElementById("options");
     let circle = document.getElementById("shapes");
 
