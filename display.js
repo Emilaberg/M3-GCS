@@ -739,15 +739,17 @@ class BITMAP {
         this.PLANE;
     }
 
-    bitmapMaker(q) {
-        let bitmap = new Array(7*q).fill(0).map(() => new Array(8).fill(0));
-
+    bitmapMaker(character) {
+        let q = character.length;
+        let bitmap = new Array(8).fill(0).map(() => new Array(7*q).fill(0));
+        
         // bitmap = chars['@'];
         let temp = "";
-
-        for(let i = 0; i < 7; i++) {
-            for(let j = 0; j < 7; j++) {
-                bitmap[j][i] = chars['@'][i*7+j];
+        for(let a = 0; a < q; a++){
+            for(let i = 0; i < 7; i++) {
+                for(let j = 0; j < 8; j++) {
+                    bitmap[j][i + (7*a)] = chars[character[a]][j*7+i];
+                }
             }
         }
         console.log(bitmap);
