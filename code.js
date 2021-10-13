@@ -54,9 +54,9 @@ class DISPLAY {
                 this.PLANE[x][y] = this.PLANE[x+1][y];
             }
         }
-        for (let y = 1; y <= this.HEIGHT; y++) {
+        for (let y = 0; y <= this.HEIGHT; y++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[this.WIDTH][y] = 255;
+            this.PLANE[this.WIDTH-1][y] = 255;
         }
         console.log("ScrollLeft avslutas");
     }
@@ -77,17 +77,26 @@ class DISPLAY {
     }
 
     scrollUp() {
-        
+        for (let y = 0; y < 0; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x][y+1] = this.PLANE[x][y];
+            }
+        }
+        for (let x = 0; x <= this.WIDTH; x++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[x][0] = 255;
+        }
     }
 
     scrollDown() {
         for (let y = this.HEIGHT; y < 0; y--) {
-            for (let x = 1; x <= this.WIDTH; x++) {
+            for (let x = 0; x < this.WIDTH; x++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
                 this.PLANE[x][y] = this.PLANE[x][y+1];
             }
         }
-        for (let x = 1; x <= this.WIDTH; x++) {
+        for (let x = 0; x <= this.WIDTH; x++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
             this.PLANE[x][0] = 255;
         }
@@ -107,12 +116,26 @@ class DISPLAY {
         }
         for (let y = 0; y < this.HEIGHT; y++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[this.WIDTH][y] = temparray[y];
+            this.PLANE[this.WIDTH-1][y] = temparray[y];
         }
     }
 
     pscrollRight() {
-
+        let temparray = new Array(this.HEIGHT);
+        for (let y = 0; y < this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            temparray[y] = this.PLANE[this.WIDTH-1][y];
+        }
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x][y] = this.PLANE[x+1][y];
+            }
+        }
+        for (let y = 0; y < this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[this.WIDTH-1][y] = temparray[y];
+        }
     }
 
     pscrollUp() {
