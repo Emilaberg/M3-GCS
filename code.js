@@ -47,6 +47,7 @@ class DISPLAY {
     }
 
     scrollLeft() {
+        console.log("ScrollLeft påbörjas");
         for (let x = 1; x < this.WIDTH; x++) {
             for (let y = 1; y < this.HEIGHT; y++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
@@ -57,10 +58,12 @@ class DISPLAY {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
             this.PLANE[this.WIDTH][y] = 255;
         }
+        console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
-        for (let x = this.WIDTH; x > 0; x++) {
+        console.log("ScrollRight påbörjad");
+        for (let x = this.WIDTH; x > 0; x--) {
             for (let y = 1; y <= this.HEIGHT; y++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
                 this.PLANE[x+1][y] = this.PLANE[x][y];
@@ -70,18 +73,37 @@ class DISPLAY {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
             this.PLANE[0][y] = 255;
         }
+        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
-
+        
     }
 
     scrollDown() {
-
+        for (let y = this.HEIGHT; y < 0; y--) {
+            for (let x = 1; x <= this.WIDTH; x++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x][y] = this.PLANE[x][y+1];
+            }
+        }
+        for (let x = 1; x <= this.WIDTH; x++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[x][0] = 255;
+        }
     }
 
     pscrollLeft() {
-
+        for (let x = 1; x < this.WIDTH; x++) {
+            for (let y = 1; y < this.HEIGHT; y++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x][y] = this.PLANE[x+1][y];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[this.WIDTH][y] = 255;
+        }
     }
 
     pscrollRight() {
@@ -121,4 +143,3 @@ function render() {
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
-ctx.scrollLeft();
