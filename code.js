@@ -47,11 +47,29 @@ class DISPLAY {
     }
 
     scrollLeft() {
-
+        for (let x = 1; x < this.WIDTH; x++) {
+            for (let y = 1; y < this.HEIGHT; y++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x][y] = this.PLANE[x+1][y];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[this.WIDTH][y] = 255;
+        }
     }
 
     scrollRight() {
-
+        for (let x = this.WIDTH; x > 0; x++) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[x+1][y] = this.PLANE[x][y];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            this.PLANE[0][y] = 255;
+        }
     }
 
     scrollUp() {
@@ -103,3 +121,4 @@ function render() {
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
+ctx.scrollLeft();
