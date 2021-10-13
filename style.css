@@ -15,6 +15,7 @@ body {
 #canvas {
     height: 100vmin;
     width: 100vmin;
+    background-color: #333;
 }
 
 /* Error */
