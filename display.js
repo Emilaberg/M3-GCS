@@ -1,3 +1,11 @@
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = "1000";
+canvas.height = "1000";
+
+
+
 const transpose = m => m[0].map((x,i) => m.map(x => x[i]));
 class DISPLAY {
     #LOCK;
@@ -6,7 +14,7 @@ class DISPLAY {
         this.WIDTH = width;
         this.HEIGHT = height;
         // this.PLANE = new Array(width * height).fill(0);
-        this.PLANE = new Array(width).fill("").map(element => new Array(height).fill(""));
+        this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
         this.ZOOM = 0;
         this.#LOCK;
     }
@@ -57,15 +65,15 @@ class DISPLAY {
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
                 if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4 * (f(i)(j) ** 2 ) - A2 <= 0) {
-                    this.PLANE[i][j] = "█";
+                    this.PLANE[i][j] = color;
                 }
             }
         }
         // console.log(this.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1","⎯").replaceAll("1","|"));
         // console.log(transpose(this.PLANE).map(element => element.join(" "))
         //     .join("\n").replaceAll("-1", "-").replaceAll("1", "+"));
-        console.log(transpose(this.PLANE).map(element => element.join(" "))
-            .join("\n").replaceAll("0", " ").replaceAll("1", "+"));
+        // console.log(transpose(this.PLANE).map(element => element.join(" "))
+        //     .join("\n").replaceAll("0", " ").replaceAll("1", "+"));
     }
 
     circle(x1, y1, diameter, color) {
@@ -151,6 +159,15 @@ class DISPLAY {
 
     pscrollDown() {
 
+    }
+
+    render() {
+        for(let i = 0; i < this.WIDTH; i++) {
+            for(let j = 0; j < this.HEIGHT; j++) {
+                ctx.fillStyle = 'rgb('+this.PLANE[i][j]+','+this.PLANE[i][j]+','+this.PLANE[i][j]+')';
+                ctx.fillRect(i, j, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
+            }
+        }
     }
 }
 
