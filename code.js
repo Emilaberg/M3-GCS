@@ -48,8 +48,8 @@ class DISPLAY {
 
     scrollLeft() {
         console.log("ScrollLeft påbörjas");
-        for (let x = 1; x < this.WIDTH; x++) {
-            for (let y = 1; y < this.HEIGHT; y++) {
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
                 this.PLANE[x][y] = this.PLANE[x+1][y];
             }
@@ -64,12 +64,12 @@ class DISPLAY {
     scrollRight() {
         console.log("ScrollRight påbörjad");
         for (let x = this.WIDTH; x > 0; x--) {
-            for (let y = 1; y <= this.HEIGHT; y++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
                 this.PLANE[x+1][y] = this.PLANE[x][y];
             }
         }
-        for (let y = 1; y <= this.HEIGHT; y++) {
+        for (let y = 0; y < this.HEIGHT; y++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
             this.PLANE[0][y] = 255;
         }
@@ -94,15 +94,20 @@ class DISPLAY {
     }
 
     pscrollLeft() {
-        for (let x = 1; x < this.WIDTH; x++) {
-            for (let y = 1; y < this.HEIGHT; y++) {
+        let temparray = new Array(this.HEIGHT);
+        for (let y = 0; y < this.HEIGHT; y++) {
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            temparray[y] = this.PLANE[0][y];
+        }
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
                 //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
                 this.PLANE[x][y] = this.PLANE[x+1][y];
             }
         }
-        for (let y = 1; y <= this.HEIGHT; y++) {
+        for (let y = 0; y < this.HEIGHT; y++) {
             //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[this.WIDTH][y] = 255;
+            this.PLANE[this.WIDTH][y] = temparray[y];
         }
     }
 
