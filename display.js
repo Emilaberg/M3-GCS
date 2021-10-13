@@ -854,7 +854,7 @@ class DISPLAY {
     }
 
     textOut(x, y, color, string) {
-
+        
     }
 
     scrollLeft() {
