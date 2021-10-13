@@ -73,11 +73,11 @@ button:hover{
 .text-command div{
     display: flex ;
     flex-direction: column;
+    margin-right: 15px;
 }
 
 .text-command textarea{
     display: flex;
-    /* margin: auto 10px auto 10px; */
     resize: none;
     border-radius: 3px;
 }
@@ -91,8 +91,7 @@ button:hover{
 
 .numbers{
     display: flex;
-    gap: 10px;
-    /* visibility: hidden; */
+    gap: 10px; 
 }
 
 .numbers input{
@@ -103,33 +102,27 @@ button:hover{
     text-align: center;
 }
 
-
-.number{
-    display: inline-block;
-    background-color: white;
-    min-height: 1.5rem;
-    min-width: 2rem;
+/* colors */
+.inputs div{
+    height: 1.7rem;
+    width: 2.5rem;
+    background-color: black;
+    margin: auto;
     border-radius: 6px;
+}
+.inputs input{
+    height: 1.7rem;
+    width: 2.5rem;
+    margin: auto;
     text-align: center;
-    border: 1px solid black;
-}
-
-
-.colors{
-    display: inline-block;
-    background-color: black;
-    height: 1.5rem;
-    width: 2rem;
-    border: 1px solid #fefefe;
+    border: none;
     border-radius: 6px;
-    
 }
 
-.inputs hr{
-    background-color: black;
-    border: 2px solid black;
-    border-radius: 4px;
-    margin-top: 4px;
+.inputs{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;   
 }
 
 .run-clear{
@@ -167,6 +160,7 @@ button:hover{
     padding: 0px 13px 0px 13px;
     border-bottom: 1px solid black;
 }
+
 #shapes{
     padding: 10px;
 }
@@ -186,7 +180,7 @@ button:hover{
 .errorDiv{
     border: 1px solid #ff2616;
     padding: 20px;
-    /* text-transform: lowercase; */
+    
     background-color: #fff;
     box-shadow: 10px 10px 5px rgba(255, 38, 22, 0.25);
     position: absolute;
@@ -239,18 +233,18 @@ button:hover{
     margin: 6px 4px;
 }
 .left{
-    /* grid-column: 1; */
+    
     grid-row: 2;
     margin: 4px;
 }
 .circle{
-    /* grid-column: 1 / span 1; */
     grid-row: 2;
     margin: 4px;
     text-align: center;
+    cursor: pointer;
 }
 .right{
-    /* grid-column: 1; */
+    
     grid-row: 2;
     margin: 4px;
 }
@@ -263,7 +257,7 @@ button:hover{
     position: absolute;
 }
 .e{
-    /* margin: 4px; */
+    
     text-align: center;
 }
 .e:hover{
