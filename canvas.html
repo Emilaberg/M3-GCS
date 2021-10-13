@@ -18,22 +18,23 @@
                 <div class="shapes">
                     <button class="shapesBtn btn" onclick="onClick()" ><span id="shapes">shapes</span><i class="fal fa-arrow-alt-down" style="font-size: 18px;"></i></button>
                     <div class="dropdown" id="options">
-                        <button class="btn" onclick="renderResize()">resize</button>
-                        <button class="btn" onclick="renderInputs(0)">circle</button>
-                        <button class="btn" onclick="renderInputs(1)">rectangle</button>
-                        <button class="btn" onclick="renderInputs(2)">line</button>
-                        <button class="btn" onclick="renderInputs(3)">pixel</button>
+                        <button onclick="renderResize()">resize</button>
+                        <button onclick="renderInputs(0)">circle</button>
+                        <button onclick="renderInputs(1)">rectangle</button>
+                        <button onclick="renderInputs(2)">line</button>
+                        <button onclick="renderInputs(3)">pixel</button>
                     </div>
                 </div>
                 
-                <div class="text-command">
-                    <div style="margin-right: 15px;">
-                        <button onclick="btnOn('command')" class="btn command-btn">Command</button>
-                        <button onclick="btnOn('text')" class="btn text-btn">Text</button>
+                <div class="text-command" id="text-command">
+                    <div>
+                        <button onclick="renderCommand()">Command</button>
+                        <button onclick="renderParser()">Text</button>
                     </div>
                     
                     <textarea name="" id="" cols="40" rows="2" placeholder="Text..."></textarea>
-                </div> 
+                </div>
+                 
             </div>
             
             <div class="navbar-right">
@@ -41,10 +42,8 @@
                     
                 </div>
 
-                <div class="inputs">
-                    <span class="colors"></span>
-                    <span class="number"></span>
-                    <hr>
+                <div class="inputs" id="color">
+                    
                 </div>
                 
                 <div class="run-clear">
@@ -61,11 +60,11 @@
     <!-- Scroll -->
     <div style="top: 15%; right: 2%;" class="absolute">
         <div class="scrollDiv">
-            <div class="e up"><i onclick="scroll('up')" class="fas fa-arrow-up"></i></div>
-            <div class="e left"><i onclick="" class="fas fa-arrow-left"></i></div>
-            <div class="circle"><i class="far fa-circle"></i></div>
-            <div class="e right"><i onclick="" class="fas fa-arrow-right"></i></div>
-            <div class="e down"><i onclick="" class="fas fa-arrow-down"></i></div>
+            <div class="e up"><i onclick="alert('you pressed up')" class="fas fa-arrow-up"></i></div>
+            <div class="e left"><i onclick="alert('you pressed left')" class="fas fa-arrow-left"></i></div>
+            <div class="circle"><i class="far fa-circle" onclick="alert('you pressed clear')"></i></div>
+            <div class="e right"><i onclick="alert('you pressed right')" class="fas fa-arrow-right"></i></div>
+            <div class="e down"><i onclick="alert('you pressed down')" class="fas fa-arrow-down"></i></div>
         </div>
         <div style="margin-top: 20px;">
             <button onclick="btnOn('preserve')" class="btn preserve-btn">preserve</button>
@@ -145,7 +144,7 @@
 
     let dropDown = document.getElementById("options");
     let circle = document.getElementById("shapes");
-
+    let colorBtn = document.getElementById("color");
 
     function onClick()
     {
@@ -186,6 +185,12 @@
             "type":"text",
             "placeholder":"Y2"
         },
+        COLOR: 
+        {
+            "name":"color",
+            "type":"text",
+            "placeholder":"Color"
+        },
         RADIUS: 
         {
             "name":"radius",
@@ -193,24 +198,27 @@
             "placeholder":"r",
         },
 
+
     };
 
     let arr = [
         //Circle
         ['X1', 'X2', 'RADIUS'],
         //Rectangle
-        [ 'X1' , 'X2' , 'Y1' , 'Y2' ],
+        [ 'X1' , 'X2' , 'Y1' , 'Y2'],
         //line
-        [ 'X1' , 'X2' , 'Y1' , 'Y2' ],
-
-        [ 'circle', 'rectangle', 'line']
-
+        [ 'X1' , 'X2' , 'Y1' , 'Y2'],
+        //pixel
+        [ 'X1', 'Y1'],
+        //names
+        [ 'circle', 'rectangle', 'line', 'pixel']
+        
     ];
 
     function renderInputs(func)
     {
         let el = document.getElementById('numbers');
-
+        let colorBtn = document.getElementById("color");
         el.innerHTML = '';
 
         for (let i = 0; i < arr[func].length; i++)
@@ -218,8 +226,9 @@
             el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}">`;
         }
 
-        circle.innerHTML = arr[3][func];
+        circle.innerHTML = arr[4][func];
         dropDown.style.visibility = "hidden";
+        colorBtn.innerHTML = `<input type="text" name="color" placeholder="color"><div></div>`
     }
 
     function renderResize()
@@ -238,6 +247,23 @@
 
         el.innerHTML = '';
         el.innerHTML += `<div style="display: flex; align-items:stretch; gap: 6px; background-color: #fefefe; padding: 6px; border-radius: 4px; box-shadow: rgba(39, 36, 36, 0.287) 4px 4px;"><span style="margin:auto; font-size: 22px;">RESIZE</span><input type="text" placeholder="W"><input type="text" placeholder="H"></div>` 
+    }
+
+    function renderCommand()
+    {
+        
+        let textCommand = document.getElementById("text-command");
+
+        textCommand.innerHTML = '';
+        textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+    }
+
+    function renderParser()
+    {
+        let parser = document.getElementById("text-command");
+
+        parser.innerHTML = '';
+        parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
     }
 
 </script>
