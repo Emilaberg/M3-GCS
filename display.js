@@ -752,6 +752,9 @@ class BITMAP {
                 }
             }
         }
+        this.PLANE = bitmap;
+        this.HEIGHT = 8;
+        this.WIDTH = 7*q;
         console.log(bitmap);
     }
 }
