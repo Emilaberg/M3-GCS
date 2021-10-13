@@ -732,7 +732,27 @@ empty: [0,0,0,0,0,0,0,
     ],
 }
 
+class BITMAP {
+    constructor() {
+        this.WIDTH;
+        this.HEIGHT;
+        this.PLANE;
+    }
 
+    bitmapMaker(q) {
+        let bitmap = new Array(7*q).fill(0).map(() => new Array(8).fill(0));
+
+        // bitmap = chars['@'];
+        let temp = "";
+
+        for(let i = 0; i < 7; i++) {
+            for(let j = 0; j < 7; j++) {
+                bitmap[j][i] = chars['@'][i*7+j];
+            }
+        }
+        console.log(bitmap);
+    }
+}
 
 const transpose = m => m[0].map((x,i) => m.map(x => x[i]));
 class DISPLAY {
@@ -854,6 +874,10 @@ class DISPLAY {
     }
 
     textOut(x, y, color, string) {
+
+    }
+
+    textOut2(x, y, color, string) {
 
     }
 
