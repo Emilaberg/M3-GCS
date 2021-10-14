@@ -979,14 +979,11 @@ class DISPLAY {
 //     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
 // }
 
-<<<<<<< HEAD
 let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 hello.circle(0, 0, 40, 5);
-=======
 
 let hello = new DISPLAY(200, 200);
 // hello.circle(0, 0, 40, 5);
->>>>>>> 8b8b89f530449456c141cc4c709aa8e5dd5bea15
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
