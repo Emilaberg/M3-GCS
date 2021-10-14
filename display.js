@@ -1,9 +1,11 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = "1000";
-canvas.height = "1000";
+// canvas.width = "1000";
+// canvas.height = "1000";
 
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerHeight;
 
 
 let chars = {
@@ -982,6 +984,8 @@ class DISPLAY {
 //     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
 // }
 
+let hello = new DISPLAY(window.innerWidth,window.innerHeight);
+hello.circle(0, 0, 40, 5);
 
 let hello = new DISPLAY(100, 100);
 // hello.circle(0, 0, 40, 5);
