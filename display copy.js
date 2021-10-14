@@ -930,7 +930,7 @@ class DISPLAY {
         for(let i = 0; i < this.WIDTH; i++) {
             for(let j = 0; j < this.HEIGHT; j++) {
                 ctx.fillStyle = 'rgb('+this.PLANE[i][j]+','+this.PLANE[i][j]+','+this.PLANE[i][j]+')';
-                ctx.fillRect(i, j, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
+                ctx.fillRect(i*canvas.width/this.WIDTH, j*canvas.height/this.HEIGHT, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
             }
         }
     }
