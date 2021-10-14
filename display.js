@@ -871,6 +871,7 @@ class DISPLAY {
 
     resize(width, height) {
         this.PLANE = this.PLANE
+        this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
     }
 
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
