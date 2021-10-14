@@ -871,6 +871,21 @@ class DISPLAY {
 
     resize(width, height) {
         this.PLANE = this.PLANE
+        this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
+    }
+
+    blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
+        for(let i = x; i < this.WIDTH && i-x < BITMAP.WIDTH; i++) {
+            for(let j = y; j < this.HEIGHT && j-y < BITMAP.HEIGHT; j++) {
+                if(BITMAP.PLANE[j-y][i-x] === 1) {
+                    this.PLANE[j][i] = color;
+                }
+            }
+        }
+    }
+
+    blitToBitmap(BITMAP, width, height, bx, by, dx, dy) {
+        
     }
 
     textOut(x, y, color, string) {
@@ -884,10 +899,6 @@ class DISPLAY {
                 }
             }
         }
-    }
-
-    textOut2(x, y, color, string) {
-
     }
 
     scrollLeft() {
