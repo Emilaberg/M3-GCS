@@ -768,8 +768,8 @@ class DISPLAY {
     constructor(width, height) {
         this.WIDTH = width;
         this.HEIGHT = height;
-        // this.PLANE = new Array(width * height).fill(0);
-        this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
+        this.PLANE = new Array(width * height).fill(0);
+        // this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
         this.ZOOM = 0;
         this.#LOCK;
     }
@@ -786,7 +786,8 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; i < this.HEIGHT; j++) {
                 if (domain(i)(j)) {
-                    this.PLANE[i][j] = func(i)(j);
+                    // this.PLANE[i][j] = func(i)(j);
+                    this.PLANE[this.to1D(i,j)] = func(i)(j);
                 }
             }
         }
@@ -818,7 +819,7 @@ class DISPLAY {
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
                 if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && (f(i)(j) ** 2 )/4 - A2 <= 0) {
-                    this.PLANE[i][j] = color;
+                    this.PLANE[this.to1D(i,j)] = color;
                 }
             }
         }  
@@ -830,11 +831,11 @@ class DISPLAY {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (diameter % 2 === 0) {
                     if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) <= radius ** 2) {
-                        this.PLANE[i][j] = color;
+                        this.PLANE[this.to1D(i,j)] = color;
                     }
                 } else {
                     if (((i - x1) ** 2 + (j - y1) ** 2) <= radius ** 2) {
-                        this.PLANE[i][j] = color;
+                        this.PLANE[this.to1D(i,j)] = color;
                     }
                 }
             }
@@ -850,7 +851,7 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (i >= x1 && i <= x2 && j >= y1 && j <= y2) {
-                    this.PLANE[i][j] = color;
+                    this.PLANE[this.to1D(i,j)] = color;
                 }
             }
         }
@@ -888,14 +889,17 @@ class DISPLAY {
         for(let i = x; i < this.WIDTH && i-x < temp.WIDTH; i++) {
             for(let j = y; j < this.HEIGHT && j-y < temp.HEIGHT; j++) {
                 if(temp.PLANE[j-y][i-x] === 1) {
-                    this.PLANE[i][j] = color;
+                    this.PLANE[this.to1D(i,j)] = color;
                 }
             }
         }
     }
 
     scrollLeft() {
-
+        for(let i = 1; i < this.WIDTH; i++) {
+            this.PLANE[i-1] = this.PLANE[i];
+        }
+        this.PLANE[this.WIDTH-1] = this.PLANE[0];
     }
 
     scrollRight() {
@@ -927,10 +931,12 @@ class DISPLAY {
     }
 
     render() {
+        let dx = Math.round(canvas.width/this.WIDTH);
+        let dy = Math.round(canvas.height/this.HEIGHT);
         for(let i = 0; i < this.WIDTH; i++) {
             for(let j = 0; j < this.HEIGHT; j++) {
-                ctx.fillStyle = 'rgb('+this.PLANE[i][j]+','+this.PLANE[i][j]+','+this.PLANE[i][j]+')';
-                ctx.fillRect(i*canvas.width/this.WIDTH, j*canvas.height/this.HEIGHT, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
+                ctx.fillStyle = 'rgb('+this.PLANE[this.to1D(i,j)]+','+this.PLANE[this.to1D(i,j)]+','+this.PLANE[this.to1D(i,j)]+')';
+                ctx.fillRect(i*dx, j*dy, dx, dy);
             }
         }
     }
@@ -941,8 +947,8 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(100, 99);
-hello.circle(0, 0, 40, 5);
+let hello = new DISPLAY(1000, 1000);
+// hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
@@ -980,5 +986,6 @@ window.addEventListener('load', () => {
     hello.line(190, 190, 450, 450, 200);
     hello.line(450, 450, 470, 430, 200);
     hello.line(450, 450, 430, 445, 200);
+    hello.line(0, 0, 10, 10, 255);
     hello.render();
 })
