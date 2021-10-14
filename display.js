@@ -927,10 +927,12 @@ class DISPLAY {
     }
 
     render() {
+        let dx = Math.round(canvas.width/this.WIDTH);
+        let dy = Math.round(canvas.height/this.HEIGHT);
         for(let i = 0; i < this.WIDTH; i++) {
             for(let j = 0; j < this.HEIGHT; j++) {
                 ctx.fillStyle = 'rgb('+this.PLANE[i][j]+','+this.PLANE[i][j]+','+this.PLANE[i][j]+')';
-                ctx.fillRect(i*canvas.width/this.WIDTH, j*canvas.height/this.HEIGHT, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
+                ctx.fillRect(i*dx, j*dy, dx, dy);
             }
         }
     }
@@ -941,7 +943,7 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(100, 99);
+let hello = new DISPLAY(100, 100);
 hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));

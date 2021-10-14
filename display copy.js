@@ -907,6 +907,7 @@ class DISPLAY {
             //this.PLANE[this.WIDTH-1][y] = 0;
         }
         console.log("ScrollLeft avslutas");
+        console.log(this.PLANE)
     }
 
     scrollRight() {
