@@ -895,35 +895,32 @@ class DISPLAY {
     }
 
     scrollLeft() {
-        console.log("ScrollLeft påbörjas");
         for (let x = 1; x <= this.WIDTH; x++) {
             for (let y = 1; y <= this.HEIGHT; y++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                //this.PLANE[x-1][y] = this.PLANE[x][y];
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-            //this.PLANE[this.WIDTH-1][y] = 0;
+
         }
         console.log("ScrollLeft avslutas");
+        console.log(this.PLANE)
     }
 
     scrollRight() {
-        console.log("ScrollRight påbörjad");
-        for (let x = this.WIDTH; x >= 0; x--) {
+        for (let x = this.WIDTH; x > 1; x--) {
             for (let y = 1; y <= this.HEIGHT; y++) {
-                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))+1];
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
             }
         }
-        for (let y = 1; y <= this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+        for (let y = 0; y < this.HEIGHT; y++) {
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = 0;
         }
-        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
-
+        
     }
 
     scrollDown() {

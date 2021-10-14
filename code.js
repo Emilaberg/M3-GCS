@@ -84,12 +84,10 @@ class DISPLAY {
         for (let y = this.HEIGHT; y > 0; y--) {
             for (let x = 0; x < this.WIDTH; x++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                //this.PLANE[x][y] = this.PLANE[x][y-1];
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-            //this.PLANE[x][0] = 0;
         }
     }
 
@@ -97,12 +95,10 @@ class DISPLAY {
         for (let y = 0; y < this.HEIGHT; y++) {
             for (let x = 0; x < this.WIDTH; x++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                //this.PLANE[x][y] = this.PLANE[x][y+1];
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-            //this.PLANE[x][this.HEIGHT-1] = 0;
         }
     }
 
