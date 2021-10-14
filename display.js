@@ -905,21 +905,44 @@ class DISPLAY {
             this.PLANE[this.to1D(this.WIDTH-1,i)] = this.PLANE[i];
         }
     }
-
-    scrollLeft() {
         
+    scrollLeft() {
+        console.log("ScrollLeft påbörjas");
+        for (let x = 1; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+            }
+        }
+        for (let y = 0; y < this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+        }
+        console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
-
+        console.log("ScrollRight påbörjad");
+        for (let x = this.WIDTH; x > 0; x--) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[x] = this.PLANE[x-1];
+            }
+        }
+        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
-
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[x][y] = this.PLANE[x][y+1];
+            }
+        }
     }
 
     scrollDown() {
-
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[x][y] = this.PLANE[x][y-1];
+            }
+        }
     }
 
     pscrollLeft() {
