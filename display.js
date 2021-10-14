@@ -788,8 +788,6 @@ class DISPLAY {
                 }
             }
         }
-
-        // this.PLANE.map((e1, i1) => e1.map((e2, i2) => ))
     }
 
     to2DArray() {
@@ -830,9 +828,6 @@ class DISPLAY {
     }
 
     circle(x1, y1, diameter, color) {
-        //this should work correctly now
-        //this can be optimised, but i don't want to mess with it too much
-        //because something might break
         let radius = diameter / 2;
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
@@ -845,11 +840,8 @@ class DISPLAY {
                         this.PLANE[i][j] = color;
                     }
                 }
-
-                // this.PLANE[i][j] = (i - x1)**2 + (j - y1)**2 - radius**2;
             }
         }
-        // console.log(this.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1","-").replaceAll("1","+"));
     }
 
     rectangle(x1, y1, x2, y2, color) {
@@ -858,8 +850,6 @@ class DISPLAY {
         //         this.putPixel(i, j, color);
         //     }
         // }
-
-        //the repetition here is deliberate as it allows for further simplification
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (i >= x1 && i <= x2 && j >= y1 && j <= y2) {
@@ -870,8 +860,7 @@ class DISPLAY {
     }
 
     clear(color) {
-        // return this.PLANE.map(element1 => element1.map(element2 => color));
-        this.PLANE = this.PLANE.map(element1 => element1.map(element2 => color));
+        this.PLANE = this.PLANE.map(element1 => element1.map(() => color));
     }
 
     resize(width, height) {
@@ -879,7 +868,14 @@ class DISPLAY {
     }
 
     textOut(x, y, color, string) {
-        
+        let temp = new BITMAP();
+        temp.bitmapMaker(string);
+
+        for(let i = x; i < this.WIDTH && i < temp.WIDTH; i++) {
+            for(let j = y; j < this.HEIGHT && j < temp.HEIGHT; j++) {
+                this.PLANE[i][j] = temp.PLANE[i][j];
+            }
+        }
     }
 
     textOut2(x, y, color, string) {
