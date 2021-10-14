@@ -895,7 +895,18 @@ class DISPLAY {
     }
 
     scrollLeft() {
-
+        console.log("ScrollLeft påbörjas");
+        for (let x = 1; x <= this.WIDTH; x++) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                //this.PLANE[x-1][y] = this.PLANE[x][y];
+            }
+        }
+        for (let y = 0; y < this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            //this.PLANE[this.WIDTH-1][y] = 0;
+        }
+        console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
@@ -936,16 +947,11 @@ class DISPLAY {
     }
 }
 
-let hello = new DISPLAY(1000, 1000);
-hello.circle(0, 0, 40, 5);
+let hello = new DISPLAY(10, 10);
 
 window.addEventListener('load', () => {
     // hello.render();
-    hello.textOut(450,450,255,"jag vet inte 123456789");
-    hello.circle(145, 145, 50, 201);
-    hello.rectangle(190, 190, 210, 210, 230);
-    hello.line(190, 190, 450, 450, 200);
-    hello.line(450, 450, 470, 430, 200);
-    hello.line(450, 450, 430, 445, 200);
+    hello.line(0,2,2,0,255);
+    hello.rectangle(0,9,9,0,255);
     hello.render();
 })

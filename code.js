@@ -73,7 +73,7 @@ class DISPLAY {
                 //this.PLANE[x][y] = this.PLANE[x-1][y];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
+        for (let y = 1; y < this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
             //this.PLANE[0][y] = 0;
         }
