@@ -905,28 +905,33 @@ class DISPLAY {
             this.PLANE[this.to1D(this.WIDTH-1,i)] = this.PLANE[i];
         }
     }
+
+    modulo(a,b) {
+        return a - b*Math.floor(a/b);
+    }
         
     scrollLeft() {
-        console.log("ScrollLeft påbörjas");
-        for (let x = 1; x < this.WIDTH; x++) {
+        for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[this.to1D(this.modulo(x-1,this.WIDTH),y)] = this.PLANE[this.to1D(x,y)];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-        }
-        console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
-        console.log("ScrollRight påbörjad");
-        for (let x = this.WIDTH; x > 0; x--) {
+        // console.log("ScrollRight påbörjad");
+        // for (let x = this.WIDTH; x > 0; x--) {
+        //     for (let y = 0; y < this.HEIGHT; y++) {
+        //         this.PLANE[x] = this.PLANE[x-1];
+        //     }
+        // }
+
+        for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[x] = this.PLANE[x-1];
+                this.PLANE[this.to1D(x,this.modulo(y-1,this.HEIGHT))] = this.PLANE[this.to1D(x,y)];
             }
         }
-        console.log("ScrollRight avslutats");
+        // console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
@@ -978,7 +983,7 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(200, 200);
+let hello = new DISPLAY(100, 100);
 // hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
@@ -1011,7 +1016,8 @@ window.addEventListener('load', () => {
     // hello.render();
     hello.rectangle(8, 8, 9, 9, 255);
     hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    hello.textOut(10, 10, 200, "test test test");
+    hello.textOut(10, 10, 255, "test test test test");
+    hello.textOut(10, 20, 255, "test test test test");
     hello.circle(145, 145, 50, 255);
     hello.rectangle(190, 190, 210, 210, 230);
     hello.line(190, 190, 450, 450, 200);
@@ -1022,17 +1028,27 @@ window.addEventListener('load', () => {
     hello.render();
 })
 
+window.addEventListener('keydown', (event) => {
+    if(event.key === 'ArrowLeft') {
+        hello.scrollLeft();
+    }
+    if(event.key === 'ArrowRight') {
+        hello.scrollRight();
+    }
+})
+
 function render() {
-    hello.rectangle(8, 8, 9, 9, 255);
-    hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    hello.textOut(10, 10, 200, "test test test");
-    hello.circle(145, 145, 50, 255);
-    hello.rectangle(190, 190, 210, 210, 230);
-    hello.line(190, 190, 450, 450, 200);
-    hello.line(450, 450, 470, 430, 200);
-    hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
-    hello.putPixel(40,40,255);
+    // hello.rectangle(8, 8, 9, 9, 255);
+    // hello.textOut(450, 450, 255, "jag vet inte 123456789");
+    // hello.textOut(10, 10, 200, "test test test");
+    // hello.circle(145, 145, 50, 255);
+    // hello.rectangle(190, 190, 210, 210, 230);
+    // hello.line(190, 190, 450, 450, 200);
+    // hello.line(450, 450, 470, 430, 200);
+    // hello.line(450, 450, 430, 445, 200);
+    // hello.line(0, 0, 10, 10, 255);
+    // hello.putPixel(40,40,255);
+    // hello.scrollLeft();
     hello.render();
     requestAnimationFrame(render);
 }
