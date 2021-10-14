@@ -759,6 +759,9 @@ class BITMAP {
     }
 }
 
+let bitmap = new BITMAP();
+// bitmap.bitmapMaker('text');
+
 const transpose = m => m[0].map((x,i) => m.map(x => x[i]));
 class DISPLAY {
     #LOCK;
