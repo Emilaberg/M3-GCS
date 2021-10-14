@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = "1000";
 canvas.height = "1000";
 
+
+
 let chars = {
     A: [0,0,0,0,0,0,0,
         0,0,0,1,0,0,0,
@@ -401,7 +403,7 @@ let chars = {
             0,0,0,1,0,0,0,
             0,0,0,0,0,0,0],
 
-empty: [0,0,0,0,0,0,0,
+' ': [0,0,0,0,0,0,0,
         0,0,0,0,0,0,0,
         0,0,0,0,0,0,0,
         0,0,0,0,0,0,0,
@@ -802,7 +804,7 @@ class DISPLAY {
     }
 
     putPixel(x, y, color) {
-        this.PLANE[this.to1D(x, y)] = color;
+        // this.PLANE[this.to1D(x, y)] = color;
     }
 
     line(x1, y1, x2, y2, color) {
@@ -815,14 +817,11 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4 * (f(i)(j) ** 2 ) - A2 <= 0) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && (f(i)(j) ** 2 )/4 - A2 <= 0) {
                     this.PLANE[i][j] = color;
                 }
             }
         }  
-    iterate(() => color, x => y => {
-
-    })
     }
     
     circle(x1, y1, diameter, color) {
@@ -862,8 +861,10 @@ class DISPLAY {
     }
 
     resize(width, height) {
-        this.PLANE = this.PLANE
         this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
+        this.WIDTH = width;
+        this.HEIGHT = height;
+        // return new DISPLAY(width, height);
     }
 
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
@@ -887,7 +888,7 @@ class DISPLAY {
         for(let i = x; i < this.WIDTH && i-x < temp.WIDTH; i++) {
             for(let j = y; j < this.HEIGHT && j-y < temp.HEIGHT; j++) {
                 if(temp.PLANE[j-y][i-x] === 1) {
-                    this.PLANE[j][i] = color;
+                    this.PLANE[i][j] = color;
                 }
             }
         }
@@ -940,35 +941,42 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(65, 65);
+let hello = new DISPLAY(1000, 1000);
 hello.circle(0, 0, 40, 5);
 
-console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
-console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
+// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
+// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
 
 
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5","█").replaceAll(" █","██").replaceAll("0█","0 "));
-console.log(hello.PLANE.map(element => element.join(" ")).join("\n")
-    .replaceAll("5", "█")
-    .replaceAll(" █", "██")
-    .replaceAll("0█", "0 ")
-    .replaceAll("0", " "));
+// // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5","█").replaceAll(" █","██").replaceAll("0█","0 "));
+// console.log(hello.PLANE.map(element => element.join(" ")).join("\n")
+//     .replaceAll("5", "█")
+//     .replaceAll(" █", "██")
+//     .replaceAll("0█", "0 ")
+//     .replaceAll("0", " "));
 
-console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1", "⎯").replaceAll("1", "|"))
+// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1", "⎯").replaceAll("1", "|"))
 
-let dsp = new DISPLAY();
+// let dsp = new DISPLAY();
 
-function scroll(string) {
-    if (preserve === true) {
-        switch (string) {
-            case "up":
-                dsp.scrollUp();
-                break;
-            case "down":
-        }
-    }
-}
+// function scroll(string) {
+//     if (preserve === true) {
+//         switch (string) {
+//             case "up":
+//                 dsp.scrollUp();
+//                 break;
+//             case "down":
+//         }
+//     }
+// }
 
-for (let j = f(i) + 1; j < f(i + 1) && f(i + 1) <= f(x2); j++) {
-    test[j][i] = 1;
-}
+window.addEventListener('load', () => {
+    // hello.render();
+    hello.textOut(450,450,255,"jag vet inte 123456789");
+    hello.circle(145, 145, 50, 201);
+    hello.rectangle(190, 190, 210, 210, 230);
+    hello.line(190, 190, 450, 450, 200);
+    hello.line(450, 450, 470, 430, 200);
+    hello.line(450, 450, 430, 445, 200);
+    hello.render();
+})
