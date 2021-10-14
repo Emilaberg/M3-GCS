@@ -941,7 +941,7 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(10, 10);
+let hello = new DISPLAY(100, 99);
 hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
@@ -974,6 +974,7 @@ window.addEventListener('load', () => {
     // hello.render();
     hello.rectangle(8,8,9,9,255);
     hello.textOut(450,450,255,"jag vet inte 123456789");
+    hello.textOut(10,10,200,"test test test");
     hello.circle(145, 145, 50, 201);
     hello.rectangle(190, 190, 210, 210, 230);
     hello.line(190, 190, 450, 450, 200);
