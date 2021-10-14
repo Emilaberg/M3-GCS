@@ -930,7 +930,7 @@ class DISPLAY {
         for(let i = 0; i < this.WIDTH; i++) {
             for(let j = 0; j < this.HEIGHT; j++) {
                 ctx.fillStyle = 'rgb('+this.PLANE[i][j]+','+this.PLANE[i][j]+','+this.PLANE[i][j]+')';
-                ctx.fillRect(i, j, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
+                ctx.fillRect(i*canvas.width/this.WIDTH, j*canvas.height/this.HEIGHT, canvas.width/this.WIDTH, canvas.height/this.HEIGHT);
             }
         }
     }
@@ -941,7 +941,7 @@ class DISPLAY {
 // }
 
 
-let hello = new DISPLAY(1000, 1000);
+let hello = new DISPLAY(10, 10);
 hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
@@ -972,6 +972,7 @@ hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
     // hello.render();
+    hello.rectangle(8,8,9,9,255);
     hello.textOut(450,450,255,"jag vet inte 123456789");
     hello.circle(145, 145, 50, 201);
     hello.rectangle(190, 190, 210, 210, 230);
