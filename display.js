@@ -877,9 +877,11 @@ class DISPLAY {
         let temp = new BITMAP();
         temp.bitmapMaker(string);
 
-        for(let i = x; i < this.WIDTH && i < temp.WIDTH; i++) {
-            for(let j = y; j < this.HEIGHT && j < temp.HEIGHT; j++) {
-                this.PLANE[i][j] = temp.PLANE[i][j];
+        for(let i = x; i < this.WIDTH && i-x < temp.WIDTH; i++) {
+            for(let j = y; j < this.HEIGHT && j-y < temp.HEIGHT; j++) {
+                if(temp.PLANE[j-y][i-x] === 1) {
+                    this.PLANE[j][i] = color;
+                }
             }
         }
     }
