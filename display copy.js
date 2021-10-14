@@ -910,7 +910,16 @@ class DISPLAY {
     }
 
     scrollRight() {
-
+        console.log("ScrollRight påbörjad");
+        for (let x = this.WIDTH; x >= 0; x--) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))+1];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+        }
+        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
@@ -951,7 +960,6 @@ let hello = new DISPLAY(10, 10);
 
 window.addEventListener('load', () => {
     // hello.render();
-    hello.line(0,2,2,0,255);
-    hello.rectangle(0,9,9,0,255);
+    hello.line(0,9,9,0,255);
     hello.render();
 })
