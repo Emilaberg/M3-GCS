@@ -5,7 +5,7 @@
 
 
 
-
+const transpose = m => m[0].map((x,i) => m.map(x => x[i]));
 class DISPLAY {
     #LOCK;
 
@@ -15,6 +15,10 @@ class DISPLAY {
         this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));;
         this.ZOOM = 0;
         this.#LOCK;
+    }
+
+    to1D(x, y) {
+        return y * this.WIDTH + x;
     }
 
     putPixel(x, y, color) {
@@ -48,15 +52,15 @@ class DISPLAY {
 
     scrollLeft() {
         console.log("ScrollLeft påbörjas");
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                this.PLANE[x][y] = this.PLANE[x+1][y];
+        for (let x = 1; x < this.WIDTH; x++) {
+            for (let y = 1; y < this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                //this.PLANE[x-1][y] = this.PLANE[x][y];
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[this.WIDTH-1][y] = 255;
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            //this.PLANE[this.WIDTH-1][y] = 0;
         }
         console.log("ScrollLeft avslutas");
     }
@@ -65,13 +69,13 @@ class DISPLAY {
         console.log("ScrollRight påbörjad");
         for (let x = this.WIDTH; x > 0; x--) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                this.PLANE[x+1][y] = this.PLANE[x][y];
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                //this.PLANE[x][y] = this.PLANE[x-1][y];
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[0][y] = 255;
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            //this.PLANE[0][y] = 0;
         }
         console.log("ScrollRight avslutats");
     }
@@ -79,33 +83,33 @@ class DISPLAY {
     scrollUp() {
         for (let y = this.HEIGHT; y > 0; y--) {
             for (let x = 0; x < this.WIDTH; x++) {
-                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                this.PLANE[x][y] = this.PLANE[x][y-1];
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                //this.PLANE[x][y] = this.PLANE[x][y-1];
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[x][0] = 255;
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            //this.PLANE[x][0] = 0;
         }
     }
 
     scrollDown() {
         for (let y = 0; y < this.HEIGHT; y++) {
             for (let x = 0; x < this.WIDTH; x++) {
-                //this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
-                this.PLANE[x][y] = this.PLANE[x][y+1];
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                //this.PLANE[x][y] = this.PLANE[x][y+1];
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
-            this.PLANE[x][this.HEIGHT-1] = 255;
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            //this.PLANE[x][this.HEIGHT-1] = 0;
         }
     }
 
     pscrollLeft() {
         let temparray = new Array(this.HEIGHT);
         for (let y = 0; y < this.HEIGHT; y++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            //temparray[y] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1];
             temparray[y] = this.PLANE[0][y];
         }
         for (let x = 0; x < this.WIDTH; x++) {
@@ -115,7 +119,7 @@ class DISPLAY {
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y];
             this.PLANE[this.WIDTH-1][y] = temparray[y];
         }
     }
@@ -133,7 +137,7 @@ class DISPLAY {
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
             this.PLANE[this.WIDTH-1][y] = temparray[y];
         }
     }
@@ -151,7 +155,7 @@ class DISPLAY {
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
             this.PLANE[x][0] = temparray[x];
         }
     }
@@ -169,7 +173,7 @@ class DISPLAY {
             }
         }
         for (let x = 0; x < this.WIDTH; x++) {
-            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 255;
+            //this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
             this.PLANE[x][this.HEIGHT-1] = temparray[x];
         }
     }
