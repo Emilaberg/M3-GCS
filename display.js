@@ -806,8 +806,8 @@ class DISPLAY {
     }
 
     line(x1, y1, x2, y2, color) {
-        const f = x => y => Math.sign((y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2));
-        // const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
+        // const f = x => y => Math.sign((y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2));
+        const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
         
         for (let i = 0; i < this.WIDTH; i++) {
@@ -819,20 +819,12 @@ class DISPLAY {
                     this.PLANE[i][j] = color;
                 }
             }
-        }
+        }  
+    iterate(() => color, x => y => {
 
-        this.iterate(() => color, x => y => {
-
-        })
-
-
-
-        // console.log(transpose(this.PLANE).map(element => element.join(" "))
-        //     .join("\n").replaceAll("-1", "-").replaceAll("1", "+"));
-        // console.log(transpose(this.PLANE).map(element => element.join(" "))
-        //     .join("\n").replaceAll("0", " ").replaceAll("1", "+"));
+    })
     }
-
+    
     circle(x1, y1, diameter, color) {
         let radius = diameter / 2;
         for (let i = 0; i < this.WIDTH; i++) {
@@ -884,7 +876,7 @@ class DISPLAY {
     }
 
     blitToBitmap(BITMAP, width, height, bx, by, dx, dy) {
-        
+
     }
 
     textOut(x, y, color, string) {
