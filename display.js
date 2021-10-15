@@ -784,16 +784,12 @@ class DISPLAY {
         return c
     }
 
-    loop(func, domain) {
+    gridMap(func) {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; i < this.HEIGHT; j++) {
-                if (domain(i)(j)) {
-                    this.PLANE[this.to1D(i, j)] = func(i)(j);
-                }
+                func(i)(j);
             }
         }
-
-        this.PLANE.map(func)
     }
 
     to2DArray() {
@@ -875,17 +871,15 @@ class DISPLAY {
     }
 
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
-        for (let i = x; i < this.WIDTH && i - x < BITMAP.WIDTH; i++) {
-            for (let j = y; j < this.HEIGHT && j - y < BITMAP.HEIGHT; j++) {
-                if (BITMAP.PLANE[j - y][i - x] === 1) {
-                    this.PLANE[j][i] = color;
+        for (let i = 0; i < bx && i < dx; i++) {
+                for (let j = y1; j < y2; j++) {
+                    this.putPixel(i, j, color);
                 }
             }
-        }
     }
 
     blitToBitmap(BITMAP, width, height, bx, by, dx, dy) {
-
+        
     }
 
     textOut(x, y, color, string) {
