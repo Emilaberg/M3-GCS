@@ -916,7 +916,7 @@ class DISPLAY {
         return a - b*Math.floor(a/b);
     }
         
-    scrollLeft() {
+    scrollLeftx() {
         for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
                 this.PLANE[this.to1D(this.modulo(x-1,this.WIDTH),y)] = this.PLANE[this.to1D(x,y)];
