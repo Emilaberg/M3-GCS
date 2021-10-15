@@ -8,14 +8,15 @@
 }
 
 body{
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     background-color: rgb(231, 231, 231);
 }
 
 header{
+    width: 100%;
     display: flex;
-    height: 12vh;
+    height: 8vh;
     background-color: gray;
 }
 
@@ -165,9 +166,16 @@ button:hover{
     padding: 10px;
 }
 
+.canvasStyle{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    height: 80%;
+    background-color: blue;
+}
+
 #canvas {
-    height: 100vmin;
-    width: 100vmin;
+    width: 100%;
 }
 
 /* header */
