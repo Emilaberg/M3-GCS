@@ -737,10 +737,11 @@ let chars = {
 }
 
 class BITMAP {
-    constructor() {
-        this.WIDTH;
-        this.HEIGHT;
-        this.PLANE;
+    constructor(width, height) {
+        this.WIDTH = width;
+        this.HEIGHT = height;
+        this.PLANE =  new Array(width).fill(0).map(() => new Array(height).fill(0));
+        //  new Array(y).fill(0).map(() => new Array(x).fill(0));  //Inte färdig....
     }
 
     bitmapMaker(character) {
@@ -884,8 +885,22 @@ class DISPLAY {
         }
     }
 
-    blitToBitmap(BITMAP, width, height, bx, by, dx, dy) {
-
+    blitToBitmap(BITMAP, width, height,bx, by, dx, dy) {
+        // let temp = new Array(10).fill(0).map(element => new Array(10).fill(0));
+        let temp = new BITMAP(width*bx, height*by);
+        for (let x = dx-width; x < dx; x++) {
+            for (let y = dy-height; y < dy; y++) {
+                // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
+                
+                temp.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)]; 
+                
+                // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
+                //     BITMAP.PLANE[this.to1D(x, y)] = color;
+                //     BITMAP.PLANE
+                // }
+            }
+        }
+        console.log(temp.PLANE);
     }
 
     textOut(x, y, color, string) {
