@@ -1008,11 +1008,33 @@ class DISPLAY {
     }
 
     pscrollUp() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, 0)];
+        }
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y+1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, this.HEIGHT - 1)] = temparray[x];
+        }
     }
 
     pscrollDown() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, this.HEIGHT - 1)];
+        }
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, 0)] = temparray[x];
+        }
     }
 
     render() {
