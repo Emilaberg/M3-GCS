@@ -821,7 +821,7 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 900) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
                     this.PLANE[this.to1D(i, j)] = color;
                 }
             }
@@ -993,9 +993,24 @@ class DISPLAY {
         }
     }
 
-    pscrollLeft() {
-
-    }
+    // pscrollLeft() {
+    //     console.log("ScrollLeft påbörjas");
+    //     let tempArray = [];
+    //     for(let i = 0; i < this.HEIGHT; i++){
+    //         tempArray[this.to1D(0, i)];
+    //     }
+    //     for (let x = 0; x < this.WIDTH; x++) {
+    //         for (let y = 0; y < this.HEIGHT; y++) {
+    //             this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x+1, y)];
+    //         }
+    //     }
+    //     for (let y = 0; y < this.HEIGHT; y++) {
+    //         // this.PLANE[this.to1D(this.WIDTH-1, y)] = this.PLANE[this.to1D(0, y)];
+    //         // this.PLANE[this.WIDTH-1][y] = 0;
+    //         this.PLANE[this.to1D(this.WIDTH-1, y)] = tempArray[this.to1D(0, y)];
+    //     }
+    //     console.log("ScrollLeft avslutas");
+    // }
 
     pscrollRight() {
 
@@ -1023,7 +1038,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(100, 100);
+let hello = new DISPLAY(10, 10);
 // hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
@@ -1033,31 +1048,32 @@ window.addEventListener('load', () => {
     // hello.line(0,0,10,0,255);
     // hello.line(10,0,10,10,255);
     // hello.line(0,10,10,10,255);
-    hello.textOut(1, 1, 255, "M");
+    // hello.textOut(1, 1, 255, "M");
     // hello.textOut(10, 10, 200, "test test test");
     // hello.circle(145, 145, 50, 255);
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
     // hello.line(450, 450, 430, 445, 200);
-    // hello.line(0, 0, 10, 10, 255);
+    hello.line(0, 0, 10, 10, 255);
     // hello.putPixel(40,40,255);
     hello.render();
 })
 
 window.addEventListener('keydown', (event) => {
-    if(event.key === 'ArrowLeft') {
+    if(event.key == 'ArrowLeft') {
         hello.scrollLeft();
     }
-    if(event.key === 'ArrowRight') {
+    if(event.key == 'ArrowRight') {
         hello.scrollRight();
     }
-    if(event.key === 'ArrowDown') {
+    if(event.key == 'ArrowDown') {
         hello.scrollDown();
     }
-    if(event.key === 'ArrowUp') {
+    if(event.key == 'ArrowUp') {
         hello.scrollUp();
     }
+    hello.render();
 })
 
 // function render() {
