@@ -924,33 +924,51 @@ class DISPLAY {
         }
     }
 
-    scrollRight() {
-        // console.log("ScrollRight påbörjad");
-        // for (let x = this.WIDTH; x > 0; x--) {
-        //     for (let y = 0; y < this.HEIGHT; y++) {
-        //         this.PLANE[x] = this.PLANE[x-1];
-        //     }
-        // }
+    // scrollRight() {
+    //     for (let x = 0; x < this.WIDTH; x++) {
+    //         for (let y = 0; y < this.HEIGHT; y++) {
+    //             this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
+    //         }
+    //     }
+    //}
 
+    scrollUp() {
+        console.log("ScrollLeft påbörjas");
         for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x+1, y)];
             }
         }
-        // console.log("ScrollRight avslutats");
+        for (let y = 0; y < this.HEIGHT; y++) {
+            // this.PLANE[this.WIDTH-1][y] = 0;
+            this.PLANE[this.to1D(this.WIDTH-1, y)] = 0;
+        }
+        console.log("ScrollLeft avslutas");
+    }
+
+    scrollRight() {
+        console.log("ScrollRight påbörjad");
+        for (let x = this.WIDTH-1; x > 0; x--) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x-1, y)];
+            }
+        }
+        for(let y = 0; y < this.HEIGHT; y++){
+            // this.PLANE[0][y] = 0;
+            this.PLANE[this.to1D(0, y)] = 0;
+        }
+        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
-        // for (let y = 0; y < this.HEIGHT-1; y++) {
-        //     for (let x = 0; x < this.WIDTH; x++) {
-        //         this.PLANE[x][y] = this.PLANE[x][y+1];
-        //     }
-        // }
-
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(x,this.modulo(y-1,this.HEIGHT))] = this.PLANE[this.to1D(x,y)];
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y+1)];
             }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            // this.PLANE[x][this.HEIGHT - 1] = 0;
+            this.PLANE[this.to1D(x, this.HEIGHT - 1)] = 0;
         }
     }
 
@@ -961,10 +979,17 @@ class DISPLAY {
         //     }
         // }
 
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(x,this.modulo(y+1,this.HEIGHT-1))] = this.PLANE[this.to1D(x,y)];
+        // for (let x = 0; x < this.WIDTH; x++) {
+        //     for (let y = 0; y < this.HEIGHT; y++) {
+        //         this.PLANE[this.to1D(x,this.modulo(y+1,this.HEIGHT-1))] = this.PLANE[this.to1D(x,y)];
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
             }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            // this.PLANE[x][0] = 0;
+            this.PLANE[this.to1D(x, 0)] = 0;
         }
     }
 
@@ -996,55 +1021,27 @@ class DISPLAY {
     }
 }
 
-// if(![f(i)(j),f(i)(j+1),f(i+1)(j),f(i+1)(j+1)].every((v, i, arr) => v === arr[0]) && f(i)(j) !== 0) {
-//     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
-// }
-
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-// hello.circle(0, 0, 40, 5);
 
 let hello = new DISPLAY(100, 100);
 // hello.circle(0, 0, 40, 5);
 
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
-
-
-// // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5","█").replaceAll(" █","██").replaceAll("0█","0 "));
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n")
-//     .replaceAll("5", "█")
-//     .replaceAll(" █", "██")
-//     .replaceAll("0█", "0 ")
-//     .replaceAll("0", " "));
-
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1", "⎯").replaceAll("1", "|"))
-
-// let dsp = new DISPLAY();
-
-// function scroll(string) {
-//     if (preserve === true) {
-//         switch (string) {
-//             case "up":
-//                 dsp.scrollUp();
-//                 break;
-//             case "down":
-//         }
-//     }
-// }
-
 window.addEventListener('load', () => {
     // hello.render();
-    // hello.rectangle(8, 8, 9, 9, 255);
-    hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    hello.textOut(10, 10, 255, "test test test test");
-    hello.textOut(10, 20, 255, "test test test test");
-    hello.circle(145, 145, 50, 255);
-    hello.rectangle(190, 190, 210, 210, 230);
-    hello.line(190, 190, 450, 450, 200);
-    hello.line(450, 450, 470, 430, 200);
-    hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 60, 10, 255);
-    hello.putPixel(40,40,255);
+    // hello.rectangle(4, 4, 5, 5, 255);
+    // hello.line(0,0,0,10,255);
+    // hello.line(0,0,10,0,255);
+    // hello.line(10,0,10,10,255);
+    // hello.line(0,10,10,10,255);
+    hello.textOut(1, 1, 255, "M");
+    // hello.textOut(10, 10, 200, "test test test");
+    // hello.circle(145, 145, 50, 255);
+    // hello.rectangle(190, 190, 210, 210, 230);
+    // hello.line(190, 190, 450, 450, 200);
+    // hello.line(450, 450, 470, 430, 200);
+    // hello.line(450, 450, 430, 445, 200);
+    // hello.line(0, 0, 10, 10, 255);
+    // hello.putPixel(40,40,255);
     hello.render();
 })
 
@@ -1062,12 +1059,19 @@ window.addEventListener('keydown', (event) => {
         hello.scrollUp();
     }
 })
-let _y = 0;
-function render() {
-    hello.clear(0);
-    hello.circle(40,0,20,255)
-    hello.line(0,0,1000,_y++/40,255);
-    hello.render();
-    requestAnimationFrame(render);
-}
-requestAnimationFrame(render);
+
+// function render() {
+//     hello.rectangle(8, 8, 9, 9, 255);
+//     hello.textOut(450, 450, 255, "jag vet inte 123456789");
+//     hello.textOut(10, 10, 200, "test test test");
+//     hello.circle(145, 145, 50, 255);
+//     hello.rectangle(190, 190, 210, 210, 230);
+//     hello.line(190, 190, 450, 450, 200);
+//     hello.line(450, 450, 470, 430, 200);
+//     hello.line(450, 450, 430, 445, 200);
+//     hello.line(0, 0, 10, 10, 255);
+//     hello.putPixel(40,40,255);
+//     hello.render();
+//     requestAnimationFrame(render);
+// }
+// requestAnimationFrame(render);
