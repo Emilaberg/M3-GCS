@@ -904,8 +904,6 @@ class DISPLAY {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
 
         }
-        console.log("ScrollLeft avslutas");
-        console.log(this.PLANE)
     }
 
     scrollRight() {
@@ -920,11 +918,25 @@ class DISPLAY {
     }
 
     scrollUp() {
-        
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[x][y] = this.PLANE[x][y+1];
+            }
+        }
+        for (let x = 0; x < this.WIDTH; x++) {
+            this.PLANE[(x+this.WIDTH*(this.HEIGHT-1))-1] = 0;
+        }
     }
 
     scrollDown() {
-
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[x][y] = this.PLANE[x][y-1];
+            }
+        }
+        for (let x = 0; x < this.WIDTH; x++) {
+            this.PLANE[(x+this.WIDTH*(1-1))-1] = 0;
+        }
     }
 
     pscrollLeft() {
