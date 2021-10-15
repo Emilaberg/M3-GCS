@@ -933,31 +933,25 @@ class DISPLAY {
     //}
 
     scrollLeft() {
-        console.log("ScrollLeft påbörjas");
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x+1, y)];
+        for (let x = 1; x <= this.WIDTH; x++) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            // this.PLANE[this.WIDTH-1][y] = 0;
-            this.PLANE[this.to1D(this.WIDTH-1, y)] = 0;
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
         }
-        console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
-        console.log("ScrollRight påbörjad");
-        for (let x = this.WIDTH-1; x > 0; x--) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x-1, y)];
+        for (let x = this.WIDTH; x > 1; x--) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
             }
         }
-        for(let y = 0; y < this.HEIGHT; y++){
-            // this.PLANE[0][y] = 0;
-            this.PLANE[this.to1D(0, y)] = 0;
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = 0;
         }
-        console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
@@ -973,55 +967,74 @@ class DISPLAY {
     }
 
     scrollDown() {
-        // for (let y = this.HEIGHT; y > 0; y--) {
-        //     for (let x = 0; x < this.WIDTH; x++) {
-        //         this.PLANE[x][y] = this.PLANE[x][y-1];
-        //     }
-        // }
-
-        // for (let x = 0; x < this.WIDTH; x++) {
-        //     for (let y = 0; y < this.HEIGHT; y++) {
-        //         this.PLANE[this.to1D(x,this.modulo(y+1,this.HEIGHT-1))] = this.PLANE[this.to1D(x,y)];
         for (let y = this.HEIGHT; y > 0; y--) {
             for (let x = 0; x < this.WIDTH; x++) {
                 this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
             }
         }
         for(let x = 0; x < this.WIDTH; x++){
-            // this.PLANE[x][0] = 0;
             this.PLANE[this.to1D(x, 0)] = 0;
         }
     }
 
-    // pscrollLeft() {
-    //     console.log("ScrollLeft påbörjas");
-    //     let tempArray = [];
-    //     for(let i = 0; i < this.HEIGHT; i++){
-    //         tempArray[this.to1D(0, i)];
-    //     }
-    //     for (let x = 0; x < this.WIDTH; x++) {
-    //         for (let y = 0; y < this.HEIGHT; y++) {
-    //             this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x+1, y)];
-    //         }
-    //     }
-    //     for (let y = 0; y < this.HEIGHT; y++) {
-    //         // this.PLANE[this.to1D(this.WIDTH-1, y)] = this.PLANE[this.to1D(0, y)];
-    //         // this.PLANE[this.WIDTH-1][y] = 0;
-    //         this.PLANE[this.to1D(this.WIDTH-1, y)] = tempArray[this.to1D(0, y)];
-    //     }
-    //     console.log("ScrollLeft avslutas");
-    // }
+    pscrollLeft() {
+        let temparray = new Array(this.WIDTH);
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(1+this.WIDTH*(y-1))-1];
+        }
+        for (let x = 1; x <= this.WIDTH; x++) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y-1];
+        }
+    }
 
     pscrollRight() {
-
+        let temparray = new Array(this.WIDTH);
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1]
+        }
+        for (let x = this.WIDTH; x > 1; x--) {
+            for (let y = 1; y <= this.HEIGHT; y++) {
+                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
+            }
+        }
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = temparray[y-1];
+        }
     }
 
     pscrollUp() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, 0)];
+        }
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y+1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, this.HEIGHT - 1)] = temparray[x];
+        }
     }
 
     pscrollDown() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, this.HEIGHT - 1)];
+        }
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, 0)] = temparray[x];
+        }
     }
 
     render() {
