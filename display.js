@@ -932,7 +932,7 @@ class DISPLAY {
     //     }
     //}
 
-    scrollUp() {
+    scrollLeft() {
         console.log("ScrollLeft påbörjas");
         for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
