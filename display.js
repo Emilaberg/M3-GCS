@@ -784,15 +784,16 @@ class DISPLAY {
         return c
     }
 
-    iterate(func, domain) {
+    loop(func, domain) {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; i < this.HEIGHT; j++) {
                 if (domain(i)(j)) {
-                    // this.PLANE[i][j] = func(i)(j);
                     this.PLANE[this.to1D(i, j)] = func(i)(j);
                 }
             }
         }
+
+        this.PLANE.map(func)
     }
 
     to2DArray() {
@@ -820,7 +821,7 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && (f(i)(j) ** 2) / 4 - A2 <= 0) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 900) {
                     this.PLANE[this.to1D(i, j)] = color;
                 }
             }
@@ -832,14 +833,17 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (diameter % 2 === 0) {
-                    if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) <= radius ** 2) {
+                    if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) - radius ** 2 <= 0) {
                         this.PLANE[this.to1D(i, j)] = color;
                     }
                 } else {
-                    if (((i - x1) ** 2 + (j - y1) ** 2) <= radius ** 2) {
+                    if (((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2 <= 0) {
                         this.PLANE[this.to1D(i, j)] = color;
                     }
                 }
+                
+                    // this.PLANE[this.to1D(i, j)] = -(((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2);
+                
             }
         }
     }
@@ -860,7 +864,7 @@ class DISPLAY {
     }
 
     clear(color) {
-        this.PLANE = this.PLANE.map(element1 => element1.map(() => color));
+        this.PLANE = this.PLANE.map(() => color);
     }
 
     resize(width, height) {
@@ -930,24 +934,36 @@ class DISPLAY {
 
         for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(x,this.modulo(y-1,this.HEIGHT))] = this.PLANE[this.to1D(x,y)];
+                this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
             }
         }
         // console.log("ScrollRight avslutats");
     }
 
     scrollUp() {
-        for (let y = 0; y < this.HEIGHT-1; y++) {
-            for (let x = 0; x < this.WIDTH; x++) {
-                this.PLANE[x][y] = this.PLANE[x][y+1];
+        // for (let y = 0; y < this.HEIGHT-1; y++) {
+        //     for (let x = 0; x < this.WIDTH; x++) {
+        //         this.PLANE[x][y] = this.PLANE[x][y+1];
+        //     }
+        // }
+
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(x,this.modulo(y-1,this.HEIGHT))] = this.PLANE[this.to1D(x,y)];
             }
         }
     }
 
     scrollDown() {
-        for (let y = this.HEIGHT; y > 0; y--) {
-            for (let x = 0; x < this.WIDTH; x++) {
-                this.PLANE[x][y] = this.PLANE[x][y-1];
+        // for (let y = this.HEIGHT; y > 0; y--) {
+        //     for (let x = 0; x < this.WIDTH; x++) {
+        //         this.PLANE[x][y] = this.PLANE[x][y-1];
+        //     }
+        // }
+
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(x,this.modulo(y+1,this.HEIGHT-1))] = this.PLANE[this.to1D(x,y)];
             }
         }
     }
@@ -984,8 +1000,8 @@ class DISPLAY {
 //     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
 // }
 
-let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-hello.circle(0, 0, 40, 5);
+// let hello = new DISPLAY(window.innerWidth,window.innerHeight);
+// hello.circle(0, 0, 40, 5);
 
 let hello = new DISPLAY(100, 100);
 // hello.circle(0, 0, 40, 5);
@@ -1018,7 +1034,7 @@ let hello = new DISPLAY(100, 100);
 
 window.addEventListener('load', () => {
     // hello.render();
-    hello.rectangle(8, 8, 9, 9, 255);
+    // hello.rectangle(8, 8, 9, 9, 255);
     hello.textOut(450, 450, 255, "jag vet inte 123456789");
     hello.textOut(10, 10, 255, "test test test test");
     hello.textOut(10, 20, 255, "test test test test");
@@ -1027,7 +1043,7 @@ window.addEventListener('load', () => {
     hello.line(190, 190, 450, 450, 200);
     hello.line(450, 450, 470, 430, 200);
     hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
+    hello.line(0, 0, 60, 10, 255);
     hello.putPixel(40,40,255);
     hello.render();
 })
@@ -1039,20 +1055,18 @@ window.addEventListener('keydown', (event) => {
     if(event.key === 'ArrowRight') {
         hello.scrollRight();
     }
+    if(event.key === 'ArrowDown') {
+        hello.scrollDown();
+    }
+    if(event.key === 'ArrowUp') {
+        hello.scrollUp();
+    }
 })
-
+let _y = 0;
 function render() {
-    // hello.rectangle(8, 8, 9, 9, 255);
-    // hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    // hello.textOut(10, 10, 200, "test test test");
-    // hello.circle(145, 145, 50, 255);
-    // hello.rectangle(190, 190, 210, 210, 230);
-    // hello.line(190, 190, 450, 450, 200);
-    // hello.line(450, 450, 470, 430, 200);
-    // hello.line(450, 450, 430, 445, 200);
-    // hello.line(0, 0, 10, 10, 255);
-    // hello.putPixel(40,40,255);
-    // hello.scrollLeft();
+    hello.clear(0);
+    hello.circle(40,0,20,255)
+    hello.line(0,0,1000,_y++/40,255);
     hello.render();
     requestAnimationFrame(render);
 }
