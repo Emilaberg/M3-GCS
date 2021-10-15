@@ -821,7 +821,7 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 900) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
                     this.PLANE[this.to1D(i, j)] = color;
                 }
             }
@@ -1054,8 +1054,13 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
+<<<<<<< HEAD
     hello.line(0, 9,9, 0, 255);
     // hello.line(0, 0, 10, 10, 255);
+=======
+    // hello.line(450, 450, 430, 445, 200);
+    hello.line(0, 0, 10, 10, 255);
+>>>>>>> b839260ddc87d2acbb92f252a6ff71c5f42e3d55
     // hello.putPixel(40,40,255);
     hello.render();
 })
