@@ -924,6 +924,7 @@ class DISPLAY {
             }
         }
         for(let x = 0; x < this.WIDTH; x++){
+            // this.PLANE[x][this.HEIGHT - 1] = 0;
             this.PLANE[this.to1D(x, this.HEIGHT - 1)] = 0;
         }
     }
