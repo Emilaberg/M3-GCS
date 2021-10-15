@@ -910,27 +910,28 @@ class DISPLAY {
         
     scrollLeft() {
         console.log("ScrollLeft påbörjas");
-        for (let x = 1; x < this.WIDTH; x++) {
+        for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x+1, y)];
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            // this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-            this.PLANE[this.WIDTH-1][y] = 0;
+            // this.PLANE[this.WIDTH-1][y] = 0;
+            this.PLANE[this.to1D(this.WIDTH-1, y)] = 0;
         }
         console.log("ScrollLeft avslutas");
     }
 
     scrollRight() {
         console.log("ScrollRight påbörjad");
-        for (let x = this.WIDTH; x > 0; x--) {
+        for (let x = this.WIDTH-1; x > 0; x--) {
             for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[x] = this.PLANE[x-1];
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x-1, y)];
             }
         }
         for(let y = 0; y < this.HEIGHT; y++){
-            this.PLANE[0][y] = 0;
+            // this.PLANE[0][y] = 0;
+            this.PLANE[this.to1D(0, y)] = 0;
         }
         console.log("ScrollRight avslutats");
     }
@@ -938,22 +939,24 @@ class DISPLAY {
     scrollUp() {
         for (let y = 0; y < this.HEIGHT-1; y++) {
             for (let x = 0; x < this.WIDTH; x++) {
-                this.PLANE[x][y] = this.PLANE[x][y+1];
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y+1)];
             }
         }
         for(let x = 0; x < this.WIDTH; x++){
-            this.PLANE[x][this.HEIGHT - 1] = 0;
+            // this.PLANE[x][this.HEIGHT - 1] = 0;
+            this.PLANE[this.to1D(x, this.HEIGHT - 1)] = 0;
         }
     }
 
     scrollDown() {
         for (let y = this.HEIGHT; y > 0; y--) {
             for (let x = 0; x < this.WIDTH; x++) {
-                this.PLANE[x][y] = this.PLANE[x][y-1];
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
             }
         }
         for(let x = 0; x < this.WIDTH; x++){
-            this.PLANE[x][0] = 0;
+            // this.PLANE[x][0] = 0;
+            this.PLANE[this.to1D(x, 0)] = 0;
         }
     }
 
@@ -989,10 +992,10 @@ class DISPLAY {
 //     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
 // }
 
-let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-hello.circle(0, 0, 40, 5);
+// let hello = new DISPLAY(window.innerWidth,window.innerHeight);
+// hello.circle(0, 0, 40, 5);
 
-let hello = new DISPLAY(200, 200);
+let hello = new DISPLAY(9, 10);
 // hello.circle(0, 0, 40, 5);
 
 // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
@@ -1023,31 +1026,35 @@ let hello = new DISPLAY(200, 200);
 
 window.addEventListener('load', () => {
     // hello.render();
-    hello.rectangle(8, 8, 9, 9, 255);
-    hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    hello.textOut(10, 10, 200, "test test test");
-    hello.circle(145, 145, 50, 255);
-    hello.rectangle(190, 190, 210, 210, 230);
-    hello.line(190, 190, 450, 450, 200);
-    hello.line(450, 450, 470, 430, 200);
-    hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
-    hello.putPixel(40,40,255);
+    // hello.rectangle(4, 4, 5, 5, 255);
+    // hello.line(0,0,0,10,255);
+    // hello.line(0,0,10,0,255);
+    // hello.line(10,0,10,10,255);
+    // hello.line(0,10,10,10,255);
+    hello.textOut(1, 1, 255, "M");
+    // hello.textOut(10, 10, 200, "test test test");
+    // hello.circle(145, 145, 50, 255);
+    // hello.rectangle(190, 190, 210, 210, 230);
+    // hello.line(190, 190, 450, 450, 200);
+    // hello.line(450, 450, 470, 430, 200);
+    // hello.line(450, 450, 430, 445, 200);
+    // hello.line(0, 0, 10, 10, 255);
+    // hello.putPixel(40,40,255);
     hello.render();
 })
 
-function render() {
-    hello.rectangle(8, 8, 9, 9, 255);
-    hello.textOut(450, 450, 255, "jag vet inte 123456789");
-    hello.textOut(10, 10, 200, "test test test");
-    hello.circle(145, 145, 50, 255);
-    hello.rectangle(190, 190, 210, 210, 230);
-    hello.line(190, 190, 450, 450, 200);
-    hello.line(450, 450, 470, 430, 200);
-    hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
-    hello.putPixel(40,40,255);
-    hello.render();
-    requestAnimationFrame(render);
-}
-requestAnimationFrame(render);
+// function render() {
+//     hello.rectangle(8, 8, 9, 9, 255);
+//     hello.textOut(450, 450, 255, "jag vet inte 123456789");
+//     hello.textOut(10, 10, 200, "test test test");
+//     hello.circle(145, 145, 50, 255);
+//     hello.rectangle(190, 190, 210, 210, 230);
+//     hello.line(190, 190, 450, 450, 200);
+//     hello.line(450, 450, 470, 430, 200);
+//     hello.line(450, 450, 430, 445, 200);
+//     hello.line(0, 0, 10, 10, 255);
+//     hello.putPixel(40,40,255);
+//     hello.render();
+//     requestAnimationFrame(render);
+// }
+// requestAnimationFrame(render);
