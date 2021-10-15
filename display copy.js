@@ -902,7 +902,6 @@ class DISPLAY {
         }
         for (let y = 0; y < this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-
         }
     }
 
@@ -944,7 +943,6 @@ class DISPLAY {
         let temparray = new Array(this.WIDTH);
         for (let y = 0; y < this.HEIGHT; y++) {
             temparray[y] = this.PLANE[(1+this.WIDTH*(y-1))-1];
-
         }
         for (let x = 1; x <= this.WIDTH; x++) {
             for (let y = 1; y <= this.HEIGHT; y++) {
@@ -953,7 +951,6 @@ class DISPLAY {
         }
         for (let y = 0; y < this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y];
-
         }
     }
 
