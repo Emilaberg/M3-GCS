@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 // canvas.height = "1000";
 
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
+ctx.canvas.height = window.innerWidth;
 
 
 let chars = {
@@ -1038,7 +1038,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(10, 10);
+let hello = new DISPLAY(10,10);
 // hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
