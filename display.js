@@ -821,7 +821,7 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 900) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
                     this.PLANE[this.to1D(i, j)] = color;
                 }
             }
@@ -1023,7 +1023,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(100, 100);
+let hello = new DISPLAY(10, 10);
 // hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
@@ -1040,7 +1040,7 @@ window.addEventListener('load', () => {
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
     // hello.line(450, 450, 430, 445, 200);
-    // hello.line(0, 0, 10, 10, 255);
+    hello.line(0, 0, 10, 10, 255);
     // hello.putPixel(40,40,255);
     hello.render();
 })
@@ -1058,6 +1058,7 @@ window.addEventListener('keydown', (event) => {
     if(event.key === 'ArrowUp') {
         hello.scrollUp();
     }
+    hello.render();
 })
 
 // function render() {
