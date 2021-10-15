@@ -1,4 +1,4 @@
-let canvas = document.querySelector('canvas');
+// let canvas = document.querySelector('canvas');
 
 let preserve = false;
 let command = false;
