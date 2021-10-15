@@ -1054,13 +1054,8 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
-<<<<<<< HEAD
     hello.line(0, 9,9, 0, 255);
     // hello.line(0, 0, 10, 10, 255);
-=======
-    // hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
->>>>>>> b839260ddc87d2acbb92f252a6ff71c5f42e3d55
     // hello.putPixel(40,40,255);
     hello.render();
 })
