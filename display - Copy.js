@@ -938,9 +938,8 @@ class DISPLAY {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y))-1] = 0;
-
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
         }
     }
 
@@ -950,8 +949,8 @@ class DISPLAY {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(1+this.WIDTH*(y))-1] = 0;
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = 0;
         }
     }
 
@@ -980,8 +979,8 @@ class DISPLAY {
 
     pscrollLeft() {
         let temparray = new Array(this.WIDTH);
-        for (let y = 0; y < this.HEIGHT; y++) {
-            temparray[y] = this.PLANE[(1+this.WIDTH*(y-1))-1];
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(1+this.WIDTH*(y-1))-1];
         }
         for (let x = 1; x <= this.WIDTH; x++) {
             for (let y = 1; y <= this.HEIGHT; y++) {
@@ -989,14 +988,14 @@ class DISPLAY {
             }
         }
         for (let y = 1; y <= this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y];
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y-1];
         }
     }
 
     pscrollRight() {
         let temparray = new Array(this.WIDTH);
-        for (let y = 0; y < this.HEIGHT; y++) {
-            temparray[y] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1]
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1]
         }
         for (let x = this.WIDTH; x > 1; x--) {
             for (let y = 1; y <= this.HEIGHT; y++) {
@@ -1004,7 +1003,7 @@ class DISPLAY {
             }
         }
         for (let y = 1; y <= this.HEIGHT; y++) {
-            this.PLANE[(1+this.WIDTH*(y-1))-1] = temparray[y];
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = temparray[y-1];
         }
     }
 
