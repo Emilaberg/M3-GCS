@@ -903,7 +903,8 @@ class DISPLAY {
             }
         }
         for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            // this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
+            this.PLANE[this.WIDTH-1][y] = 0;
         }
         console.log("ScrollLeft avslutas");
     }
@@ -915,6 +916,9 @@ class DISPLAY {
                 this.PLANE[x] = this.PLANE[x-1];
             }
         }
+        for(let y = 0; y < this.HEIGHT; y++){
+            this.PLANE[0][y] = 0;
+        }
         console.log("ScrollRight avslutats");
     }
 
@@ -924,6 +928,9 @@ class DISPLAY {
                 this.PLANE[x][y] = this.PLANE[x][y+1];
             }
         }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[x][this.HEIGHT - 1] = 0;
+        }
     }
 
     scrollDown() {
@@ -931,6 +938,9 @@ class DISPLAY {
             for (let x = 0; x < this.WIDTH; x++) {
                 this.PLANE[x][y] = this.PLANE[x][y-1];
             }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[x][0] = 0;
         }
     }
 
