@@ -48,7 +48,7 @@ function btnOn(btn){
 }
 
 let dropDown = document.getElementById("options");
-let circle = document.getElementById("shapes");
+// let circle = document.getElementById("shapes");
 let colorBtn = document.getElementById("color");
 
 function onClick()
@@ -122,22 +122,25 @@ let arr = [
     [ 'X1', 'Y1'],
     //names
     [ 'circle', 'rectangle', 'line', 'pixel']
-    
 ];
+
+
+let select = document.getElementById('options');
+select.addEventListener('change',function(){
+    renderInputs(select.selectedIndex);
+});
 
 function renderInputs(func)
 {
     let el = document.getElementById('numbers');
     let colorBtn = document.getElementById("color");
+    
     el.innerHTML = '';
 
     for (let i = 0; i < arr[func].length; i++)
     {
         el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`;
     }
-    shape = func;
-    circle.innerHTML = arr[4][func];
-    dropDown.style.visibility = "hidden";
     colorBtn.innerHTML = `<input type="text" name="color" placeholder="color"><div></div>`
 }
 
@@ -147,8 +150,6 @@ function renderResize()
 
     el.innerHTML = '';
     el.innerHTML += `<button onclick="renderResizeBtn()" style="padding: 10px; box-shadow: black 2px 2px;">resize</button>`;
-    dropDown.style.visibility = "hidden";
-    circle.innerHTML = "resize";
 }
 
 function renderResizeBtn()
@@ -181,9 +182,4 @@ function writeShape(){
     let numbers = document.getElementById("numbers");
     
     console.log(numbers);
-
-    // for(i=0; i<; i++)
-    // {
-    //     console.log(numbers);
-    // }
 }
