@@ -764,7 +764,6 @@ class BITMAP {
     }
 }
 
-const transpose = m => m[0].map((x, i) => m.map(x => x[i]));
 class DISPLAY {
     #LOCK;
 
@@ -786,9 +785,9 @@ class DISPLAY {
     }
 
     gridMap(func) {
-        for (let i = 0; i < this.WIDTH; i++) {
-            for (let j = 0; i < this.HEIGHT; j++) {
-                func(i)(j);
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(x)(y)] = func(i)(j);
             }
         }
     }
@@ -873,10 +872,10 @@ class DISPLAY {
 
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
         for (let i = 0; i < bx && i < dx; i++) {
-                for (let j = y1; j < y2; j++) {
-                    this.putPixel(i, j, color);
-                }
+            for (let j = y1; j < y2; j++) {
+                
             }
+        }
     }
 
     blitToBitmap( width, height,bx, by, dx, dy) {
