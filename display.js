@@ -871,11 +871,13 @@ class DISPLAY {
     }
 
     blitToDisplay(BITMAp, width, height, bx, by, dx, dy) {
-        // for (let i = 0; i < bx && i < dx; i++) {
-        //     for (let j = y1; j < y2; j++) {
-        //         BITMAP[x][y]
-        //     }
-        // }
+        for (let i = bx; i < bx+width; i++) {
+            for (let j = by; j < by+height; j++) {
+                this.PLANE[this.to1D(i-bx+dx,j-by+dy)] = BITMAp.PLANE[i][j];
+                console.log(BITMAp);
+                this.render();
+            }
+        }
 
         // if(dx-width < -1 || dy-height < -1){
         //     alert('Error');
@@ -911,6 +913,7 @@ class DISPLAY {
         }
         console.log(this.PLANE);
         console.log(BITMAP.PLANE);
+        return temp;
         
     }
 
