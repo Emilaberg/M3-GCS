@@ -188,7 +188,6 @@ function writeShape(){
         case 1:
             // prints message in the console for debugging
             console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
-            
             // draws a rectangle with the inputs you entered. 
             hello.rectangle(x1.value,y1.value,x2.value,y2.value);
             success.style.display = "block";
