@@ -879,23 +879,23 @@ class DISPLAY {
         }
     }
 
-    blitToBitmap(width, height,bx, by, dx, dy) {
+    blitToBitmap(BITMAP, width, height,bx, by, dx, dy) {
 
         if(dx-width < -1 || dy-height < -1){
             alert('Error');
             return;
         }
         
-        let temp = new BITMAP(width+bx, height+by);
+        // let temp = new BITMAP(width+bx, height+by);
         for (let x = dx-(width-1); x <= dx; x++) {
             for (let y = dy-(height-1); y <= dy; y++) {
 
-                temp.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
+                BITMAP.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
                 
             }
         }
         console.log(this.PLANE);
-        console.log(temp.PLANE);
+        console.log(BITMAP.PLANE);
         
     }
 
@@ -1062,7 +1062,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(5,5);
+let hello = new DISPLAY(50,50);
 // hello.circle(0, 0, 40, 5);
 let presActive = false;
 function presBtn() {
