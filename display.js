@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 // canvas.height = "1000";
 
 ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
+ctx.canvas.height = window.innerWidth;
 
 
 let chars = {
@@ -764,7 +764,6 @@ class BITMAP {
     }
 }
 
-const transpose = m => m[0].map((x, i) => m.map(x => x[i]));
 class DISPLAY {
     #LOCK;
 
@@ -786,9 +785,9 @@ class DISPLAY {
     }
 
     gridMap(func) {
-        for (let i = 0; i < this.WIDTH; i++) {
-            for (let j = 0; i < this.HEIGHT; j++) {
-                func(i)(j);
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(x)(y)] = func(i)(j);
             }
         }
     }
@@ -873,27 +872,55 @@ class DISPLAY {
 
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
         for (let i = 0; i < bx && i < dx; i++) {
-                for (let j = y1; j < y2; j++) {
-                    this.putPixel(i, j, color);
-                }
+            for (let j = y1; j < y2; j++) {
+                
             }
+        }
     }
 
-    blitToBitmap(BITMAP, width, height,bx, by, dx, dy) {
-        // let temp = new Array(10).fill(0).map(element => new Array(10).fill(0));
-        let temp = new BITMAP(width*bx, height*by);
-        for (let x = dx-width; x < dx; x++) {
-            for (let y = dy-height; y < dy; y++) {
+    blitToBitmap( width, height,bx, by, dx, dy) {
+        let tempArray = new Array(width + bx).fill(0).map(element => new Array(height + by).fill(0));
+        let temp = new BITMAP(width+bx, height+by);
+        let x1 = 0;
+        let y1 = 0;
+        for (let x = dx-width-1; x < dx; x++) {
+            for (let y = dy-height-1; y < dy; y++) {
+
+
+
+                // console.log(this.PLANE[x][y]);
+                // console.log(this.PLANE[x, y]);
+
                 // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
+
+                tempArray[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)];
+
+                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)];
                 
-                temp.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)]; 
+                // console.log(x);
+                // console.log(y);
+                
+                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
+                
+                // console.log(this.PLANE[x][y]);
                 
                 // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
                 //     BITMAP.PLANE[this.to1D(x, y)] = color;
                 //     BITMAP.PLANE
-                // }
+                // } 
+                
             }
+            
         }
+        for(let x = bx; x < bx + width; x++){
+            for(let y = by; y < by + height; y++){
+                temp.PLANE[x][y] = tempArray[this.to1D(x, y)];
+                y1++;
+            }
+            x1++;
+        }
+        console.log(tempArray);
+        console.log(this.PLANE);
         console.log(temp.PLANE);
     }
 
@@ -1060,7 +1087,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(10, 10);
+let hello = new DISPLAY(5,5);
 // hello.circle(0, 0, 40, 5);
 let presActive = false;
 function presBtn() {
@@ -1069,7 +1096,7 @@ function presBtn() {
 
 window.addEventListener('load', () => {
     // hello.render();
-    // hello.rectangle(4, 4, 5, 5, 255);
+    
     // hello.line(0,0,0,10,255);
     // hello.line(0,0,10,0,255);
     // hello.line(10,0,10,10,255);
@@ -1080,10 +1107,12 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
-    hello.line(0, 9,9, 0, 255);
+    hello.line(0, 4, 4, 0, 100);
+    // hello.rectangle(0, 5, 5, 8, 255);
+    // hello.rectangle(4,6,0,9,255);
     // hello.line(0, 0, 10, 10, 255);
     // hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
+    // hello.line(0, 0, 10, 10, 255);
     // hello.putPixel(40,40,255);
     hello.render();
 })
