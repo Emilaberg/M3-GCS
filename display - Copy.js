@@ -784,15 +784,16 @@ class DISPLAY {
         return c
     }
 
-    iterate(func, domain) {
+    loop(func, domain) {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; i < this.HEIGHT; j++) {
                 if (domain(i)(j)) {
-                    // this.PLANE[i][j] = func(i)(j);
                     this.PLANE[this.to1D(i, j)] = func(i)(j);
                 }
             }
         }
+
+        this.PLANE.map(func)
     }
 
     to2DArray() {
@@ -820,7 +821,7 @@ class DISPLAY {
                 let B2 = (i - x1) ** 2 + (j - y1) ** 2;
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
-                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && (f(i)(j) ** 2) / 4 - A2 <= 0) {
+                if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
                     this.PLANE[this.to1D(i, j)] = color;
                 }
             }
@@ -832,14 +833,17 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (diameter % 2 === 0) {
-                    if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) <= radius ** 2) {
+                    if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) - radius ** 2 <= 0) {
                         this.PLANE[this.to1D(i, j)] = color;
                     }
                 } else {
-                    if (((i - x1) ** 2 + (j - y1) ** 2) <= radius ** 2) {
+                    if (((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2 <= 0) {
                         this.PLANE[this.to1D(i, j)] = color;
                     }
                 }
+                
+                    // this.PLANE[this.to1D(i, j)] = -(((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2);
+                
             }
         }
     }
@@ -860,7 +864,7 @@ class DISPLAY {
     }
 
     clear(color) {
-        this.PLANE = this.PLANE.map(element1 => element1.map(() => color));
+        this.PLANE = this.PLANE.map(() => color);
     }
 
     resize(width, height) {
@@ -907,16 +911,35 @@ class DISPLAY {
             this.PLANE[this.to1D(this.WIDTH-1,i)] = this.PLANE[i];
         }
     }
+
+    modulo(a,b) {
+        return a - b*Math.floor(a/b);
+    }
         
+    scrollLeftx() {
+        for (let x = 0; x < this.WIDTH; x++) {
+            for (let y = 0; y < this.HEIGHT; y++) {
+                this.PLANE[this.to1D(this.modulo(x-1,this.WIDTH),y)] = this.PLANE[this.to1D(x,y)];
+            }
+        }
+    }
+
+    // scrollRight() {
+    //     for (let x = 0; x < this.WIDTH; x++) {
+    //         for (let y = 0; y < this.HEIGHT; y++) {
+    //             this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
+    //         }
+    //     }
+    //}
+
     scrollLeft() {
         for (let x = 1; x <= this.WIDTH; x++) {
             for (let y = 1; y <= this.HEIGHT; y++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
+        for (let y = 1; y <= this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
-
         }
     }
 
@@ -926,7 +949,7 @@ class DISPLAY {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
+        for (let y = 1; y <= this.HEIGHT; y++) {
             this.PLANE[(1+this.WIDTH*(y-1))-1] = 0;
         }
     }
@@ -950,48 +973,68 @@ class DISPLAY {
             }
         }
         for(let x = 0; x < this.WIDTH; x++){
-            // this.PLANE[x][0] = 0;
             this.PLANE[this.to1D(x, 0)] = 0;
         }
     }
 
     pscrollLeft() {
         let temparray = new Array(this.WIDTH);
-        for (let y = 0; y < this.HEIGHT; y++) {
-            temparray[y] = this.PLANE[(1+this.WIDTH*(y-1))-1];
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(1+this.WIDTH*(y-1))-1];
         }
         for (let x = 1; x <= this.WIDTH; x++) {
             for (let y = 1; y <= this.HEIGHT; y++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y];
-
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = temparray[y-1];
         }
     }
 
     pscrollRight() {
         let temparray = new Array(this.WIDTH);
-        for (let y = 0; y < this.HEIGHT; y++) {
-            temparray[y] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1];
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            temparray[y-1] = this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1]
         }
         for (let x = this.WIDTH; x > 1; x--) {
             for (let y = 1; y <= this.HEIGHT; y++) {
                 this.PLANE[(x+this.WIDTH*(y-1))-1] = this.PLANE[(x+this.WIDTH*(y-1))-2];
             }
         }
-        for (let y = 0; y < this.HEIGHT; y++) {
-            this.PLANE[(1+this.WIDTH*(y-1))-1] = temparray[y];
+        for (let y = 1; y <= this.HEIGHT; y++) {
+            this.PLANE[(1+this.WIDTH*(y-1))-1] = temparray[y-1];
         }
     }
 
     pscrollUp() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, 0)];
+        }
+        for (let y = 0; y < this.HEIGHT-1; y++) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y+1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, this.HEIGHT - 1)] = temparray[x];
+        }
     }
 
     pscrollDown() {
-
+        let temparray = new Array(this.HEIGHT);
+        for(let x = 0; x < this.WIDTH; x++){
+            temparray[x] = this.PLANE[this.to1D(x, this.HEIGHT - 1)];
+        }
+        for (let y = this.HEIGHT; y > 0; y--) {
+            for (let x = 0; x < this.WIDTH; x++) {
+                this.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y -1)];
+            }
+        }
+        for(let x = 0; x < this.WIDTH; x++){
+            this.PLANE[this.to1D(x, 0)] = temparray[x];
+        }
     }
 
     render() {
@@ -1006,44 +1049,43 @@ class DISPLAY {
     }
 }
 
-// if(![f(i)(j),f(i)(j+1),f(i+1)(j),f(i+1)(j+1)].every((v, i, arr) => v === arr[0]) && f(i)(j) !== 0) {
-//     this.PLANE[Math.floor(i)][Math.floor(j)] = color;
-// }
-
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-// hello.circle(0, 0, 40, 5);
 
 let hello = new DISPLAY(10, 10);
 // hello.circle(0, 0, 40, 5);
 
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■"));
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5", "■").replaceAll("0", " "))
-
-
-// // console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("5","█").replaceAll(" █","██").replaceAll("0█","0 "));
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n")
-//     .replaceAll("5", "█")
-//     .replaceAll(" █", "██")
-//     .replaceAll("0█", "0 ")
-//     .replaceAll("0", " "));
-
-// console.log(hello.PLANE.map(element => element.join(" ")).join("\n").replaceAll("-1", "⎯").replaceAll("1", "|"))
-
-// let dsp = new DISPLAY();
-
-// function scroll(string) {
-//     if (preserve === true) {
-//         switch (string) {
-//             case "up":
-//                 dsp.scrollUp();
-//                 break;
-//             case "down":
-//         }
-//     }
-// }
-
 window.addEventListener('load', () => {
-    hello.line(0, 10, 10, 0, 255);
+    // hello.render();
+    // hello.rectangle(4, 4, 5, 5, 255);
+    // hello.line(0,0,0,10,255);
+    // hello.line(0,0,10,0,255);
+    // hello.line(10,0,10,10,255);
+    // hello.line(0,10,10,10,255);
+    // hello.textOut(1, 1, 255, "M");
+    // hello.textOut(10, 10, 200, "test test test");
+    // hello.circle(145, 145, 50, 255);
+    // hello.rectangle(190, 190, 210, 210, 230);
+    // hello.line(190, 190, 450, 450, 200);
+    // hello.line(450, 450, 470, 430, 200);
+    // hello.line(450, 450, 430, 445, 200);
+    hello.line(0, 9, 9, 0, 255);
+    // hello.putPixel(40,40,255);
+    hello.render();
+})
+
+window.addEventListener('keydown', (event) => {
+    if(event.key == 'ArrowLeft') {
+        hello.scrollLeft();
+    }
+    if(event.key == 'ArrowRight') {
+        hello.scrollRight();
+    }
+    if(event.key == 'ArrowDown') {
+        hello.scrollDown();
+    }
+    if(event.key == 'ArrowUp') {
+        hello.scrollUp();
+    }
     hello.render();
 })
 

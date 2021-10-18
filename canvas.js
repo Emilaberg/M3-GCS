@@ -178,5 +178,12 @@ function renderParser()
 
 
 function writeShape(){
+    let numbers = document.getElementById("numbers");
     
+    console.log(numbers);
+
+    // for(i=0; i<; i++)
+    // {
+    //     console.log(numbers);
+    // }
 }
