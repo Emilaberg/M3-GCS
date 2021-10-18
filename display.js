@@ -914,6 +914,7 @@ class DISPLAY {
         BITMAP.PLANE = temp.PLANE;
         console.log(this.PLANE);
         console.log(temp.PLANE);
+        return temp;
         
     }
 
