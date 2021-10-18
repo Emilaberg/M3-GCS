@@ -795,8 +795,9 @@ class DISPLAY {
     to2DArray() {
         let tempArr = [[]];
         for (let i = 0; i < this.WIDTH; i++) {
+            tempArr[i] = [];
             for (let j = 0; j < this.HEIGHT; j++) {
-                tempArr[i] = [];
+                
                 tempArr[i][j] = this.PLANE[this.to1D(i, j)];
             }
         }
@@ -878,50 +879,24 @@ class DISPLAY {
         }
     }
 
-    blitToBitmap( width, height,bx, by, dx, dy) {
-        let tempArray = new Array(width + bx).fill(0).map(element => new Array(height + by).fill(0));
+    blitToBitmap(width, height,bx, by, dx, dy) {
+
+        if(dx-width < -1 || dy-height < -1){
+            alert('Error');
+            return;
+        }
+        
         let temp = new BITMAP(width+bx, height+by);
-        let x1 = 0;
-        let y1 = 0;
-        for (let x = dx-width-1; x < dx; x++) {
-            for (let y = dy-height-1; y < dy; y++) {
+        for (let x = dx-(width-1); x <= dx; x++) {
+            for (let y = dy-(height-1); y <= dy; y++) {
 
-
-
-                // console.log(this.PLANE[x][y]);
-                // console.log(this.PLANE[x, y]);
-
-                // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
-
-                tempArray[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)];
-
-                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)];
-                
-                // console.log(x);
-                // console.log(y);
-                
-                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
-                
-                // console.log(this.PLANE[x][y]);
-                
-                // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
-                //     BITMAP.PLANE[this.to1D(x, y)] = color;
-                //     BITMAP.PLANE
-                // } 
+                temp.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
                 
             }
-            
         }
-        for(let x = bx; x < bx + width; x++){
-            for(let y = by; y < by + height; y++){
-                temp.PLANE[x][y] = tempArray[this.to1D(x, y)];
-                y1++;
-            }
-            x1++;
-        }
-        console.log(tempArray);
         console.log(this.PLANE);
         console.log(temp.PLANE);
+        
     }
 
     textOut(x, y, color, string) {
