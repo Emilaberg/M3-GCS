@@ -17,11 +17,12 @@
             <div class="navbar-left">
                 <div class="shapes">
                     <select name="" id="options" class="dropdown">
-                        <option value="resize" onclick="renderResize()">resize</option>
-                        <option value="0" onclick="renderInputs()">circle</option>
-                        <option value="1" onclick="renderInputs(1)">rectangle</option>
-                        <option value="2" onclick="renderInputs(2)">line</option>
-                        <option value="2" onclick="renderInputs(3)">pixel</option>
+                        <option value="" disabled selected>Shapes</option>
+                        <option value="reSize" ">resize</option>
+                        <option value="0">circle</option>
+                        <option value="1">rectangle</option>
+                        <option value="2">line</option>
+                        <option value="3">pixel</option>
                     </select>
                 </div>
                 
@@ -81,13 +82,14 @@
     </div>
 
     <!-- Success -->
-    <div class="successDiv"> 
+    <div class="successDiv" id="success"> 
         <i class="fas fa-2x fa-check success"></i>
         <span class="successMessage">Successful</span>
     </div>
     <div class="canvasStyle">
         <canvas id="canvas"">error: browser does not support canvas</canvas>
     </div>
+
     <script src="canvas.js"></script>
     <script src="display.js"></script>
     
