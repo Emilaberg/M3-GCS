@@ -1062,6 +1062,10 @@ class DISPLAY {
 
 let hello = new DISPLAY(10, 10);
 // hello.circle(0, 0, 40, 5);
+let presActive = false;
+function presBtn() {
+    presActive = !presActive;
+}
 
 window.addEventListener('load', () => {
     // hello.render();
@@ -1085,17 +1089,33 @@ window.addEventListener('load', () => {
 })
 
 window.addEventListener('keydown', (event) => {
-    if(event.key == 'ArrowLeft') {
-        hello.scrollLeft();
+    if (presActive == true) {
+        if(event.key == 'ArrowLeft') {
+            hello.pscrollLeft();
+        }
+        if(event.key == 'ArrowRight') {
+            hello.pscrollRight();
+        }
+        if(event.key == 'ArrowDown') {
+            hello.pscrollDown();
+        }
+        if(event.key == 'ArrowUp') {
+            hello.pscrollUp();
+        }
     }
-    if(event.key == 'ArrowRight') {
-        hello.scrollRight();
-    }
-    if(event.key == 'ArrowDown') {
-        hello.scrollDown();
-    }
-    if(event.key == 'ArrowUp') {
-        hello.scrollUp();
+    else {
+        if(event.key == 'ArrowLeft') {
+            hello.scrollLeft();
+        }
+        if(event.key == 'ArrowRight') {
+            hello.scrollRight();
+        }
+        if(event.key == 'ArrowDown') {
+            hello.scrollDown();
+        }
+        if(event.key == 'ArrowUp') {
+            hello.scrollUp();
+        }
     }
     hello.render();
 })
