@@ -795,9 +795,12 @@ class DISPLAY {
     to2DArray() {
         let tempArr = [[]];
         for (let i = 0; i < this.WIDTH; i++) {
+            tempArr[i] = [];
             for (let j = 0; j < this.HEIGHT; j++) {
-                tempArr[i] = [];
+                
                 tempArr[i][j] = this.PLANE[this.to1D(i, j)];
+                // this.PLANE
+                this.to2DArray()
             }
         }
         return tempArr;
@@ -808,8 +811,8 @@ class DISPLAY {
     }
 
     line(x1, y1, x2, y2, color) {
-        // const f = x => y => Math.sign((y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2));
-        const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
+        const f = x => y => (y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2);
+        // const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
 
         for (let i = 0; i < this.WIDTH; i++) {
@@ -818,7 +821,7 @@ class DISPLAY {
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
                 if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
-                    this.PLANE[this.to1D(i, j)] = color;
+                    this.putPixel(i,j,color);
                 }
             }
         }
@@ -830,16 +833,13 @@ class DISPLAY {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (diameter % 2 === 0) {
                     if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) - radius ** 2 <= 0) {
-                        this.PLANE[this.to1D(i, j)] = color;
+                        this.putPixel(i,j,color);
                     }
                 } else {
                     if (((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2 <= 0) {
-                        this.PLANE[this.to1D(i, j)] = color;
+                        this.putPixel(i,j,color);
                     }
-                }
-                
-                    // this.PLANE[this.to1D(i, j)] = -(((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2);
-                
+                }                
             }
         }
     }
@@ -870,58 +870,52 @@ class DISPLAY {
         // return new DISPLAY(width, height);
     }
 
-    blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
-        for (let i = 0; i < bx && i < dx; i++) {
-            for (let j = y1; j < y2; j++) {
-                
+    blitToDisplay(BITMAp, width, height, bx, by, dx, dy) {
+        for (let i = bx; i < bx+width; i++) {
+            for (let j = by; j < by+height; j++) {
+                this.PLANE[this.to1D(i-bx+dx,j-by+dy)] = BITMAp.PLANE[i][j];
+                console.log(BITMAp);
+                this.render();
             }
         }
+
+        // if(dx-width < -1 || dy-height < -1){
+        //     alert('Error');
+        //     return;
+        // }
+        
+        // let temp = new BITMAP(width+bx, height+by);
+        // for (let x = bx-(width-1); x <= bx; x++) {
+        //     for (let y = by-(height-1); y <= by; y++) {
+
+        //         this.PLANE[this.to1D(x, y)] = temp.PLANE[dx+x][dy+y];
+                
+        //     }
+        // }
+        // console.log(this.PLANE);
+        // console.log(temp.PLANE);
     }
 
-    blitToBitmap( width, height,bx, by, dx, dy) {
-        let tempArray = new Array(width + bx).fill(0).map(element => new Array(height + by).fill(0));
+    blitToBitmap(width, height,bx, by, dx, dy) {
+
+        if(dx-width < -1 || dy-height < -1){
+            alert('Error');
+            return;
+        }
+        
         let temp = new BITMAP(width+bx, height+by);
-        let x1 = 0;
-        let y1 = 0;
-        for (let x = dx-width-1; x < dx; x++) {
-            for (let y = dy-height-1; y < dy; y++) {
+        for (let x = dx-(width-1); x <= dx; x++) {
+            for (let y = dy-(height-1); y <= dy; y++) {
 
-
-
-                // console.log(this.PLANE[x][y]);
-                // console.log(this.PLANE[x, y]);
-
-                // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
-
-                tempArray[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)];
-
-                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)];
-                
-                // console.log(x);
-                // console.log(y);
-                
-                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
-                
-                // console.log(this.PLANE[x][y]);
-                
-                // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
-                //     BITMAP.PLANE[this.to1D(x, y)] = color;
-                //     BITMAP.PLANE
-                // } 
+                temp.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
                 
             }
-            
         }
-        for(let x = bx; x < bx + width; x++){
-            for(let y = by; y < by + height; y++){
-                temp.PLANE[x][y] = tempArray[this.to1D(x, y)];
-                y1++;
-            }
-            x1++;
-        }
-        console.log(tempArray);
+        BITMAP.PLANE = temp.PLANE;
         console.log(this.PLANE);
         console.log(temp.PLANE);
+        return temp;
+        
     }
 
     textOut(x, y, color, string) {
@@ -1087,7 +1081,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(5,5);
+let hello = new DISPLAY(50,50);
 // hello.circle(0, 0, 40, 5);
 let presActive = false;
 function presBtn() {
