@@ -913,7 +913,6 @@ class DISPLAY {
         }
         console.log(this.PLANE);
         console.log(BITMAP.PLANE);
-        return temp;
         
     }
 
