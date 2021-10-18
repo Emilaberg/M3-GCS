@@ -894,23 +894,23 @@ class DISPLAY {
         console.log(temp.PLANE);
     }
 
-    blitToBitmap(width, height,bx, by, dx, dy) {
+    blitToBitmap(BITMAP, width, height,bx, by, dx, dy) {
 
         if(dx-width < -1 || dy-height < -1){
             alert('Error');
             return;
         }
         
-        let temp = new BITMAP(width+bx, height+by);
+        // let temp = new BITMAP(width+bx, height+by);
         for (let x = dx-(width-1); x <= dx; x++) {
             for (let y = dy-(height-1); y <= dy; y++) {
 
-                temp.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
+                BITMAP.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
                 
             }
         }
         console.log(this.PLANE);
-        console.log(temp.PLANE);
+        console.log(BITMAP.PLANE);
         
     }
 
