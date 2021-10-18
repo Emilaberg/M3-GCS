@@ -795,9 +795,11 @@ class DISPLAY {
     to2DArray() {
         let tempArr = [[]];
         for (let i = 0; i < this.WIDTH; i++) {
+            tempArr[i] = [];
             for (let j = 0; j < this.HEIGHT; j++) {
-                tempArr[i] = [];
                 tempArr[i][j] = this.PLANE[this.to1D(i, j)];
+                // this.PLANE
+                this.to2DArray()
             }
         }
         return tempArr;
@@ -808,8 +810,8 @@ class DISPLAY {
     }
 
     line(x1, y1, x2, y2, color) {
-        // const f = x => y => Math.sign((y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2));
-        const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
+        const f = x => y => (y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2);
+        // const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
 
         for (let i = 0; i < this.WIDTH; i++) {
@@ -818,7 +820,7 @@ class DISPLAY {
                 let C2 = (x2 - i) ** 2 + (y2 - j) ** 2;
 
                 if (A2 + B2 - C2 >= 0 && A2 + C2 - B2 >= 0 && 4*(f(i)(j) ** 2) - A2 < 0) {
-                    this.PLANE[this.to1D(i, j)] = color;
+                    this.putPixel(i,j,color);
                 }
             }
         }
@@ -830,16 +832,13 @@ class DISPLAY {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (diameter % 2 === 0) {
                     if (((i - x1 + 0.5) ** 2 + (j - y1 + 0.5) ** 2) - radius ** 2 <= 0) {
-                        this.PLANE[this.to1D(i, j)] = color;
+                        this.putPixel(i,j,color);
                     }
                 } else {
                     if (((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2 <= 0) {
-                        this.PLANE[this.to1D(i, j)] = color;
+                        this.putPixel(i,j,color);
                     }
-                }
-                
-                    // this.PLANE[this.to1D(i, j)] = -(((i - x1) ** 2 + (j - y1) ** 2) - radius ** 2);
-                
+                }                
             }
         }
     }
@@ -873,7 +872,7 @@ class DISPLAY {
     blitToDisplay(BITMAP, width, height, bx, by, dx, dy) {
         for (let i = 0; i < bx && i < dx; i++) {
             for (let j = y1; j < y2; j++) {
-                
+                BITMAP[x][y]
             }
         }
     }
@@ -910,7 +909,6 @@ class DISPLAY {
                 // } 
                 
             }
-            
         }
         for(let x = bx; x < bx + width; x++){
             for(let y = by; y < by + height; y++){
@@ -1087,7 +1085,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(5,5);
+let hello = new DISPLAY(50,50);
 // hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
@@ -1115,16 +1113,16 @@ window.addEventListener('load', () => {
 
 window.addEventListener('keydown', (event) => {
     if(event.key == 'ArrowLeft') {
-        hello.scrollLeft();
+        hello.pscrollLeft();
     }
     if(event.key == 'ArrowRight') {
-        hello.scrollRight();
+        hello.pscrollRight();
     }
     if(event.key == 'ArrowDown') {
-        hello.scrollDown();
+        hello.pscrollDown();
     }
     if(event.key == 'ArrowUp') {
-        hello.scrollUp();
+        hello.pscrollUp();
     }
     hello.render();
 })
