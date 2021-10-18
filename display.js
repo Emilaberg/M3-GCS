@@ -879,14 +879,14 @@ class DISPLAY {
             }
     }
 
-    blitToBitmap(BITMAP, width, height,bx, by, dx, dy) {
+    blitToBitmap( width, height,bx, by, dx, dy) {
         // let temp = new Array(10).fill(0).map(element => new Array(10).fill(0));
-        let temp = new BITMAP(width*bx, height*by);
+        let temp = new BITMAP(width+bx, height+by);
         for (let x = dx-width; x < dx; x++) {
             for (let y = dy-height; y < dy; y++) {
                 // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
                 
-                temp.PLANE[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)]; 
+                temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
                 
                 // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
                 //     BITMAP.PLANE[this.to1D(x, y)] = color;
@@ -1052,7 +1052,7 @@ let hello = new DISPLAY(10, 10);
 
 window.addEventListener('load', () => {
     // hello.render();
-    // hello.rectangle(4, 4, 5, 5, 255);
+    
     // hello.line(0,0,0,10,255);
     // hello.line(0,0,10,0,255);
     // hello.line(10,0,10,10,255);
@@ -1063,10 +1063,12 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
-    hello.line(0, 9,9, 0, 255);
+    hello.line(1, 8,8, 1, 100);
+    // hello.rectangle(0, 5, 5, 8, 255);
+    // hello.rectangle(4,6,0,9,255);
     // hello.line(0, 0, 10, 10, 255);
     // hello.line(450, 450, 430, 445, 200);
-    hello.line(0, 0, 10, 10, 255);
+    // hello.line(0, 0, 10, 10, 255);
     // hello.putPixel(40,40,255);
     hello.render();
 })
