@@ -12,10 +12,12 @@ function btnOn(btn){
         if(preserve == true){
             document.querySelector(`.${btn}-btn`).style.backgroundColor = '#333';
             document.querySelector('.preserve-btn').style.color = '#fff';
+            presBtn();
         }
         else{
             document.querySelector('.preserve-btn').style.backgroundColor = '#fff';
             document.querySelector('.preserve-btn').style.color = '#333';
+            presBtn();
         }
     }
     else if(btn == 'command'){
