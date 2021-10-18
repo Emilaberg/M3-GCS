@@ -880,20 +880,48 @@ class DISPLAY {
     }
 
     blitToBitmap( width, height,bx, by, dx, dy) {
-        // let temp = new Array(10).fill(0).map(element => new Array(10).fill(0));
+        let tempArray = new Array(width + bx).fill(0).map(element => new Array(height + by).fill(0));
         let temp = new BITMAP(width+bx, height+by);
-        for (let x = dx-width; x < dx; x++) {
-            for (let y = dy-height; y < dy; y++) {
+        let x1 = 0;
+        let y1 = 0;
+        for (let x = dx-width-1; x < dx; x++) {
+            for (let y = dy-height-1; y < dy; y++) {
+
+
+
+                // console.log(this.PLANE[x][y]);
+                // console.log(this.PLANE[x, y]);
+
                 // this.PLANE[this.to1D(x, y)] = BITMAP.PLANE[this.to1D(x, y)];
+
+                tempArray[this.to1D(x, y)] = this.PLANE[this.to1D(x, y)];
+
+                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)];
                 
-                temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
+                // console.log(x);
+                // console.log(y);
+                
+                // temp.PLANE[x][y] = this.PLANE[this.to1D(x, y)]; 
+                
+                // console.log(this.PLANE[x][y]);
                 
                 // if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
                 //     BITMAP.PLANE[this.to1D(x, y)] = color;
                 //     BITMAP.PLANE
-                // }
+                // } 
+                
             }
+            
         }
+        for(let x = bx; x < bx + width; x++){
+            for(let y = by; y < by + height; y++){
+                temp.PLANE[x][y] = tempArray[this.to1D(x, y)];
+                y1++;
+            }
+            x1++;
+        }
+        console.log(tempArray);
+        console.log(this.PLANE);
         console.log(temp.PLANE);
     }
 
@@ -1060,7 +1088,7 @@ class DISPLAY {
 
 // let hello = new DISPLAY(window.innerWidth,window.innerHeight);
 
-let hello = new DISPLAY(10,10);
+let hello = new DISPLAY(5,5);
 // hello.circle(0, 0, 40, 5);
 
 window.addEventListener('load', () => {
@@ -1076,7 +1104,7 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
-    hello.line(1, 8,8, 1, 100);
+    hello.line(0, 4, 4, 0, 100);
     // hello.rectangle(0, 5, 5, 8, 255);
     // hello.rectangle(4,6,0,9,255);
     // hello.line(0, 0, 10, 10, 255);
