@@ -1110,7 +1110,7 @@ window.addEventListener('load', () => {
     // hello.rectangle(190, 190, 210, 210, 230);
     // hello.line(190, 190, 450, 450, 200);
     // hello.line(450, 450, 470, 430, 200);
-    hello.line(0, 4, 4, 0, 100);
+    // hello.line(0, 4, 4, 0, 100);
     // hello.rectangle(0, 5, 5, 8, 255);
     // hello.rectangle(4,6,0,9,255);
     // hello.line(0, 0, 10, 10, 255);

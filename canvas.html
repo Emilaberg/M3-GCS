@@ -32,7 +32,7 @@
                         <button onclick="renderParser()">Text</button>
                     </div>
                     
-                    <textarea name="" id="" cols="40" rows="2" placeholder="Text..."></textarea>
+                    <textarea name="" id="textinput" cols="40" rows="2" placeholder="Text..."></textarea>
                 </div>
                  
             </div>
@@ -48,7 +48,8 @@
                 
                 <div class="run-clear">
                     <button class="btn" onclick="writeShape()">run</button>
-                    <button class="btn" id="clear" onclick="alert('you pressed clear')">clear</button>
+                    <button class="btn" id="clear" onclick="clearCanvas()">clear</button>
+                    <div></div>
                 </div>
             </div>
 
@@ -89,7 +90,7 @@
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
     <script src="canvas.js"></script>
-
+    <script src="display.js"></script>
 </body>
 </html>
 
