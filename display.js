@@ -864,7 +864,7 @@ class DISPLAY {
     }
 
     resize(width, height) {
-        this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
+        this.PLANE = new Array(width * height).fill(0);
         this.WIDTH = width;
         this.HEIGHT = height;
         // return new DISPLAY(width, height);
