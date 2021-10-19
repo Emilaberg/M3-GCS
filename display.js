@@ -914,6 +914,7 @@ class DISPLAY {
         BITMAP.PLANE = temp.PLANE;
         console.log(this.PLANE);
         console.log(temp.PLANE);
+        return temp;
         
     }
 
@@ -1111,7 +1112,7 @@ window.addEventListener('load', () => {
 })
 
 window.addEventListener('keydown', (event) => {
-    if (presActive == true) {
+    if (presActive == false) {
         if(event.key == 'ArrowLeft') {
             hello.pscrollLeft();
         }
@@ -1142,7 +1143,7 @@ window.addEventListener('keydown', (event) => {
     hello.render();
 })
 
-// function render() {
+function render() {
 //     hello.rectangle(8, 8, 9, 9, 255);
 //     hello.textOut(450, 450, 255, "jag vet inte 123456789");
 //     hello.textOut(10, 10, 200, "test test test");
@@ -1153,7 +1154,7 @@ window.addEventListener('keydown', (event) => {
 //     hello.line(450, 450, 430, 445, 200);
 //     hello.line(0, 0, 10, 10, 255);
 //     hello.putPixel(40,40,255);
-//     hello.render();
-//     requestAnimationFrame(render);
-// }
-// requestAnimationFrame(render);
+    hello.render();
+    requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
