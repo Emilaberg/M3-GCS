@@ -4,6 +4,7 @@ let preserve = false;
 let command = false;
 let text = false;
 let shape = 0;
+let stop = false;
 
 function btnOn(btn){
     if(btn == 'preserve'){
@@ -221,3 +222,50 @@ function clearCanvas()
     hello.clear(shade.value);
 }
 
+function ScrollStop()
+{
+    stop = true;
+}
+
+function canvasScroll(num)
+{
+    stop = false;
+    expr = num;
+    if(preserve === false)
+    {
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.scrollUp();
+                break;
+            case 1:
+                hello.scrollLeft();
+                break;
+            case 2:
+                hello.scrollRight();
+                break;
+            case 3:
+                hello.scrollDown();
+                break;
+        }
+    }
+    else if(preserve === true && stop === false){
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.pscrollUp();
+                break;
+            case 1:
+                hello.pscrollLeft();
+                break;
+            case 2:
+                hello.pscrollRight();
+                break;
+            case 3:
+                hello.pscrollDown();
+                break;
+        }
+    }
+}
