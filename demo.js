@@ -1,12 +1,8 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// canvas.width = "1000";
-// canvas.height = "1000";
-
 ctx.canvas.width = window.innerWidth;
 ctx.canvas.height = window.innerWidth;
-
 
 // Alla tecken/bokstäver, uppritade i 1 dimensionell array. Bredd: 7, Höjd: 8.
 let chars = {
@@ -778,30 +774,12 @@ class DISPLAY {
         return y * this.WIDTH + x;
     }
 
-    to2D(c) {
-        return c
-    }
-
     gridMap(func) {
         for (let x = 0; x < this.WIDTH; x++) {
             for (let y = 0; y < this.HEIGHT; y++) {
                 this.PLANE[this.to1D(x)(y)] = func(i)(j);
             }
         }
-    }
-
-    to2DArray() {
-        let tempArr = [[]];
-        for (let i = 0; i < this.WIDTH; i++) {
-            tempArr[i] = [];
-            for (let j = 0; j < this.HEIGHT; j++) {
-                
-                tempArr[i][j] = this.PLANE[this.to1D(i, j)];
-                // this.PLANE
-                this.to2DArray()
-            }
-        }
-        return tempArr;
     }
 
     putPixel(x, y, color) {
@@ -843,11 +821,6 @@ class DISPLAY {
     }
 
     rectangle(x1, y1, x2, y2, color) {
-        // for (let i = x1; i < x2; i++) {
-        //     for (let j = y1; j < y2; j++) {
-        //         this.putPixel(i, j, color);
-        //     }
-        // }
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (i >= x1 && i <= x2 && j >= y1 && j <= y2) {
@@ -865,7 +838,6 @@ class DISPLAY {
         this.PLANE = new Array(width * height).fill(0);
         this.WIDTH = width;
         this.HEIGHT = height;
-        // return new DISPLAY(width, height);
     }
 
     blitToDisplay(BITMAp, width, height, bx, by, dx, dy) {
@@ -876,22 +848,6 @@ class DISPLAY {
                 this.render();
             }
         }
-
-        // if(dx-width < -1 || dy-height < -1){
-        //     alert('Error');
-        //     return;
-        // }
-        
-        // let temp = new BITMAP(width+bx, height+by);
-        // for (let x = bx-(width-1); x <= bx; x++) {
-        //     for (let y = by-(height-1); y <= by; y++) {
-
-        //         this.PLANE[this.to1D(x, y)] = temp.PLANE[dx+x][dy+y];
-                
-        //     }
-        // }
-        // console.log(this.PLANE);
-        // console.log(temp.PLANE);
     }
 
     blitToBitmap(width, height,bx, by, dx, dy) {                        //width, height - Bredd och höjd för det valda området. bx, by - startkoordinater på bitmap. dx, dy - slutkoordinater på display
@@ -940,36 +896,9 @@ class DISPLAY {
         }
     }
 
-    scrollLeft2() {
-        for (let i = 1; i < this.WIDTH; i++) {
-            for (let j = 0; j < this.HEIGHT; j++) {
-                this.PLANE[this.to1D(i-1,j)] = this.PLANE[this.to1D(i,j)];
-            }
-        }
-        for(let i = 0; i < this.HEIGHT; i++) {
-            this.PLANE[this.to1D(this.WIDTH-1,i)] = this.PLANE[i];
-        }
-    }
-
     modulo(a,b) {
         return a - b*Math.floor(a/b);
     }
-        
-    scrollLeftx() {
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(this.modulo(x-1,this.WIDTH),y)] = this.PLANE[this.to1D(x,y)];
-            }
-        }
-    }
-
-    // scrollRight() {
-    //     for (let x = 0; x < this.WIDTH; x++) {
-    //         for (let y = 0; y < this.HEIGHT; y++) {
-    //             this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
-    //         }
-    //     }
-    //}
 
     scrollLeft() {
         for (let x = 1; x <= this.WIDTH; x++) {
@@ -1088,37 +1017,17 @@ class DISPLAY {
     }
 }
 
-// let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-
 let hello = new DISPLAY(50,50);
-// hello.circle(0, 0, 40, 5);
+
 let presActive = false;
 function presBtn() {
     presActive = !presActive;
 }
 
-window.addEventListener('load', () => {
-    // hello.render();
-    
-    // hello.line(0,0,0,10,255);
-    // hello.line(0,0,10,0,255);
-    // hello.line(10,0,10,10,255);
-    // hello.line(0,10,10,10,255);
-    // hello.textOut(1, 1, 255, "M");
-    // hello.textOut(10, 10, 200, "test test test");
-    // hello.circle(145, 145, 50, 255);
-    // hello.rectangle(190, 190, 210, 210, 230);
-    // hello.line(190, 190, 450, 450, 200);
-    // hello.line(450, 450, 470, 430, 200);
-    hello.line(0, 4, 4, 0, 100);
-    // hello.rectangle(0, 5, 5, 8, 255);
-    // hello.rectangle(4,6,0,9,255);
-    // hello.line(0, 0, 10, 10, 255);
-    // hello.line(450, 450, 430, 445, 200);
-    // hello.line(0, 0, 10, 10, 255);
-    // hello.putPixel(40,40,255);
-    hello.render();
-})
+// window.addEventListener('load', () => {
+//     hello.line(0, 4, 4, 0, 100);
+//     hello.render();
+// })
 
 // För varje gång som trycker på en av pil-tangenterna så ska scroll köras i samma riktning som pilen, om preserve = true, ska pScroll köras
 
@@ -1155,16 +1064,6 @@ window.addEventListener('keydown', (event) => {
 })
 
 function render() {
-//     hello.rectangle(8, 8, 9, 9, 255);
-//     hello.textOut(450, 450, 255, "jag vet inte 123456789");
-//     hello.textOut(10, 10, 200, "test test test");
-//     hello.circle(145, 145, 50, 255);
-//     hello.rectangle(190, 190, 210, 210, 230);
-//     hello.line(190, 190, 450, 450, 200);
-//     hello.line(450, 450, 470, 430, 200);
-//     hello.line(450, 450, 430, 445, 200);
-//     hello.line(0, 0, 10, 10, 255);
-//     hello.putPixel(40,40,255);
     hello.render();
     requestAnimationFrame(render);
 }
