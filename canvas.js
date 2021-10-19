@@ -164,7 +164,7 @@ function renderCommand()
     let textCommand = document.getElementById("text-command");
 
     textCommand.innerHTML = '';
-    textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+    textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
 }
 
 function renderParser()
@@ -172,7 +172,7 @@ function renderParser()
     let parser = document.getElementById("text-command");
 
     parser.innerHTML = '';
-    parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
+    parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
 }
 
 function writeShape(){
