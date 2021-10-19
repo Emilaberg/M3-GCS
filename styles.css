@@ -261,7 +261,7 @@ button:hover{
     text-align: center;
     cursor: pointer;
 }
-.right{
+.right{ 
     
     grid-row: 2;
     margin: 4px;
@@ -280,4 +280,8 @@ button:hover{
 }
 .e:hover{
     cursor: pointer;
+}
+
+i.fas{
+    color: #ff2616;
 }

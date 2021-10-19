@@ -50,22 +50,8 @@ function btnOn(btn){
 }
 
 let dropDown = document.getElementById("options");
-let circle = document.getElementById("shapes");
 let colorBtn = document.getElementById("color");
 
-function onClick()
-{
-    console.log("yes")
-    
-    if(dropDown.style.visibility == "visible")
-    {
-        dropDown.style.visibility = "hidden";
-    }
-    else
-    {
-        dropDown.style.visibility = "visible";
-    }
-}
 
 
 let inputs = {
@@ -74,7 +60,8 @@ let inputs = {
         "name":"X1",
         "type":"text",
         "placeholder" :"X1",
-        "id":"x1"
+        "id":"x1",
+        "value": "document.getElementByID('w').value"
     },
     X2: {
         "name":"X2",
@@ -124,23 +111,35 @@ let arr = [
     [ 'X1', 'Y1'],
     //names
     [ 'circle', 'rectangle', 'line', 'pixel']
-    
 ];
+
+let select = document.getElementById('options');
+select.addEventListener('change',function(){
+    renderInputs(select.selectedIndex-1);
+});
 
 function renderInputs(func)
 {
-    let el = document.getElementById('numbers');
-    let colorBtn = document.getElementById("color");
-    el.innerHTML = '';
-
-    for (let i = 0; i < arr[func].length; i++)
+    func--;
+    if(select.value === 'reSize')
     {
-        el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`;
+        renderResize();
+    }else
+    {
+        let el = document.getElementById('numbers');
+        let colorBtn = document.getElementById("color");
+        
+        el.innerHTML = '';
+    
+        for (let i = 0; i < arr[func].length; i++)
+        {
+            el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`;
+        }
+        colorBtn.innerHTML = `<input type="text" name="color" placeholder="color" id="shade"><div></div>`
     }
-    shape = func;
-    circle.innerHTML = arr[4][func];
-    dropDown.style.visibility = "hidden";
-    colorBtn.innerHTML = `<input type="text" name="color" placeholder="color"><div></div>`
+    console.log(func);
+    console.log("option " + select.selectedIndex);
+    
 }
 
 function renderResize()
@@ -149,8 +148,6 @@ function renderResize()
 
     el.innerHTML = '';
     el.innerHTML += `<button onclick="renderResizeBtn()" style="padding: 10px; box-shadow: black 2px 2px;">resize</button>`;
-    dropDown.style.visibility = "hidden";
-    circle.innerHTML = "resize";
 }
 
 function renderResizeBtn()
@@ -178,14 +175,32 @@ function renderParser()
     parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
 }
 
-
 function writeShape(){
-    let numbers = document.getElementById("numbers");
-    
-    console.log(numbers);
+    const expr = select.selectedIndex-2
+    let success = document.getElementById("success");
+    switch(expr)
+    {
+        // circle
+        case 0:
+            console.log(x1.value,x2.value,r.value);
+            break;
+        // Rectangle
+        case 1:
+            // prints message in the console for debugging
+            console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
+            // draws a rectangle with the inputs you entered. 
+            hello.rectangle(x1.value,y1.value,x2.value,y2.value);
+            success.style.display = "block";
+            break;
+        // line
+        case 2:
+            console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+            success.style.display = "block";
+            break;
+        //pixel
+        case 3:
+            console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+            break;
 
-    // for(i=0; i<; i++)
-    // {
-    //     console.log(numbers);
-    // }
+    }
 }
