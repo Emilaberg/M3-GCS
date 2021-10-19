@@ -899,17 +899,27 @@ class DISPLAY {
     blitToBitmap(width, height,bx, by, dx, dy) {
 
         if(dx-width < -1 || dy-height < -1){
-            alert('Error');
+            alert('Error!');
             return;
         }
+
+        let a = by;
         
         let temp = new BITMAP(width+bx, height+by);
         for (let x = dx-(width-1); x <= dx; x++) {
             for (let y = dy-(height-1); y <= dy; y++) {
 
-                temp.PLANE[bx+x][by+y] = this.PLANE[this.to1D(x, y)];
+                // temp.PLANE[bx + x][by + y] = this.PLANE[this.to1D(x, y)];
+                temp.PLANE[bx][by] = this.PLANE[this.to1D(x, y)];
+                // temp.PLANE[this.to1D(bx, by)] = this.PLANE[this.to1D(x, y)];
+
+                by++;
+                if(by == a+height){
+                    by = a;
+                }
                 
             }
+            bx++;
         }
         BITMAP.PLANE = temp.PLANE;
         console.log(this.PLANE);
