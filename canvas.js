@@ -6,6 +6,8 @@ let text = false;
 let shape = 0;
 let stop = false;
 
+
+
 function btnOn(btn){
     if(btn == 'preserve'){
         preserve = !preserve;
@@ -52,7 +54,11 @@ function btnOn(btn){
 
 let dropDown = document.getElementById("options");
 let colorBtn = document.getElementById("color");
+let select = document.getElementById('options');
 
+select.addEventListener('change',function(){
+    renderInputs(select.selectedIndex-1);
+});
 
 
 let inputs = {
@@ -114,10 +120,6 @@ let arr = [
     [ 'circle', 'rectangle', 'line', 'pixel']
 ];
 
-let select = document.getElementById('options');
-select.addEventListener('change',function(){
-    renderInputs(select.selectedIndex-1);
-});
 
 function renderInputs(func)
 {
@@ -224,7 +226,7 @@ function clearCanvas()
 
 function ScrollStop()
 {
-    stop = true;
+    clearInterval(timer);
 }
 
 function canvasScroll(num)
@@ -269,3 +271,12 @@ function canvasScroll(num)
         }
     }
 }
+
+let timer;
+
+function startTimer(num) {
+    timer = setInterval(function() { 
+        canvasScroll(num) 
+    }, 100);
+}
+  

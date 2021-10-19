@@ -261,6 +261,10 @@ button:hover{
     margin: 4px;
     text-align: center;
     cursor: pointer;
+    color: transparent;
+    border: red solid 2px;
+    border-radius: 100%;
+    
 }
 .right{ 
     
