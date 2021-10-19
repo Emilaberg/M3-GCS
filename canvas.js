@@ -4,6 +4,9 @@ let preserve = false;
 let command = false;
 let text = false;
 let shape = 0;
+let stop = false;
+
+
 
 function btnOn(btn){
     if(btn == 'preserve'){
@@ -51,7 +54,11 @@ function btnOn(btn){
 
 let dropDown = document.getElementById("options");
 let colorBtn = document.getElementById("color");
+let select = document.getElementById('options');
 
+select.addEventListener('change',function(){
+    renderInputs(select.selectedIndex-1);
+});
 
 
 let inputs = {
@@ -90,33 +97,29 @@ let inputs = {
         "placeholder":"Color",
         "id":"color"
     },
-    RADIUS: 
+    DIAMETER: 
     {
-        "name":"radius",
+        "name":"diameter",
         "type":"text",
-        "placeholder":"r",
-        "id":"r"
+        "placeholder":"d",
+        "id":"d"
     },
     
 };
 
 let arr = [
     //Circle
-    ['X1', 'X2', 'RADIUS',],
+    ['X1', 'Y1', 'DIAMETER',],
     //Rectangle
-    [ 'X1' , 'X2' , 'Y1' , 'Y2'],
+    [ 'X1' , 'Y1' , 'X2' , 'Y2'],
     //line
-    [ 'X1' , 'X2' , 'Y1' , 'Y2'],
+    [ 'X1' , 'Y1' , 'X2' , 'Y2'],
     //pixel
     [ 'X1', 'Y1'],
     //names
     [ 'circle', 'rectangle', 'line', 'pixel']
 ];
 
-let select = document.getElementById('options');
-select.addEventListener('change',function(){
-    renderInputs(select.selectedIndex-1);
-});
 
 function renderInputs(func)
 {
@@ -135,7 +138,7 @@ function renderInputs(func)
         {
             el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`;
         }
-        colorBtn.innerHTML = `<input type="text" name="color" placeholder="color" id="shade"><div></div>`
+        colorBtn.innerHTML = `<input type="text" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`
     }
     console.log(func);
     console.log("option " + select.selectedIndex);
@@ -175,32 +178,105 @@ function renderParser()
     parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
 }
 
-function writeShape(){
+function writeShape()
+{
     const expr = select.selectedIndex-2
     let success = document.getElementById("success");
-    switch(expr)
+    
+    if(select.value === "reSize")
     {
-        // circle
-        case 0:
-            console.log(x1.value,x2.value,r.value);
-            break;
-        // Rectangle
-        case 1:
-            // prints message in the console for debugging
-            console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
-            // draws a rectangle with the inputs you entered. 
-            hello.rectangle(x1.value,y1.value,x2.value,y2.value);
-            success.style.display = "block";
-            break;
-        // line
-        case 2:
-            console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
-            success.style.display = "block";
-            break;
-        //pixel
-        case 3:
-            console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
-            break;
+        console.log(`you pressed the resize button and resized the screen to W: ${w.value} and H: ${h.value}`);
+        hello.resize(w.value, h.value);
+    }
+    else
+    {
+        switch(expr)
+        {
+            // circle
+            case 0:
+                console.log(x1.value,y1.value,d.value, shade.value);
+                hello.circle(x1.value,y1.value,d.value, shade.value);
+                break;
+            // Rectangle
+            case 1:
+                // prints message in the console for debugging
+                console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
+                // draws a rectangle with the inputs you entered.
+                hello.rectangle(x1.value,y1.value,x2.value,y2.value, shade.value);
+                break;
+            // line
+            case 2:
+                console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+                hello.line(x1.value,x2.value,y1.value,y2.value, shade.value);
+                break;
+            //pixel
+            case 3:
+                console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+                hello.putPixel(x1.value,y1.value, shade.value);
+                break;
+        }
+    }
+    success.style.display = "block";
+}
 
+function clearCanvas()
+{
+    hello.clear(shade.value);
+}
+
+function ScrollStop()
+{
+    clearInterval(timer);
+}
+
+function canvasScroll(num)
+{
+    stop = false;
+    expr = num;
+    if(preserve === false)
+    {
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.scrollUp();
+                break;
+            case 1:
+                hello.scrollLeft();
+                break;
+            case 2:
+                hello.scrollRight();
+                break;
+            case 3:
+                hello.scrollDown();
+                break;
+        }
+    }
+    else if(preserve === true && stop === false){
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.pscrollUp();
+                break;
+            case 1:
+                hello.pscrollLeft();
+                break;
+            case 2:
+                hello.pscrollRight();
+                break;
+            case 3:
+                hello.pscrollDown();
+                break;
+        }
     }
 }
+
+let timer;
+
+function startTimer(num) {
+    timer = setInterval(function() { 
+        canvasScroll(num) 
+    }, 100);
+}
+  

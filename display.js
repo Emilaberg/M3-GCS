@@ -981,6 +981,7 @@ class DISPLAY {
         for (let y = 1; y <= this.HEIGHT; y++) {
             this.PLANE[(this.WIDTH+this.WIDTH*(y-1))-1] = 0;
         }
+        
     }
 
     scrollRight() {
