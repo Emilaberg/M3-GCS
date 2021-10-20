@@ -18,7 +18,7 @@
                 <div class="shapes">
                     <select name="" id="options" class="dropdown">
                         <option value="" disabled selected>Shapes</option>
-                        <option value="reSize" ">resize</option>
+                        <option value="reSize">resize</option>
                         <option value="0">circle</option>
                         <option value="1">rectangle</option>
                         <option value="2">line</option>
@@ -28,11 +28,11 @@
                 
                 <div class="text-command" id="text-command">
                     <div>
-                        <button onclick="renderCommand()">Command</button>
-                        <button onclick="renderParser()">Text</button>
+                        <button class="command-btn" onclick="renderParser()">Command</button>
+                        <button class="text-btn" onclick="renderText()">Text</button>
                     </div>
                     
-                    <textarea name="" id="" cols="40" rows="2" placeholder="Text..."></textarea>
+                    <textarea name="" id="textinput" cols="40" rows="2" placeholder="Text..."></textarea>
                 </div>
                  
             </div>
@@ -48,7 +48,8 @@
                 
                 <div class="run-clear">
                     <button class="btn" onclick="writeShape()">run</button>
-                    <button class="btn" id="clear" onclick="alert('you pressed clear')">clear</button>
+                    <button class="btn" id="clear" onclick="clearCanvas()">clear</button>
+                    <div></div>
                 </div>
             </div>
 
@@ -58,13 +59,13 @@
     </header>
 
     <!-- Scroll -->
-    <div style="top: 15%; right: 2%;" class="absolute">
+    <div style="top: 10%; right: 2%;" class="absolute">
         <div class="scrollDiv">
-            <div class="e up"><i onclick="alert('you pressed up')" class="fas fa-arrow-up"></i></div>
-            <div class="e left"><i onclick="alert('you pressed left')" class="fas fa-arrow-left"></i></div>
-            <div class="circle"><i class="far fa-circle" onclick="alert('you pressed clear')"></i></div>
-            <div class="e right"><i onclick="alert('you pressed right')" class="fas fa-arrow-right"></i></div>
-            <div class="e down"><i onclick="alert('you pressed down')" class="fas fa-arrow-down"></i></div>
+            <div class="e up"><i onclick="startTimer(0)" class="fas fa-arrow-up"></i></div>
+            <div class="e left"><i onclick="startTimer(1)" class="fas fa-arrow-left"></i></div>
+            <div class="circle"><i class="far fa-circle" onclick="ScrollStop()"></i></div>
+            <div class="e right"><i onclick="startTimer(2)" class="fas fa-arrow-right"></i></div>
+            <div class="e down"><i onclick="startTimer(3)" class="fas fa-arrow-down"></i></div>
         </div>
         <div style="margin-top: 20px;">
             <button onclick="btnOn('preserve')" class="btn preserve-btn">preserve</button>
@@ -89,7 +90,8 @@
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
     <script src="canvas.js"></script>
-
+    <script src="parser.js"></script>
+    <script src="display.js"></script>
 </body>
 </html>
 

@@ -1,12 +1,8 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = "1000";
-canvas.height = "1000";
-
-// ctx.canvas.width = window.innerWidth;
-// ctx.canvas.height = window.innerWidth;
-
+ctx.canvas.width = window.innerWidth;
+ctx.canvas.height = window.innerWidth;
 
 // Alla tecken/bokstäver, uppritade i 1 dimensionell array. Bredd: 7, Höjd: 8.
 let chars = {
@@ -735,6 +731,85 @@ let chars = {
         0, 0, 1, 1, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0
     ],
+
+    '-': [
+        0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 1, 1, 0, 0,
+        0, 1, 0, 0, 0, 1, 0,
+        0, 1, 0, 1, 1, 1, 0,
+        0, 1, 0, 1, 0, 1, 0,
+        0, 1, 0, 1, 1, 1, 0,
+        0, 0, 1, 1, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0
+    ],
+    
+
+}
+
+            // Colors
+            // Red - 150
+            // Brown - 130
+            // Beige/gul - 250
+            // Black - 0
+            // Blue - 75
+            // 200
+
+let mario = {
+    'run1': [200, 200, 200, 200, 200, 150, 150, 150, 150, 150, 200, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 150, 150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 200,
+             200, 200, 200, 200, 130, 130, 130, 250, 250, 000, 250, 200, 200, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200,
+             200, 200, 200, 130, 130, 250, 250, 250, 250, 000, 000, 000, 000, 200, 200, 200,
+             200, 200, 200, 200, 200, 250, 250, 250, 250, 250, 250, 250, 200, 200, 200, 200,
+             200, 200, 150, 150, 150, 150, 075, 150, 150, 150, 075, 200, 200, 200, 200, 200,
+             250, 250, 150, 150, 150, 150, 075, 075, 150, 150, 150, 075, 150, 250, 250, 250,
+             250, 250, 250, 200, 150, 150, 075, 075, 075, 075, 075, 075, 150, 150, 250, 250, 
+             250, 250, 200, 200, 075, 075, 075, 250, 075, 075, 075, 250, 200, 200, 130, 200, //
+             200, 200, 200, 075, 075, 075, 075, 075, 075, 075, 075, 075, 075, 130, 130, 200,
+             200, 200, 075, 075, 075, 075, 075, 075, 075, 075, 075, 075, 075, 130, 130, 200,
+             200, 130, 130, 075, 075, 075, 200, 200, 200, 200, 075, 075, 075, 130, 130, 200,
+             200, 130, 130, 130, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200,
+             200, 200, 130, 130, 130, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200
+
+        ],
+
+    'run2': [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200,   
+             200, 200, 200, 200, 200, 150, 150, 150, 150, 150, 200, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 150, 150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 200,
+             200, 200, 200, 200, 130, 130, 130, 250, 250, 000, 250, 200, 200, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200,
+             200, 200, 200, 130, 130, 250, 250, 250, 250, 000, 000, 000, 000, 200, 200, 200,
+             200, 200, 200, 200, 200, 250, 250, 250, 250, 250, 250, 250, 200, 200, 200, 200,
+             200, 200, 200, 200, 150, 150, 150, 075, 150, 150, 200, 200, 200, 200, 200, 200,
+             200, 200, 200, 150, 150, 150, 150, 075, 075, 150, 150, 200, 200, 200, 200, 200,
+             200, 200, 200, 150, 150, 150, 075, 075, 250, 075, 075, 200, 200, 200, 200, 200, //
+             200, 200, 200, 150, 150, 150, 150, 075, 075, 075, 075, 200, 200, 200, 200, 200,
+             200, 200, 200, 075, 150, 150, 250, 250, 075, 075, 075, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 075, 150, 250, 250, 075, 075, 200, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 200, 075, 075, 075, 130, 130, 130, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 200, 130, 130, 130, 130, 200, 200, 200, 200, 200, 200, 200         
+            ],
+
+    'run3': [200, 200, 200, 200, 200, 150, 150, 150, 150, 150, 200, 200, 200, 200, 200, 200,
+             200, 200, 200, 200, 150, 150, 150, 150, 150, 150, 150, 150, 150, 200, 200, 200,
+             200, 200, 200, 200, 130, 130, 130, 250, 250, 000, 250, 200, 200, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200, 200,
+             200, 200, 200, 130, 250, 130, 130, 250, 250, 250, 000, 250, 250, 250, 200, 200,
+             200, 200, 200, 130, 130, 250, 250, 250, 250, 000, 000, 000, 000, 200, 200, 200,
+             200, 200, 200, 200, 200, 250, 250, 250, 250, 250, 250, 250, 200, 200, 200, 200, 
+             200, 200, 200, 200, 200, 200, 150, 150, 075, 075, 150, 200, 200, 200, 200, 200, 
+             200, 200, 200, 200, 200, 150, 150, 150, 150, 075, 150, 250, 250, 200, 200, 200, 
+             200, 200, 200, 250, 250, 150, 150, 150, 150, 150, 150, 250, 250, 250, 200, 200, 
+             200, 200, 250, 250, 250, 075, 150, 150, 150, 150, 150, 250, 250, 200, 200, 200, 
+             200, 200, 200, 130, 130, 075, 075, 075, 075, 075, 075, 075, 200, 200, 200, 200, 
+             200, 200, 200, 130, 075, 075, 075, 075, 075, 075, 075, 075, 200, 200, 200, 200, 
+             200, 200, 130, 130, 075, 075, 200, 200, 075, 075, 075, 200, 200, 200, 200, 200, 
+             200, 200, 130, 200, 200, 200, 200, 130, 130, 130, 200, 200, 200, 200, 200, 200, 
+             200, 200, 200, 200, 200, 200, 200, 200, 130, 130, 130, 200, 200, 200, 200, 200 
+            ]
+
 }
 
 class BITMAP {                                                                                  //Class BITMAP
@@ -760,6 +835,20 @@ class BITMAP {                                                                  
         this.WIDTH = 7 * q;
         console.log(bitmap);
     }
+
+    spriteMaker(sprite){
+        let bitmap = new Array(16).fill(0).map(() => new Array(16).fill(0));
+
+        for (let i = 0; i < 16; i++) {                                                       
+            for (let j = 0; j < 16; j++) {                                                   
+                bitmap[i][j] = mario[sprite][j * 16 + i];   
+            }                                                                               
+        }
+
+        this.PLANE = bitmap;
+        this.HEIGHT = 16;
+        this.WIDTH = 16;
+    }
 }
 
 class DISPLAY {
@@ -769,16 +858,13 @@ class DISPLAY {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.PLANE = new Array(width * height).fill(0);
+        // this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
         this.ZOOM = 0;
         this.#LOCK;
     }
 
     to1D(x, y) {
         return y * this.WIDTH + x;
-    }
-
-    to2D(c) {
-        return c
     }
 
     gridMap(func) {
@@ -789,25 +875,13 @@ class DISPLAY {
         }
     }
 
-    to2DArray() {
-        let tempArr = [[]];
-        for (let i = 0; i < this.WIDTH; i++) {
-            tempArr[i] = [];
-            for (let j = 0; j < this.HEIGHT; j++) {
-                
-                tempArr[i][j] = this.PLANE[this.to1D(i, j)];
-                this.to2DArray()
-            }
-        }
-        return tempArr;
-    }
-
     putPixel(x, y, color) {
         this.PLANE[this.to1D(x, y)] = color;
     }
 
     line(x1, y1, x2, y2, color) {
         const f = x => y => (y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2);
+        // const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
 
         for (let i = 0; i < this.WIDTH; i++) {
@@ -840,11 +914,6 @@ class DISPLAY {
     }
 
     rectangle(x1, y1, x2, y2, color) {
-        // for (let i = x1; i < x2; i++) {
-        //     for (let j = y1; j < y2; j++) {
-        //         this.putPixel(i, j, color);
-        //     }
-        // }
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (i >= x1 && i <= x2 && j >= y1 && j <= y2) {
@@ -862,14 +931,12 @@ class DISPLAY {
         this.PLANE = new Array(width * height).fill(0);
         this.WIDTH = width;
         this.HEIGHT = height;
-        // return new DISPLAY(width, height);
     }
 
     blitToDisplay(BITMAp, width, height, bx, by, dx, dy) {
         for (let i = bx; i < bx+width; i++) {
             for (let j = by; j < by+height; j++) {
                 this.PLANE[this.to1D(i-bx+dx,j-by+dy)] = BITMAp.PLANE[i][j];
-                console.log(BITMAp);
                 this.render();
             }
         }
@@ -921,36 +988,9 @@ class DISPLAY {
         }
     }
 
-    scrollLeft2() {
-        for (let i = 1; i < this.WIDTH; i++) {
-            for (let j = 0; j < this.HEIGHT; j++) {
-                this.PLANE[this.to1D(i-1,j)] = this.PLANE[this.to1D(i,j)];
-            }
-        }
-        for(let i = 0; i < this.HEIGHT; i++) {
-            this.PLANE[this.to1D(this.WIDTH-1,i)] = this.PLANE[i];
-        }
-    }
-
     modulo(a,b) {
         return a - b*Math.floor(a/b);
     }
-        
-    scrollLeftx() {
-        for (let x = 0; x < this.WIDTH; x++) {
-            for (let y = 0; y < this.HEIGHT; y++) {
-                this.PLANE[this.to1D(this.modulo(x-1,this.WIDTH),y)] = this.PLANE[this.to1D(x,y)];
-            }
-        }
-    }
-
-    // scrollRight() {
-    //     for (let x = 0; x < this.WIDTH; x++) {
-    //         for (let y = 0; y < this.HEIGHT; y++) {
-    //             this.PLANE[this.to1D(this.modulo(x+1,this.WIDTH-1),y)] = this.PLANE[this.to1D(x,y)];
-    //         }
-    //     }
-    //}
 
     scrollLeft() {
         for (let x = 1; x <= this.WIDTH; x++) {
@@ -1057,10 +1097,6 @@ class DISPLAY {
         }
     }
 
-    canvasCoords(x,y) {
-
-    }
-
     render() {
         let dx = Math.round(canvas.width / this.WIDTH);
         let dy = Math.round(canvas.height / this.HEIGHT);
@@ -1068,70 +1104,22 @@ class DISPLAY {
             for (let j = 0; j < this.HEIGHT; j++) {
                 ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ')';
                 ctx.fillRect(i * dx, j * dy, dx, dy);
-                // ctx.fillRect(i * dx, j * dx, dx, dx);
-            }
-        }
-    }
-
-    renderNew() {
-        
-        let w1 = canvas.getBoundingClientRect().width;
-        let h1 = canvas.getBoundingClientRect().height;
-        let r1 = w1/h1;
-        let r2 = this.WIDTH / this.HEIGHT;
-
-
-        // let product = Math.min(displayRatio,canvasRatio)/Math.max(displayRatio,canvasRatio);
-
-    
-
-
-        let offsetY = 0;
-        let offsetX = w1/2 - (h1*r2)/2;
-        let dx = Math.round(((w1*r2)) / (h1));
-        // let dx = (h1*r2) / this.WIDTH;
-        // let dy = dx;
-        
-        for (let i = 0; i < this.WIDTH; i++) {
-            for (let j = 0; j < this.HEIGHT; j++) {
-                
-                ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ')';
-                ctx.fillRect(i*dx, j*dx, dx, dx);
-                // ctx.fillRect(i * dx, j * dy, dx, dy);
-                // ctx.fillRect(i * dx, j * dx, dx, dx);
             }
         }
     }
 }
+
 let hello = new DISPLAY(50,50);
-// hello.circle(0, 0, 40, 5);
+
 let presActive = false;
 function presBtn() {
     presActive = !presActive;
 }
 
-window.addEventListener('load', () => {
-    // hello.render();
-    
-    // hello.line(0,0,0,10,255);
-    // hello.line(0,0,10,0,255);
-    // hello.line(10,0,10,10,255);
-    // hello.line(0,10,10,10,255);
-    // hello.textOut(1, 1, 255, "M");
-    // hello.textOut(10, 10, 200, "test test test");
-    // hello.circle(145, 145, 50, 255);
-    // hello.rectangle(190, 190, 210, 210, 230);
-    // hello.line(190, 190, 450, 450, 200);
-    // hello.line(450, 450, 470, 430, 200);
-    hello.line(0, 4, 4, 0, 100);
-    // hello.rectangle(0, 5, 5, 8, 255);
-    // hello.rectangle(4,6,0,9,255);
-    // hello.line(0, 0, 10, 10, 255);
-    // hello.line(450, 450, 430, 445, 200);
-    // hello.line(0, 0, 10, 10, 255);
-    // hello.putPixel(40,40,255);
-    hello.render();
-})
+// window.addEventListener('load', () => {
+//     hello.line(0, 4, 4, 0, 100);
+//     hello.render();
+// })
 
 // För varje gång som trycker på en av pil-tangenterna så ska scroll köras i samma riktning som pilen, om preserve = true, ska pScroll köras
 
@@ -1167,19 +1155,292 @@ window.addEventListener('keydown', (event) => {
     hello.render();
 })
 
+let demoTrue = true;
+let sessionOne = false;
+let sessionTwo = false;
+let sessionThree = true;
+let marioArray = 
 function render() {
-//     hello.rectangle(8, 8, 9, 9, 255);
-//     hello.textOut(450, 450, 255, "jag vet inte 123456789");
-//     hello.textOut(10, 10, 200, "test test test");
-//     hello.circle(145, 145, 50, 255);
-//     hello.rectangle(190, 190, 210, 210, 230);
-//     hello.line(190, 190, 450, 450, 200);
-//     hello.line(450, 450, 470, 430, 200);
-//     hello.line(450, 450, 430, 445, 200);
-//     hello.line(0, 0, 10, 10, 255);
-//     hello.putPixel(40,40,255);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // if(demoTrue == true && sessionOne == true){
+    //     for(let i = 0; i < 256; i++){
+    //         let b = Math.floor(Math.random()*50);
+    //         let c = Math.floor(Math.random()*50);
+            
+    //         hello.putPixel(b, c, i);
+    //     }
+    //     timeA();
+    // }
+
+    // if(demoTrue == true && sessionTwo == true){
+
+    //     setTimeout(function(){ 
+    //         hello.scrollDown();
+    //         hello.putPixel(49, 0, 5);
+    //         hello.putPixel(48, 0, 10);
+    //         hello.putPixel(47, 0, 15);
+    //         hello.putPixel(46, 0, 20);
+    //         hello.putPixel(45, 0, 25);
+    //         hello.putPixel(44, 0, 30);
+    //         hello.putPixel(43, 0, 35);
+    //         hello.putPixel(42, 0, 40);
+    //         hello.putPixel(41, 0, 45);
+    //         hello.putPixel(40, 0, 50);
+    //         hello.putPixel(39, 0, 55);
+    //         hello.putPixel(38, 0, 60);
+    //         hello.putPixel(37, 0, 65);
+    //         hello.putPixel(36, 0, 70);
+    //         hello.putPixel(35, 0, 75);
+    //         hello.putPixel(34, 0, 80);
+    //         hello.putPixel(33, 0, 85);
+    //         hello.putPixel(32, 0, 90);
+    //         hello.putPixel(31, 0, 95);
+    //         hello.putPixel(30, 0, 105);
+    //         hello.putPixel(29, 0, 110);
+    //         hello.putPixel(28, 0, 115);
+    //         hello.putPixel(27, 0, 120);
+    //         hello.putPixel(26, 0, 125);
+    //         hello.putPixel(25, 0, 130);
+    //         hello.putPixel(24, 0, 135);
+    //         hello.putPixel(23, 0, 140);
+    //         hello.putPixel(22, 0, 145);
+    //         hello.putPixel(21, 0, 150);
+    //         hello.putPixel(20, 0, 155);
+    //         hello.putPixel(19, 0, 160);
+    //         hello.putPixel(18, 0, 165);
+    //         hello.putPixel(17, 0, 170);
+    //         hello.putPixel(16, 0, 175);
+    //         hello.putPixel(15, 0, 180);
+    //         hello.putPixel(14, 0, 185);
+    //         hello.putPixel(13, 0, 190);
+    //         hello.putPixel(12, 0, 195);
+    //         hello.putPixel(11, 0, 200);
+    //         hello.putPixel(10, 0, 205);
+    //         hello.putPixel(9, 0, 210);
+    //         hello.putPixel(8, 0, 215);
+    //         hello.putPixel(7, 0, 220);
+    //         hello.putPixel(6, 0, 225);
+    //         hello.putPixel(5, 0, 230);
+    //         hello.putPixel(4, 0, 235);
+    //         hello.putPixel(3, 0, 245);
+    //         hello.putPixel(2, 0, 248);
+    //         hello.putPixel(1, 0, 251);
+    //         hello.putPixel(0, 0, 255);
+
+    //         hello.putPixel(49, 1, 5);
+    //         hello.putPixel(49, 2, 10);
+    //         hello.putPixel(49, 3, 15);
+    //         hello.putPixel(49, 4, 20);
+    //         hello.putPixel(49, 5, 25);
+    //         hello.putPixel(49, 6, 30);
+    //         hello.putPixel(49, 7, 35);
+    //         hello.putPixel(49, 8, 40);
+    //         hello.putPixel(49, 9, 45);
+    //         hello.putPixel(49, 10, 50);
+    //         hello.putPixel(49, 11, 55);
+    //         hello.putPixel(49, 12, 60);
+    //         hello.putPixel(49, 13, 65);
+    //         hello.putPixel(49, 14, 70);
+    //         hello.putPixel(49, 15, 75);
+    //         hello.putPixel(49, 16, 80);
+    //         hello.putPixel(49, 17, 85);
+    //         hello.putPixel(49, 18, 90);
+    //         hello.putPixel(49, 19, 95);
+    //         hello.putPixel(49, 20, 100);
+    //         hello.putPixel(49, 21, 105);
+    //         hello.putPixel(49, 22, 110);
+    //         hello.putPixel(49, 23, 115);
+    //         hello.putPixel(49, 24, 120);
+    //         hello.putPixel(49, 25, 125);
+    //         hello.putPixel(49, 26, 130);
+    //         hello.putPixel(49, 27, 135);
+    //         hello.putPixel(49, 28, 140);
+    //         hello.putPixel(49, 29, 145);
+    //         hello.putPixel(49, 30, 150);
+    //         hello.putPixel(49, 31, 155);
+    //         hello.putPixel(49, 32, 160);
+    //         hello.putPixel(49, 33, 165);
+    //         hello.putPixel(49, 34, 170);
+    //         hello.putPixel(49, 35, 175);
+    //         hello.putPixel(49, 36, 180);
+    //         hello.putPixel(49, 37, 185);
+    //         hello.putPixel(49, 38, 190);
+    //         hello.putPixel(49, 39, 195);
+    //         hello.putPixel(49, 40, 200);
+    //         hello.putPixel(49, 41, 205);
+    //         hello.putPixel(49, 42, 210);
+    //         hello.putPixel(49, 43, 215);
+    //         hello.putPixel(49, 44, 220);
+    //         hello.putPixel(49, 45, 225);
+    //         hello.putPixel(49, 46, 230);
+    //         hello.putPixel(49, 47, 235);
+    //         hello.putPixel(49, 48, 240);
+    //         hello.putPixel(49, 49, 245);
+
+    //         hello.scrollLeft();
+
+    //         hello.putPixel(49,0,5);
+
+    //         hello.putPixel(49, 1, 5);
+    //         hello.putPixel(49, 2, 10);
+    //         hello.putPixel(49, 3, 15);
+    //         hello.putPixel(49, 4, 20);
+    //         hello.putPixel(49, 5, 25);
+    //         hello.putPixel(49, 6, 30);
+    //         hello.putPixel(49, 7, 35);
+    //         hello.putPixel(49, 8, 40);
+    //         hello.putPixel(49, 9, 45);
+    //         hello.putPixel(49, 10, 50);
+    //         hello.putPixel(49, 11, 55);
+    //         hello.putPixel(49, 12, 60);
+    //         hello.putPixel(49, 13, 65);
+    //         hello.putPixel(49, 14, 70);
+    //         hello.putPixel(49, 15, 75);
+    //         hello.putPixel(49, 16, 80);
+    //         hello.putPixel(49, 17, 85);
+    //         hello.putPixel(49, 18, 90);
+    //         hello.putPixel(49, 19, 95);
+    //         hello.putPixel(49, 20, 100);
+    //         hello.putPixel(49, 21, 105);
+    //         hello.putPixel(49, 22, 110);
+    //         hello.putPixel(49, 23, 115);
+    //         hello.putPixel(49, 24, 120);
+    //         hello.putPixel(49, 25, 125);
+    //         hello.putPixel(49, 26, 130);
+    //         hello.putPixel(49, 27, 135);
+    //         hello.putPixel(49, 28, 140);
+    //         hello.putPixel(49, 29, 145);
+    //         hello.putPixel(49, 30, 150);
+    //         hello.putPixel(49, 31, 155);
+    //         hello.putPixel(49, 32, 160);
+    //         hello.putPixel(49, 33, 165);
+    //         hello.putPixel(49, 34, 170);
+    //         hello.putPixel(49, 35, 175);
+    //         hello.putPixel(49, 36, 180);
+    //         hello.putPixel(49, 37, 185);
+    //         hello.putPixel(49, 38, 190);
+    //         hello.putPixel(49, 39, 195);
+    //         hello.putPixel(49, 40, 200);
+    //         hello.putPixel(49, 41, 205);
+    //         hello.putPixel(49, 42, 210);
+    //         hello.putPixel(49, 43, 215);
+    //         hello.putPixel(49, 44, 220);
+    //         hello.putPixel(49, 45, 225);
+    //         hello.putPixel(49, 46, 230);
+    //         hello.putPixel(49, 47, 235);
+    //         hello.putPixel(49, 48, 240);
+    //         hello.putPixel(49, 49, 245);
+            
+    //     }, 200);
+
+    //     timeB();
+    // }
+
+    if(demoTrue == true && sessionThree == true){
+
+        let h = new BITMAP();
+        console.log('hej');
+
+        
+
+            
+
+        // h.spriteMaker('run2');
+
+        // hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+    
+        //     h.spriteMaker('run1');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            
+
+        
+
+        // setTimeout(function (){
+
+        //     hello.clear(0);
+
+        //     h.spriteMaker('run1');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+        //     hello.clear(0);
+
+        //     h.spriteMaker('run2');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+        //     hello.clear(0);
+
+        //     h.spriteMaker('run3');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+        //     hello.clear(0);
+
+        //     h.spriteMaker('run2');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+        //     hello.clear(0);
+
+        //     h.spriteMaker('run1');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
+        
+        // timeC();
+    }
+
     hello.render();
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
+
+
+function demo(){
+    
+    // document.querySelector('#demo').style.display = 'none';
+    demoTrue = !demoTrue;
+    return demoTrue;
+
+}
+
+function timeA(){
+    setTimeout(function(){ 
+        sessionOne = false; 
+        sessionTwo = true;
+    }, 3000);
+}
+
+function timeB(){
+    setTimeout(function (){ 
+        sessionTwo = false; 
+        sessionThree = true;
+    }, 3000);
+}
+
+function timeC(){
+    setTimeout(function (){ 
+        sessionThree = false;
+        
+        
+    }, 3000);
+}
