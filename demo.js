@@ -1155,256 +1155,253 @@ window.addEventListener('keydown', (event) => {
     hello.render();
 })
 
-let demoTrue = true;
-let sessionOne = false;
+let demoTrue = false;
+let sessionOne = true;
 let sessionTwo = false;
-let sessionThree = true;
-let marioArray = 
+let sessionThree = false;
 function render() {
 
-    // if(demoTrue == true && sessionOne == true){
-    //     for(let i = 0; i < 256; i++){
-    //         let b = Math.floor(Math.random()*50);
-    //         let c = Math.floor(Math.random()*50);
+    if(demoTrue == true && sessionOne == true){
+        for(let i = 0; i < 256; i++){
+            let b = Math.floor(Math.random()*50);
+            let c = Math.floor(Math.random()*50);
             
-    //         hello.putPixel(b, c, i);
-    //     }
-    //     timeA();
-    // }
+            hello.putPixel(b, c, i);
+        }
+        timeA();
+    }
 
-    // if(demoTrue == true && sessionTwo == true){
+    if(demoTrue == true && sessionTwo == true){
 
-    //     setTimeout(function(){ 
-    //         hello.scrollDown();
-    //         hello.putPixel(49, 0, 5);
-    //         hello.putPixel(48, 0, 10);
-    //         hello.putPixel(47, 0, 15);
-    //         hello.putPixel(46, 0, 20);
-    //         hello.putPixel(45, 0, 25);
-    //         hello.putPixel(44, 0, 30);
-    //         hello.putPixel(43, 0, 35);
-    //         hello.putPixel(42, 0, 40);
-    //         hello.putPixel(41, 0, 45);
-    //         hello.putPixel(40, 0, 50);
-    //         hello.putPixel(39, 0, 55);
-    //         hello.putPixel(38, 0, 60);
-    //         hello.putPixel(37, 0, 65);
-    //         hello.putPixel(36, 0, 70);
-    //         hello.putPixel(35, 0, 75);
-    //         hello.putPixel(34, 0, 80);
-    //         hello.putPixel(33, 0, 85);
-    //         hello.putPixel(32, 0, 90);
-    //         hello.putPixel(31, 0, 95);
-    //         hello.putPixel(30, 0, 105);
-    //         hello.putPixel(29, 0, 110);
-    //         hello.putPixel(28, 0, 115);
-    //         hello.putPixel(27, 0, 120);
-    //         hello.putPixel(26, 0, 125);
-    //         hello.putPixel(25, 0, 130);
-    //         hello.putPixel(24, 0, 135);
-    //         hello.putPixel(23, 0, 140);
-    //         hello.putPixel(22, 0, 145);
-    //         hello.putPixel(21, 0, 150);
-    //         hello.putPixel(20, 0, 155);
-    //         hello.putPixel(19, 0, 160);
-    //         hello.putPixel(18, 0, 165);
-    //         hello.putPixel(17, 0, 170);
-    //         hello.putPixel(16, 0, 175);
-    //         hello.putPixel(15, 0, 180);
-    //         hello.putPixel(14, 0, 185);
-    //         hello.putPixel(13, 0, 190);
-    //         hello.putPixel(12, 0, 195);
-    //         hello.putPixel(11, 0, 200);
-    //         hello.putPixel(10, 0, 205);
-    //         hello.putPixel(9, 0, 210);
-    //         hello.putPixel(8, 0, 215);
-    //         hello.putPixel(7, 0, 220);
-    //         hello.putPixel(6, 0, 225);
-    //         hello.putPixel(5, 0, 230);
-    //         hello.putPixel(4, 0, 235);
-    //         hello.putPixel(3, 0, 245);
-    //         hello.putPixel(2, 0, 248);
-    //         hello.putPixel(1, 0, 251);
-    //         hello.putPixel(0, 0, 255);
+        setTimeout(function(){ 
+            hello.scrollDown();
+            hello.putPixel(49, 0, 5);
+            hello.putPixel(48, 0, 10);
+            hello.putPixel(47, 0, 15);
+            hello.putPixel(46, 0, 20);
+            hello.putPixel(45, 0, 25);
+            hello.putPixel(44, 0, 30);
+            hello.putPixel(43, 0, 35);
+            hello.putPixel(42, 0, 40);
+            hello.putPixel(41, 0, 45);
+            hello.putPixel(40, 0, 50);
+            hello.putPixel(39, 0, 55);
+            hello.putPixel(38, 0, 60);
+            hello.putPixel(37, 0, 65);
+            hello.putPixel(36, 0, 70);
+            hello.putPixel(35, 0, 75);
+            hello.putPixel(34, 0, 80);
+            hello.putPixel(33, 0, 85);
+            hello.putPixel(32, 0, 90);
+            hello.putPixel(31, 0, 95);
+            hello.putPixel(30, 0, 105);
+            hello.putPixel(29, 0, 110);
+            hello.putPixel(28, 0, 115);
+            hello.putPixel(27, 0, 120);
+            hello.putPixel(26, 0, 125);
+            hello.putPixel(25, 0, 130);
+            hello.putPixel(24, 0, 135);
+            hello.putPixel(23, 0, 140);
+            hello.putPixel(22, 0, 145);
+            hello.putPixel(21, 0, 150);
+            hello.putPixel(20, 0, 155);
+            hello.putPixel(19, 0, 160);
+            hello.putPixel(18, 0, 165);
+            hello.putPixel(17, 0, 170);
+            hello.putPixel(16, 0, 175);
+            hello.putPixel(15, 0, 180);
+            hello.putPixel(14, 0, 185);
+            hello.putPixel(13, 0, 190);
+            hello.putPixel(12, 0, 195);
+            hello.putPixel(11, 0, 200);
+            hello.putPixel(10, 0, 205);
+            hello.putPixel(9, 0, 210);
+            hello.putPixel(8, 0, 215);
+            hello.putPixel(7, 0, 220);
+            hello.putPixel(6, 0, 225);
+            hello.putPixel(5, 0, 230);
+            hello.putPixel(4, 0, 235);
+            hello.putPixel(3, 0, 245);
+            hello.putPixel(2, 0, 248);
+            hello.putPixel(1, 0, 251);
+            hello.putPixel(0, 0, 255);
 
-    //         hello.putPixel(49, 1, 5);
-    //         hello.putPixel(49, 2, 10);
-    //         hello.putPixel(49, 3, 15);
-    //         hello.putPixel(49, 4, 20);
-    //         hello.putPixel(49, 5, 25);
-    //         hello.putPixel(49, 6, 30);
-    //         hello.putPixel(49, 7, 35);
-    //         hello.putPixel(49, 8, 40);
-    //         hello.putPixel(49, 9, 45);
-    //         hello.putPixel(49, 10, 50);
-    //         hello.putPixel(49, 11, 55);
-    //         hello.putPixel(49, 12, 60);
-    //         hello.putPixel(49, 13, 65);
-    //         hello.putPixel(49, 14, 70);
-    //         hello.putPixel(49, 15, 75);
-    //         hello.putPixel(49, 16, 80);
-    //         hello.putPixel(49, 17, 85);
-    //         hello.putPixel(49, 18, 90);
-    //         hello.putPixel(49, 19, 95);
-    //         hello.putPixel(49, 20, 100);
-    //         hello.putPixel(49, 21, 105);
-    //         hello.putPixel(49, 22, 110);
-    //         hello.putPixel(49, 23, 115);
-    //         hello.putPixel(49, 24, 120);
-    //         hello.putPixel(49, 25, 125);
-    //         hello.putPixel(49, 26, 130);
-    //         hello.putPixel(49, 27, 135);
-    //         hello.putPixel(49, 28, 140);
-    //         hello.putPixel(49, 29, 145);
-    //         hello.putPixel(49, 30, 150);
-    //         hello.putPixel(49, 31, 155);
-    //         hello.putPixel(49, 32, 160);
-    //         hello.putPixel(49, 33, 165);
-    //         hello.putPixel(49, 34, 170);
-    //         hello.putPixel(49, 35, 175);
-    //         hello.putPixel(49, 36, 180);
-    //         hello.putPixel(49, 37, 185);
-    //         hello.putPixel(49, 38, 190);
-    //         hello.putPixel(49, 39, 195);
-    //         hello.putPixel(49, 40, 200);
-    //         hello.putPixel(49, 41, 205);
-    //         hello.putPixel(49, 42, 210);
-    //         hello.putPixel(49, 43, 215);
-    //         hello.putPixel(49, 44, 220);
-    //         hello.putPixel(49, 45, 225);
-    //         hello.putPixel(49, 46, 230);
-    //         hello.putPixel(49, 47, 235);
-    //         hello.putPixel(49, 48, 240);
-    //         hello.putPixel(49, 49, 245);
+            hello.putPixel(49, 1, 5);
+            hello.putPixel(49, 2, 10);
+            hello.putPixel(49, 3, 15);
+            hello.putPixel(49, 4, 20);
+            hello.putPixel(49, 5, 25);
+            hello.putPixel(49, 6, 30);
+            hello.putPixel(49, 7, 35);
+            hello.putPixel(49, 8, 40);
+            hello.putPixel(49, 9, 45);
+            hello.putPixel(49, 10, 50);
+            hello.putPixel(49, 11, 55);
+            hello.putPixel(49, 12, 60);
+            hello.putPixel(49, 13, 65);
+            hello.putPixel(49, 14, 70);
+            hello.putPixel(49, 15, 75);
+            hello.putPixel(49, 16, 80);
+            hello.putPixel(49, 17, 85);
+            hello.putPixel(49, 18, 90);
+            hello.putPixel(49, 19, 95);
+            hello.putPixel(49, 20, 100);
+            hello.putPixel(49, 21, 105);
+            hello.putPixel(49, 22, 110);
+            hello.putPixel(49, 23, 115);
+            hello.putPixel(49, 24, 120);
+            hello.putPixel(49, 25, 125);
+            hello.putPixel(49, 26, 130);
+            hello.putPixel(49, 27, 135);
+            hello.putPixel(49, 28, 140);
+            hello.putPixel(49, 29, 145);
+            hello.putPixel(49, 30, 150);
+            hello.putPixel(49, 31, 155);
+            hello.putPixel(49, 32, 160);
+            hello.putPixel(49, 33, 165);
+            hello.putPixel(49, 34, 170);
+            hello.putPixel(49, 35, 175);
+            hello.putPixel(49, 36, 180);
+            hello.putPixel(49, 37, 185);
+            hello.putPixel(49, 38, 190);
+            hello.putPixel(49, 39, 195);
+            hello.putPixel(49, 40, 200);
+            hello.putPixel(49, 41, 205);
+            hello.putPixel(49, 42, 210);
+            hello.putPixel(49, 43, 215);
+            hello.putPixel(49, 44, 220);
+            hello.putPixel(49, 45, 225);
+            hello.putPixel(49, 46, 230);
+            hello.putPixel(49, 47, 235);
+            hello.putPixel(49, 48, 240);
+            hello.putPixel(49, 49, 245);
 
-    //         hello.scrollLeft();
+            hello.scrollLeft();
 
-    //         hello.putPixel(49,0,5);
+            hello.putPixel(49,0,5);
 
-    //         hello.putPixel(49, 1, 5);
-    //         hello.putPixel(49, 2, 10);
-    //         hello.putPixel(49, 3, 15);
-    //         hello.putPixel(49, 4, 20);
-    //         hello.putPixel(49, 5, 25);
-    //         hello.putPixel(49, 6, 30);
-    //         hello.putPixel(49, 7, 35);
-    //         hello.putPixel(49, 8, 40);
-    //         hello.putPixel(49, 9, 45);
-    //         hello.putPixel(49, 10, 50);
-    //         hello.putPixel(49, 11, 55);
-    //         hello.putPixel(49, 12, 60);
-    //         hello.putPixel(49, 13, 65);
-    //         hello.putPixel(49, 14, 70);
-    //         hello.putPixel(49, 15, 75);
-    //         hello.putPixel(49, 16, 80);
-    //         hello.putPixel(49, 17, 85);
-    //         hello.putPixel(49, 18, 90);
-    //         hello.putPixel(49, 19, 95);
-    //         hello.putPixel(49, 20, 100);
-    //         hello.putPixel(49, 21, 105);
-    //         hello.putPixel(49, 22, 110);
-    //         hello.putPixel(49, 23, 115);
-    //         hello.putPixel(49, 24, 120);
-    //         hello.putPixel(49, 25, 125);
-    //         hello.putPixel(49, 26, 130);
-    //         hello.putPixel(49, 27, 135);
-    //         hello.putPixel(49, 28, 140);
-    //         hello.putPixel(49, 29, 145);
-    //         hello.putPixel(49, 30, 150);
-    //         hello.putPixel(49, 31, 155);
-    //         hello.putPixel(49, 32, 160);
-    //         hello.putPixel(49, 33, 165);
-    //         hello.putPixel(49, 34, 170);
-    //         hello.putPixel(49, 35, 175);
-    //         hello.putPixel(49, 36, 180);
-    //         hello.putPixel(49, 37, 185);
-    //         hello.putPixel(49, 38, 190);
-    //         hello.putPixel(49, 39, 195);
-    //         hello.putPixel(49, 40, 200);
-    //         hello.putPixel(49, 41, 205);
-    //         hello.putPixel(49, 42, 210);
-    //         hello.putPixel(49, 43, 215);
-    //         hello.putPixel(49, 44, 220);
-    //         hello.putPixel(49, 45, 225);
-    //         hello.putPixel(49, 46, 230);
-    //         hello.putPixel(49, 47, 235);
-    //         hello.putPixel(49, 48, 240);
-    //         hello.putPixel(49, 49, 245);
+            hello.putPixel(49, 1, 5);
+            hello.putPixel(49, 2, 10);
+            hello.putPixel(49, 3, 15);
+            hello.putPixel(49, 4, 20);
+            hello.putPixel(49, 5, 25);
+            hello.putPixel(49, 6, 30);
+            hello.putPixel(49, 7, 35);
+            hello.putPixel(49, 8, 40);
+            hello.putPixel(49, 9, 45);
+            hello.putPixel(49, 10, 50);
+            hello.putPixel(49, 11, 55);
+            hello.putPixel(49, 12, 60);
+            hello.putPixel(49, 13, 65);
+            hello.putPixel(49, 14, 70);
+            hello.putPixel(49, 15, 75);
+            hello.putPixel(49, 16, 80);
+            hello.putPixel(49, 17, 85);
+            hello.putPixel(49, 18, 90);
+            hello.putPixel(49, 19, 95);
+            hello.putPixel(49, 20, 100);
+            hello.putPixel(49, 21, 105);
+            hello.putPixel(49, 22, 110);
+            hello.putPixel(49, 23, 115);
+            hello.putPixel(49, 24, 120);
+            hello.putPixel(49, 25, 125);
+            hello.putPixel(49, 26, 130);
+            hello.putPixel(49, 27, 135);
+            hello.putPixel(49, 28, 140);
+            hello.putPixel(49, 29, 145);
+            hello.putPixel(49, 30, 150);
+            hello.putPixel(49, 31, 155);
+            hello.putPixel(49, 32, 160);
+            hello.putPixel(49, 33, 165);
+            hello.putPixel(49, 34, 170);
+            hello.putPixel(49, 35, 175);
+            hello.putPixel(49, 36, 180);
+            hello.putPixel(49, 37, 185);
+            hello.putPixel(49, 38, 190);
+            hello.putPixel(49, 39, 195);
+            hello.putPixel(49, 40, 200);
+            hello.putPixel(49, 41, 205);
+            hello.putPixel(49, 42, 210);
+            hello.putPixel(49, 43, 215);
+            hello.putPixel(49, 44, 220);
+            hello.putPixel(49, 45, 225);
+            hello.putPixel(49, 46, 230);
+            hello.putPixel(49, 47, 235);
+            hello.putPixel(49, 48, 240);
+            hello.putPixel(49, 49, 245);
             
-    //     }, 200);
+        }, 200);
 
-    //     timeB();
-    // }
+        timeB();
+    }
 
     if(demoTrue == true && sessionThree == true){
 
         let h = new BITMAP();
         console.log('hej');
-
         
+        setInterval(function(){
 
-            
-
-        // h.spriteMaker('run2');
-
-        // hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-    
-        //     h.spriteMaker('run1');
-
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-            
-
+            let d = new Date();
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let s = d.getSeconds();
         
+            counter.innerHTML = `${h} : ${m} : ${s}`;
+        
+            counter.animate([{opacity: '0'}, {opacity: '1.0'}], {duration: 500, fill: 'forwards'});
+        
+        }, 1000);
 
-        // setTimeout(function (){
+        setTimeout(function (){
 
-        //     hello.clear(0);
+            hello.clear(200);
 
-        //     h.spriteMaker('run1');
+            h.spriteMaker('run1');
 
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        // }, 1);
+        }, 1);
 
-        // setTimeout(function (){
+        setTimeout(function (){
 
-        //     hello.clear(0);
+            hello.clear(200);
 
-        //     h.spriteMaker('run2');
+            h.spriteMaker('run2');
 
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        // }, 1);
+        }, 1);
 
-        // setTimeout(function (){
+        setTimeout(function (){
 
-        //     hello.clear(0);
+            hello.clear(200);
 
-        //     h.spriteMaker('run3');
+            h.spriteMaker('run3');
 
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        // }, 1);
+        }, 1);
 
-        // setTimeout(function (){
+        setTimeout(function (){
 
-        //     hello.clear(0);
+            hello.clear(200);
 
-        //     h.spriteMaker('run2');
+            h.spriteMaker('run2');
 
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        // }, 1);
+        }, 1);
 
-        // setTimeout(function (){
+        setTimeout(function (){
 
-        //     hello.clear(0);
+            hello.clear(200);
 
-        //     h.spriteMaker('run1');
+            h.spriteMaker('run1');
 
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        // }, 1);
+        }, 1);
         
         // timeC();
     }

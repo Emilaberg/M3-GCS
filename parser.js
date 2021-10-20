@@ -1,5 +1,4 @@
 let temporaryArray = new Array;
-// document.writeln("<script src='display.js'></script>");
 function parser() {
     temporaryArray = document.getElementById('textInput').value.split('\n');
     for (let l = 0; l < temporaryArray.length; l++) {
