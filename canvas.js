@@ -65,42 +65,42 @@ let inputs = {
     // 
     X1: {
         "name":"X1",
-        "type":"text",
+        "type":"number",
         "placeholder" :"X1",
         "id":"x1",
         "value": "document.getElementByID('w').value"
     },
     X2: {
         "name":"X2",
-        "type":"text",
+        "type":"number",
         "placeholder":"X2",
         "id":"x2"
     },
     Y1: 
     {
         "name":"Y1",
-        "type":"text",
+        "type":"number",
         "placeholder":"Y1",
         "id":"y1"
     },
     Y2: 
     {
         "name":"Y2",
-        "type":"text",
+        "type":"number",
         "placeholder":"Y2",
         "id":"y2"
     },
     COLOR: 
     {
         "name":"color",
-        "type":"text",
+        "type":"number",
         "placeholder":"Color",
         "id":"color"
     },
     DIAMETER: 
     {
         "name":"diameter",
-        "type":"text",
+        "type":"number",
         "placeholder":"d",
         "id":"d"
     },
@@ -117,7 +117,9 @@ let arr = [
     //pixel
     [ 'X1', 'Y1'],
     //names
-    [ 'circle', 'rectangle', 'line', 'pixel']
+    [ 'circle', 'rectangle', 'line', 'pixel'],
+    // Textout
+    ['X1', 'Y1', 'string']
 ];
 
 
@@ -127,8 +129,8 @@ function renderInputs(func)
     if(select.value === 'reSize')
     {
         renderResize();
-    }else
-    {
+    }
+    else{
         let el = document.getElementById('numbers');
         let colorBtn = document.getElementById("color");
         
@@ -136,9 +138,9 @@ function renderInputs(func)
     
         for (let i = 0; i < arr[func].length; i++)
         {
-            el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`;
+            console.log(el.innerHTML += `<input name="${inputs[arr[func][i]].name}" placeholder="${inputs[arr[func][i]].placeholder}" type="${inputs[arr[func][i]].type}" id="${inputs[arr[func][i]].id}">`);
         }
-        colorBtn.innerHTML = `<input type="text" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`
+        colorBtn.innerHTML = `<input type="number" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`
     }
     console.log(func);
     console.log("option " + select.selectedIndex);
@@ -161,13 +163,19 @@ function renderResizeBtn()
     el.innerHTML += `<div style="display: flex; align-items:stretch; gap: 6px; background-color: #fefefe; padding: 6px; border-radius: 4px; box-shadow: rgba(39, 36, 36, 0.287) 4px 4px;"><span style="margin:auto; font-size: 22px;">RESIZE</span><input type="text" placeholder="W" id="w"><input type="text" placeholder="H" id="h"></div>` 
 }
 
-function renderCommand()
+let reText = false;
+function renderText()
 {
-    
+    reText = true;
+    let el = document.getElementById('numbers');
+    let colorBtn = document.getElementById("color");
     let textCommand = document.getElementById("text-command");
 
     textCommand.innerHTML = '';
-    textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+    textCommand.innerHTML += `<div><button onclick="renderText()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+    el.innerHTML += `<input name="X1" placeholder="X1" type="number" id="x1"><input name="Y1" placeholder="Y1" type="number" id="y1">`;
+    colorBtn.innerHTML = `<input type="number" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`;
+    return reText;
 }
 
 function renderParser()
@@ -175,13 +183,45 @@ function renderParser()
     let parser = document.getElementById("text-command");
 
     parser.innerHTML = '';
-    parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
+    parser.innerHTML += `<div><button onclick="renderText()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
 }
 
 function writeShape()
 {
-    const expr = select.selectedIndex-2
+    const expr = select.selectedIndex-2;
     let success = document.getElementById("success");
+    let errorDiv = document.querySelector(".errorDiv");
+    let errorMessage = document.querySelector('.errorP');
+    let el = document.getElementById('numbers');
+    let col = document.querySelector('.inputs');
+
+    if(reText == true){
+
+        let innerText = document.querySelector('#textinput');
+
+        alert(innerText.value);
+
+        // if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+        //     errorDiv.style.display = 'block';
+        //     errorMessage.innerHTML = 'Inputs not correct';
+        //     setTimeout(function session1(){ 
+        //         errorDiv.style.display = 'none';
+        //     }, 3000);
+        // }
+        // else{
+        //     hello.circle(x1.value, y1.value, d.value, shade.value);
+        //     success.style.display = 'block';
+        //     el.innerHTML = '';
+        //     col.innerHTML = '';
+        //     setTimeout(function session1(){ 
+        //         success.style.display = 'none';
+        //     }, 3000);
+        //     return;
+        // }
+
+        // reText = false;
+        return;
+    }
     
     if(select.value === "reSize")
     {
@@ -190,33 +230,118 @@ function writeShape()
     }
     else
     {
-        switch(expr)
-        {
-            // circle
-            case 0:
-                console.log(x1.value,y1.value,d.value, shade.value);
-                hello.circle(x1.value,y1.value,d.value, shade.value);
-                break;
-            // Rectangle
-            case 1:
-                // prints message in the console for debugging
-                console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
-                // draws a rectangle with the inputs you entered.
-                hello.rectangle(x1.value,y1.value,x2.value,y2.value, shade.value);
-                break;
-            // line
-            case 2:
-                console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
-                hello.line(x1.value,x2.value,y1.value,y2.value, shade.value);
-                break;
-            //pixel
-            case 3:
-                console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
-                hello.putPixel(x1.value,y1.value, shade.value);
-                break;
+
+        if(expr == 0){
+            // Circle
+            if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || d.value.length == 0 || d.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+                errorDiv.style.display = 'block';
+                errorMessage.innerHTML = 'Inputs not correct';
+                setTimeout(function session1(){ 
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+            else{
+                hello.circle(x1.value, y1.value, d.value, shade.value);
+                success.style.display = 'block';
+                el.innerHTML = '';
+                col.innerHTML = '';
+                setTimeout(function session1(){ 
+                    success.style.display = 'none';
+                }, 3000);
+                return;
+            }
         }
+
+        if(expr == 1){
+            // Rectangle
+            if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || x2.value.length == 0 || x2.value < 0 || y2.value.length == 0 || y2.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+                errorDiv.style.display = 'block';
+                errorMessage.innerHTML = 'Inputs not correct';
+                setTimeout(function session1(){ 
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+            else{
+                hello.rectangle(x1.value, y1.value, x2.value, y2.value, shade.value);
+                success.style.display = 'block';
+                el.innerHTML = '';
+                col.innerHTML = '';
+                setTimeout(function session1(){ 
+                    success.style.display = 'none';
+                }, 3000);
+                return;
+            }
+        }
+
+        if(expr == 2){
+            // Line
+            if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || x2.value.length == 0 || x2.value < 0 || y2.value.length == 0 || y2.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+                errorDiv.style.display = 'block';
+                errorMessage.innerHTML = 'Inputs not correct';
+                setTimeout(function session1(){ 
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+            else{
+                hello.line(x1.value, y1.value, x2.value, y2.value, shade.value);
+                success.style.display = 'block';
+                el.innerHTML = '';
+                col.innerHTML = '';
+                setTimeout(function session1(){ 
+                    success.style.display = 'none';
+                }, 3000);
+                return;
+            }
+        }
+
+        if(expr == 3){
+            // Pixel
+            if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+                errorDiv.style.display = 'block';
+                errorMessage.innerHTML = 'Inputs not correct';
+                setTimeout(function session1(){ 
+                    errorDiv.style.display = 'none';
+                }, 3000);
+            }
+            else{
+                hello.putPixel(x1.value, y1.value, shade.value);
+                success.style.display = 'block';
+                el.innerHTML = '';
+                col.innerHTML = '';
+                setTimeout(function session1(){ 
+                    success.style.display = 'none';
+                }, 3000);
+                return;
+            }
+        }
+
+        // switch(expr)
+        // {
+        //     // circle
+        //     case 0:
+        //         console.log(x1.value,y1.value,d.value, shade.value);
+        //         hello.circle(x1.value,y1.value,d.value, shade.value);
+        //         break;
+        //     // Rectangle
+        //     case 1:
+        //         // prints message in the console for debugging
+        //         console.log(`you chose rectangle and entered X1: ${x1.value} Y1: ${y1.value} X2: ${x2.value} Y2: ${y2.value} and color ${shade.value}`);
+        //         // draws a rectangle with the inputs you entered.
+        //         hello.rectangle(x1.value,y1.value,x2.value,y2.value, shade.value);
+        //         break;
+        //     // line
+        //     case 2:
+        //         console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+        //         hello.line(x1.value,x2.value,y1.value,y2.value, shade.value);
+        //         break;
+        //     //pixel
+        //     case 3:
+        //         console.log(`you chose pixel and entered X: ${x1.value} and Y: ${y1.value} and color ${shade.value}`);
+        //         hello.putPixel(x1.value,y1.value, shade.value);
+        //         break;
+        // }
     }
-    success.style.display = "block";
+    // success.style.display = "block";
 }
 
 function clearCanvas()
