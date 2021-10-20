@@ -61,11 +61,11 @@
     <!-- Scroll -->
     <div style="top: 15%; right: 2%;" class="absolute">
         <div class="scrollDiv">
-            <div class="e up"><i onclick="alert('you pressed up')" class="fas fa-arrow-up"></i></div>
-            <div class="e left"><i onclick="alert('you pressed left')" class="fas fa-arrow-left"></i></div>
-            <div class="circle"><i class="far fa-circle" onclick="alert('you pressed clear')"></i></div>
-            <div class="e right"><i onclick="alert('you pressed right')" class="fas fa-arrow-right"></i></div>
-            <div class="e down"><i onclick="alert('you pressed down')" class="fas fa-arrow-down"></i></div>
+            <div class="e up"><i onclick="startTimer(0)" class="fas fa-arrow-up"></i></div>
+            <div class="e left"><i onclick="startTimer(1)" class="fas fa-arrow-left"></i></div>
+            <div class="circle"><i class="far fa-circle" onclick="ScrollStop()"></i></div>
+            <div class="e right"><i onclick="startTimer(2)" class="fas fa-arrow-right"></i></div>
+            <div class="e down"><i onclick="startTimer(3)" class="fas fa-arrow-down"></i></div>
         </div>
         <div style="margin-top: 20px;">
             <button onclick="btnOn('preserve')" class="btn preserve-btn">preserve</button>
@@ -90,6 +90,8 @@
 
     <canvas id="canvas">error: browser does not support canvas</canvas>
     <script src="canvas.js"></script>
+    <script src="parser.js"></script>
+
     <script src="display.js"></script>
 </body>
 </html>

@@ -4,6 +4,9 @@ let preserve = false;
 let command = false;
 let text = false;
 let shape = 0;
+let stop = false;
+
+
 
 function btnOn(btn){
     if(btn == 'preserve'){
@@ -51,7 +54,11 @@ function btnOn(btn){
 
 let dropDown = document.getElementById("options");
 let colorBtn = document.getElementById("color");
+let select = document.getElementById('options');
 
+select.addEventListener('change',function(){
+    renderInputs(select.selectedIndex-1);
+});
 
 
 let inputs = {
@@ -113,10 +120,6 @@ let arr = [
     [ 'circle', 'rectangle', 'line', 'pixel']
 ];
 
-let select = document.getElementById('options');
-select.addEventListener('change',function(){
-    renderInputs(select.selectedIndex-1);
-});
 
 function renderInputs(func)
 {
@@ -164,7 +167,7 @@ function renderCommand()
     let textCommand = document.getElementById("text-command");
 
     textCommand.innerHTML = '';
-    textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+    textCommand.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
 }
 
 function renderParser()
@@ -172,7 +175,7 @@ function renderParser()
     let parser = document.getElementById("text-command");
 
     parser.innerHTML = '';
-    parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
+    parser.innerHTML += `<div><button onclick="renderCommand()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
 }
 
 function writeShape()
@@ -221,3 +224,59 @@ function clearCanvas()
     hello.clear(shade.value);
 }
 
+function ScrollStop()
+{
+    clearInterval(timer);
+}
+
+function canvasScroll(num)
+{
+    stop = false;
+    expr = num;
+    if(preserve === false)
+    {
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.scrollUp();
+                break;
+            case 1:
+                hello.scrollLeft();
+                break;
+            case 2:
+                hello.scrollRight();
+                break;
+            case 3:
+                hello.scrollDown();
+                break;
+        }
+    }
+    else if(preserve === true && stop === false){
+        switch(expr)
+        {
+            // Scroll left
+            case 0:
+                hello.pscrollUp();
+                break;
+            case 1:
+                hello.pscrollLeft();
+                break;
+            case 2:
+                hello.pscrollRight();
+                break;
+            case 3:
+                hello.pscrollDown();
+                break;
+        }
+    }
+}
+
+let timer;
+
+function startTimer(num) {
+    timer = setInterval(function() { 
+        canvasScroll(num) 
+    }, 100);
+}
+  
