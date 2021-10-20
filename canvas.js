@@ -6,8 +6,6 @@ let text = false;
 let shape = 0;
 let stop = false;
 
-
-
 function btnOn(btn){
     if(btn == 'preserve'){
         preserve = !preserve;
@@ -23,32 +21,6 @@ function btnOn(btn){
             presBtn();
         }
     }
-    else if(btn == 'command'){
-        command = !command;
-
-        if(command == true){
-            document.querySelector('.command-btn').style.backgroundColor = '#333';
-            document.querySelector('.command-btn').style.color = '#fff';
-        }
-        else{
-            document.querySelector('.command-btn').style.backgroundColor = '#fff';
-            document.querySelector('.command-btn').style.color = '#333';
-        }
-    }
-    else if(btn == 'text'){
-        text = !text;
-
-        if(text == true){
-            document.querySelector('.text-btn').style.backgroundColor = '#333';
-            document.querySelector('.text-btn').style.color = '#fff';
-        }
-        else{
-            document.querySelector('.text-btn').style.backgroundColor = '#fff';
-            document.querySelector('.text-btn').style.color = '#333';
-        }
-    }
-    
-
     return;
 }
 
@@ -171,11 +143,29 @@ function renderText()
     let colorBtn = document.getElementById("color");
     let textCommand = document.getElementById("text-command");
 
-    textCommand.innerHTML = '';
-    textCommand.innerHTML += `<div><button onclick="renderText()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
-    el.innerHTML += `<input name="X1" placeholder="X1" type="number" id="x1"><input name="Y1" placeholder="Y1" type="number" id="y1">`;
-    colorBtn.innerHTML = `<input type="number" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`;
-    return reText;
+    text = !text;
+
+        if(text == true){
+            
+
+            el.innerHTML = '';
+            textCommand.innerHTML = '';
+            textCommand.innerHTML += `<div><button class="command-btn" onclick="renderParser()">Command</button><button class="text-btn" onclick="renderText()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: circle(00,00,00,255)..."></textarea>`
+            el.innerHTML += `<input name="X1" placeholder="X1" type="number" id="x1"><input name="Y1" placeholder="Y1" type="number" id="y1">`;
+            colorBtn.innerHTML = `<input type="number" name="color" placeholder="color" id="shade"><div id="displayColor"></div>`;
+
+            document.querySelector('.text-btn').style.backgroundColor = '#333';
+            document.querySelector('.text-btn').style.color = '#fff';
+            return reText;
+        }
+        else{
+            document.querySelector('.text-btn').style.backgroundColor = '#fff';
+            document.querySelector('.text-btn').style.color = '#333';
+
+            el.innerHTML = '';
+            colorBtn.innerHTML = '';
+        }
+
 }
 
 function renderParser()
@@ -183,7 +173,18 @@ function renderParser()
     let parser = document.getElementById("text-command");
 
     parser.innerHTML = '';
-    parser.innerHTML += `<div><button onclick="renderText()">Command</button><button onclick="renderParser()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
+    parser.innerHTML += `<div><button class="command-btn" onclick="renderParser()">Command</button><button class="text-btn" onclick="renderText()">Text</button></div><textarea name="" id="textInput" cols="40" rows="2" placeholder="Ex: Draw a circle "></textarea>`
+
+    command = !command;
+
+        if(command == true){
+            document.querySelector('.command-btn').style.backgroundColor = '#333';
+            document.querySelector('.command-btn').style.color = '#fff';
+        }
+        else{
+            document.querySelector('.command-btn').style.backgroundColor = '#fff';
+            document.querySelector('.command-btn').style.color = '#333';
+        }
 }
 
 function writeShape()
@@ -197,29 +198,29 @@ function writeShape()
 
     if(reText == true){
 
-        let innerText = document.querySelector('#textinput');
+        let innerText = document.querySelector('#textInput');
 
-        alert(innerText.value);
+        if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || innerText.value == '' || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
+            errorDiv.style.display = 'block';
+            errorMessage.innerHTML = 'Inputs not correct';
+            reText = false;
+            el.innerHTML = '';
+            setTimeout(function session1(){ 
+                errorDiv.style.display = 'none';
+            }, 3000);
+        }
+        else{
+            hello.textOut(x1.value, y1.value, shade.value, innerText.value );
+            success.style.display = 'block';
+            el.innerHTML = '';
+            col.innerHTML = '';
+            setTimeout(function session1(){ 
+                success.style.display = 'none';
+                reText = false;
+            }, 3000);
+            return;
+        }
 
-        // if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
-        //     errorDiv.style.display = 'block';
-        //     errorMessage.innerHTML = 'Inputs not correct';
-        //     setTimeout(function session1(){ 
-        //         errorDiv.style.display = 'none';
-        //     }, 3000);
-        // }
-        // else{
-        //     hello.circle(x1.value, y1.value, d.value, shade.value);
-        //     success.style.display = 'block';
-        //     el.innerHTML = '';
-        //     col.innerHTML = '';
-        //     setTimeout(function session1(){ 
-        //         success.style.display = 'none';
-        //     }, 3000);
-        //     return;
-        // }
-
-        // reText = false;
         return;
     }
     
@@ -299,8 +300,11 @@ function writeShape()
             if(x1.value.length == 0 || x1.value < 0 || y1.value.length == 0 || y1.value < 0 || shade.value.length == 0 || shade.value < 0 || shade.value > 255){
                 errorDiv.style.display = 'block';
                 errorMessage.innerHTML = 'Inputs not correct';
+                
                 setTimeout(function session1(){ 
                     errorDiv.style.display = 'none';
+                    el.innerHTML = '';
+                col.innerHTML = '';
                 }, 3000);
             }
             else{
@@ -346,6 +350,7 @@ function writeShape()
 
 function clearCanvas()
 {
+    hello.clear(0);
     hello.clear(shade.value);
 }
 
@@ -404,4 +409,11 @@ function startTimer(num) {
         canvasScroll(num) 
     }, 100);
 }
+
+
+window.addEventListener('click', function(){
+    let displayColor = document.querySelector('#displayColor');
+    displayColor.style.backgroundColor = `rgb(${shade.value}, ${shade.value}, ${shade.value})`;
+});
+
   

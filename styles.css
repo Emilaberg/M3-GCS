@@ -7,6 +7,10 @@
     font-family: 'Noto Sans Display', sans-serif;
 }
 
+::placeholder{
+    font-weight: bold;
+}
+
 body{
     /* width: 100%;
     height: 100%; */
