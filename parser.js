@@ -1,9 +1,7 @@
 let temporaryArray = new Array;
 // document.writeln("<script src='display.js'></script>");
 function parser() {
-    console.log("Parse start");
     temporaryArray = document.getElementById('textInput').value.split('\n');
-    console.log(temporaryArray);
     for (let l = 0; l < temporaryArray.length; l++) {
         temporaryArray[l] = temporaryArray[l].toLowerCase();
         temporaryArray[l] = temporaryArray[l].replaceAll(" ",'');
@@ -15,13 +13,10 @@ function parser() {
         temporaryArray[l] = temporaryArray[l].replaceAll(",",' ');
         temporaryArray[l] = temporaryArray[l].split(' ');
     }
-    console.log(temporaryArray);
     interpreter();
-    console.log("Parse end");
 }
 
 function interpreter() {
-    console.log("Interpreter start");
     for (let l = 0; l < temporaryArray.length; l++) {
         if (Array.isArray(temporaryArray[l]) == true) {
             if (temporaryArray[l][0] == "putpixel") {
@@ -115,7 +110,6 @@ function interpreter() {
             }
         }
     }
-    console.log("Interpreter end");
 }
 
 
