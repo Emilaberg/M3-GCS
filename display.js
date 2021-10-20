@@ -1,11 +1,11 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-// canvas.width = "1000";
-// canvas.height = "1000";
+canvas.width = "1000";
+canvas.height = "1000";
 
-ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerWidth;
+// ctx.canvas.width = window.innerWidth;
+// ctx.canvas.height = window.innerWidth;
 
 
 let chars = {
@@ -771,7 +771,6 @@ class DISPLAY {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.PLANE = new Array(width * height).fill(0);
-        // this.PLANE = new Array(width).fill(0).map(element => new Array(height).fill(0));
         this.ZOOM = 0;
         this.#LOCK;
     }
@@ -799,7 +798,6 @@ class DISPLAY {
             for (let j = 0; j < this.HEIGHT; j++) {
                 
                 tempArr[i][j] = this.PLANE[this.to1D(i, j)];
-                // this.PLANE
                 this.to2DArray()
             }
         }
@@ -812,7 +810,6 @@ class DISPLAY {
 
     line(x1, y1, x2, y2, color) {
         const f = x => y => (y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2);
-        // const f = x => y => (x - x2) * (y2 - y1) - (x2 - x1) * (y - y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
 
         for (let i = 0; i < this.WIDTH; i++) {
@@ -878,22 +875,6 @@ class DISPLAY {
                 this.render();
             }
         }
-
-        // if(dx-width < -1 || dy-height < -1){
-        //     alert('Error');
-        //     return;
-        // }
-        
-        // let temp = new BITMAP(width+bx, height+by);
-        // for (let x = bx-(width-1); x <= bx; x++) {
-        //     for (let y = by-(height-1); y <= by; y++) {
-
-        //         this.PLANE[this.to1D(x, y)] = temp.PLANE[dx+x][dy+y];
-                
-        //     }
-        // }
-        // console.log(this.PLANE);
-        // console.log(temp.PLANE);
     }
 
     blitToBitmap(width, height,bx, by, dx, dy) {
@@ -1077,20 +1058,38 @@ class DISPLAY {
         }
     }
 
-    render() {
-        let dx = Math.round(canvas.width / this.WIDTH);
-        let dy = Math.round(canvas.height / this.HEIGHT);
+    canvasCoords(x,y) {
+
+    }
+
+    renderNew() {
+        
+        let w1 = canvas.getBoundingClientRect().width;
+        let h1 = canvas.getBoundingClientRect().height;
+        let r1 = w1/h1;
+        let r2 = this.WIDTH / this.HEIGHT;
+
+
+        // let product = Math.min(displayRatio,canvasRatio)/Math.max(displayRatio,canvasRatio);
+
+    
+
+
+        let offsetY = 0;
+        let offsetX = w1/2 - (h1*r2)/2;
+        let dx = Math.round(((w1*r2)) / (h1));
+        // let dx = (h1*r2) / this.WIDTH;
+        // let dy = dx;
+        
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
+                
                 ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ')';
-                ctx.fillRect(i * dx, j * dy, dx, dy);
+                ctx.fillRect(i*dx, j*dx, dx, dx);
             }
         }
     }
 }
-
-// let hello = new DISPLAY(window.innerWidth,window.innerHeight);
-
 let hello = new DISPLAY(50,50);
 // hello.circle(0, 0, 40, 5);
 let presActive = false;
@@ -1164,6 +1163,7 @@ function render() {
 //     hello.line(450, 450, 430, 445, 200);
 //     hello.line(0, 0, 10, 10, 255);
 //     hello.putPixel(40,40,255);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     hello.render();
     requestAnimationFrame(render);
 }
