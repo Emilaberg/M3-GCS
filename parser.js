@@ -28,7 +28,7 @@ function interpreter() {
     for (let l = 0; l < temporaryArray.length; l++) {
         // First checks if the first index is an array, if it is then it executes the code bellow
         if (Array.isArray(temporaryArray[l]) == true) {
-            // Then checks which function matches the first string and if all the appropriate inputs are NaN
+            // Then checks which function matches the first string and if all the appropriate inputs are NaN before 
             if (temporaryArray[l][0] == "putpixel") {
                 if (isNaN(temporaryArray[l][1]) == false && isNaN(temporaryArray[l][2]) == false && isNaN(temporaryArray[l][3]) == false) {
                     hello.putPixel(parseInt(temporaryArray[l][1]),parseInt(temporaryArray[l][2]),parseInt(temporaryArray[l][3]));
@@ -73,6 +73,7 @@ function interpreter() {
             }
         }
         else {
+            // Here it only checks which function matches the string
             if (temporaryArray[l] == "scrollleft") {
                 hello.scrollLeft();
                 hello.render();

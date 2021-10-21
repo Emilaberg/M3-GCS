@@ -18,7 +18,7 @@
                 <div class="shapes">
                     <select name="" id="options" class="dropdown">
                         <option value="" disabled selected>Shapes</option>
-                        <option value="reSize" ">resize</option>
+                        <option value="reSize">resize</option>
                         <option value="0">circle</option>
                         <option value="1">rectangle</option>
                         <option value="2">line</option>
@@ -28,8 +28,8 @@
                 
                 <div class="text-command" id="text-command">
                     <div>
-                        <button onclick="renderCommand()">Command</button>
-                        <button onclick="renderParser()">Text</button>
+                        <button class="command-btn" onclick="renderParser()">Command</button>
+                        <button class="text-btn" onclick="renderText()">Text</button>
                     </div>
                     
                     <textarea name="" id="textinput" cols="40" rows="2" placeholder="Text..."></textarea>
@@ -59,7 +59,7 @@
     </header>
 
     <!-- Scroll -->
-    <div style="top: 15%; right: 2%;" class="absolute">
+    <div style="top: 10%; right: 2%;" class="absolute">
         <div class="scrollDiv">
             <div class="e up"><i onclick="startTimer(0)" class="fas fa-arrow-up"></i></div>
             <div class="e left"><i onclick="startTimer(1)" class="fas fa-arrow-left"></i></div>
