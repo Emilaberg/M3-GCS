@@ -64,7 +64,23 @@ button:hover{
     flex-grow: 0.25;
     justify-content: space-between;
 }
+.shapes{
+    display: flex;
+    flex-direction: column;
+}
 
+.advctr{
+    background-color: #fefefe;
+    width: 50%;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.advctr:hover{
+    background-color: #e2e2e2;
+}
 /* Shapes button */
 .shapesBtn{
     padding: 3px;
