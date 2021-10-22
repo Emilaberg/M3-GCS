@@ -1340,68 +1340,104 @@ function render() {
         let h = new BITMAP();
         console.log('hej');
         
-        setInterval(function(){
+        // setInterval(function(){
 
-            let d = new Date();
-            let h = d.getHours();
-            let m = d.getMinutes();
-            let s = d.getSeconds();
+        //     let d = new Date();
+        //     let h = d.getHours();
+        //     let m = d.getMinutes();
+        //     let s = d.getSeconds();
         
-            counter.innerHTML = `${h} : ${m} : ${s}`;
+        //     counter.innerHTML = `${h} : ${m} : ${s}`;
         
-            counter.animate([{opacity: '0'}, {opacity: '1.0'}], {duration: 500, fill: 'forwards'});
+        //     counter.animate([{opacity: '0'}, {opacity: '1.0'}], {duration: 500, fill: 'forwards'});
         
-        }, 1000);
+        // }, 1000);
 
-        setTimeout(function (){
+        for(let i = 0; i < 4; i++){
+            if(i == 0){
+                setTimeout(function (){
 
-            hello.clear(200);
+                    console.log(i);
 
-            h.spriteMaker('run1');
+                    hello.clear(200);
 
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+                    h.spriteMaker('run1');
 
-        }, 1);
+                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        setTimeout(function (){
+                }, 50);
+                
+            }
+            if(i == 1){
+                setTimeout(function (){
 
-            hello.clear(200);
+                    console.log(i);
 
-            h.spriteMaker('run2');
+                    hello.clear(200);
 
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+                    h.spriteMaker('run2');
 
-        }, 1);
+                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        setTimeout(function (){
+                }, 50);
+            }
+            if(i == 2){
+                setTimeout(function (){
 
-            hello.clear(200);
+                    console.log(i);
 
-            h.spriteMaker('run3');
+                    hello.clear(200);
 
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+                    h.spriteMaker('run3');
 
-        }, 1);
+                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        setTimeout(function (){
+                }, 50);
+            }
+            if(i == 3){
+                setTimeout(function (){
 
-            hello.clear(200);
+                    console.log(i);
 
-            h.spriteMaker('run2');
+                    hello.clear(200);
 
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+                    h.spriteMaker('run2');
 
-        }, 1);
+                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
 
-        setTimeout(function (){
+                }, 50);
+            }
+        }
 
-            hello.clear(200);
+        
 
-            h.spriteMaker('run1');
+        // setTimeout(function (){
 
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+            
 
-        }, 1);
+        // }, 1);
+
+        // setTimeout(function (){
+
+            
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+            
+
+        // }, 1);
+
+        // setTimeout(function (){
+
+        //     hello.clear(200);
+
+        //     h.spriteMaker('run1');
+
+        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
+
+        // }, 1);
         
         // timeC();
     }
