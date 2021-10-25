@@ -1159,6 +1159,9 @@ let demoTrue = false;
 let sessionOne = true;
 let sessionTwo = false;
 let sessionThree = false;
+let sessionFour = false;
+let sessionFive = false;
+let sessionSix = false;
 function render() {
 
     if(demoTrue == true && sessionOne == true){
@@ -1339,107 +1342,69 @@ function render() {
 
         let h = new BITMAP();
         console.log('hej');
+
+
+            for(let i = 0; i < 50; i++){
+                    setTimeout(function (){
+                        hello.clear(200);
         
-        // setInterval(function(){
-
-        //     let d = new Date();
-        //     let h = d.getHours();
-        //     let m = d.getMinutes();
-        //     let s = d.getSeconds();
+                        h.spriteMaker('run1');  
         
-        //     counter.innerHTML = `${h} : ${m} : ${s}`;
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
         
-        //     counter.animate([{opacity: '0'}, {opacity: '1.0'}], {duration: 500, fill: 'forwards'});
+                        h.spriteMaker('run2');  
         
-        // }, 1000);
-
-        for(let i = 0; i < 4; i++){
-            if(i == 0){
-                setTimeout(function (){
-
-                    console.log(i);
-
-                    hello.clear(200);
-
-                    h.spriteMaker('run1');
-
-                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-                }, 50);
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
+        
+                        h.spriteMaker('run3');  
+        
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
+        
+                        h.spriteMaker('run2');  
+        
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
                 
             }
-            if(i == 1){
-                setTimeout(function (){
 
-                    console.log(i);
+        timeC();
 
-                    hello.clear(200);
+    }
 
-                    h.spriteMaker('run2');
+    if(demoTrue == true && sessionFour == true){
+        for(let i = 0; i < 31; i++){
+            setTimeout(function(){console.log('hej');}, i);
+                let a = Math.floor(Math.random()*50);
+                let b = Math.floor(Math.random()*50);
+                let c = Math.floor(Math.random()*10);
 
-                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-                }, 50);
-            }
-            if(i == 2){
-                setTimeout(function (){
-
-                    console.log(i);
-
-                    hello.clear(200);
-
-                    h.spriteMaker('run3');
-
-                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-                }, 50);
-            }
-            if(i == 3){
-                setTimeout(function (){
-
-                    console.log(i);
-
-                    hello.clear(200);
-
-                    h.spriteMaker('run2');
-
-                    hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-                }, 50);
-            }
+                hello.circle(a, b, c, i*8);
+            
         }
+        timeD();
+    }
 
-        
+    if(demoTrue == true && sessionFive == true){
+        for(let i = 0; i < 31; i++){
+            setTimeout(function(){console.log('hej');}, i);
+                let a = Math.floor(Math.random()*50);
+                let b = Math.floor(Math.random()*50);
+                let c = Math.floor(Math.random()*50);
+                let d = Math.floor(Math.random()*50);
 
-        // setTimeout(function (){
-
+                hello.rectangle(a, b, c, d, i*8);
             
-
-        // }, 1);
-
-        // setTimeout(function (){
-
-            
-
-        // }, 1);
-
-        // setTimeout(function (){
-
-            
-
-        // }, 1);
-
-        // setTimeout(function (){
-
-        //     hello.clear(200);
-
-        //     h.spriteMaker('run1');
-
-        //     hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        // }, 1);
-        
-        // timeC();
+        }
+        timeE();
     }
 
     hello.render();
@@ -1449,9 +1414,21 @@ requestAnimationFrame(render);
 
 
 function demo(){
-    
-    // document.querySelector('#demo').style.display = 'none';
+    let btn = document.querySelector('#demo');
+
     demoTrue = !demoTrue;
+
+    if(demoTrue == true){
+        btn.style.color = '#fff';
+        btn.style.backgroundColor = '#333';
+        btn.innerHTML = `<i class="fas fa-pause"></i>Pause`;
+    }
+    if(demoTrue == false){
+        btn.style.color = '#333';
+        btn.style.backgroundColor = '#fff';
+        btn.innerHTML = `<i class="fas fa-play"></i>Play`;
+    }
+
     return demoTrue;
 
 }
@@ -1466,14 +1443,30 @@ function timeA(){
 function timeB(){
     setTimeout(function (){ 
         sessionTwo = false; 
-        sessionThree = true;
+        sessionFour = true;
     }, 3000);
 }
 
 function timeC(){
     setTimeout(function (){ 
         sessionThree = false;
+        sessionFour = true;
         
+    }, 3000);
+}
+
+function timeD(){
+    setTimeout(function (){ 
+        sessionFour = false;
+        sessionFive = true;
+        
+    }, 3000);
+}
+
+function timeE(){
+    setTimeout(function (){ 
+        sessionFive = false;
+        sessionSix = true;
         
     }, 3000);
 }

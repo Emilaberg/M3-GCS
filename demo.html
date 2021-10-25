@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@100&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Noto Sans Display', sans-serif;
         }
 
         body {
@@ -26,16 +31,34 @@
         button{
             position: absolute;
             top: 20%;
-            right: 20%;
+            right: 11%;
+            padding: 10px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            color: #333;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        h1{
+            position: absolute;
+            top: 45%;
+            right: 6%;
+            text-align: center;
+            width: 200px;
+        }
+
+        i{
+            padding-right: 10px;
         }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
 
-    <button id="demo" onclick="demo()">Demo</button>
+    <button id="demo" onclick="demo()"><i class="fas fa-play"></i>Play</button>
 
-
+    <h1>Hello m m m m m m m m</h1>
 
 
     <script src="demo.js">
