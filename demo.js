@@ -1186,6 +1186,8 @@ window.addEventListener('keydown', (event) => {
     hello.render();
 })
 
+let time = 0;
+
 let demoTrue = false;
 let sessionOne = true;
 let sessionTwo = false;
@@ -1193,6 +1195,7 @@ let sessionThree = false;
 let sessionFour = false;
 let sessionFive = false;
 let sessionSix = false;
+let sessionSeven = false;
 function render() {
 
     if(demoTrue == true && sessionOne == true){
@@ -1436,9 +1439,18 @@ function render() {
             
         }
         timeE();
-    }
 
+    }
+    if(demoTrue == true && sessionSix == true) {
+        hello.clear(0);
+        hello.implicitFunc(x => y => 10*Math.sin((x-10*time)/7)*Math.cos(time) - (y-20),255);
+        setTimeout(function() {
+            timeF();
+
+        },3000);
+    }
     hello.render();
+    time += 0.1;
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
@@ -1500,4 +1512,11 @@ function timeE(){
         sessionSix = true;
         
     }, 3000);
+}
+
+function timeF(){
+    setTimeout(function(){
+        sessionSix = false;
+        sessionSeven = true;
+    },3000);
 }

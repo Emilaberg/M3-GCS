@@ -762,7 +762,12 @@ class BITMAP {                                                                  
         console.log(bitmap);
     }
 }
-
+function POINT(x,y) {
+    return {
+        x: x,
+        y: y
+    }
+}
 class DISPLAY {
     #LOCK;
 
@@ -809,7 +814,7 @@ class DISPLAY {
 
     implicitFunc(func, color) {
         const allEqual = a => a.every(element => element === a[0]);
-        let tempDisp = new Array(this.WIDTH+1).fill(0).map(() => new Array(this.HEIGHT+1).fill(0)).map((s1,x) => s1.map((s2,y) => Math.sign(func(x)(y))));
+        let tempDisp = new Array(this.WIDTH+1).fill(0).map(() => new Array(this.HEIGHT+1).fill(0)).map((s1,x) => s1.map((s2,y) => Math.sign(func(x+0.5)(y+0.5))));
 
         for(let x = 0; x < this.WIDTH; x++) {
             for(let y = 0; y < this.HEIGHT; y++) {
@@ -851,6 +856,15 @@ class DISPLAY {
                     this.putPixel(i,j,color);
                 }
             }
+        }
+    }
+
+    polygon(color, ...points) {
+        for(let i = 0; i < points.length; i++) {
+            this.line(points[i].x, points[i].y, points[(i+1)%points.length].x, points[(i+1)%points.length].y,color);
+        }
+        for(let i = 0; i < points.length; i++) {
+            this.putPixel(points[i].x,points[i].y,127);
         }
     }
 
@@ -1121,7 +1135,7 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 
-                ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ')';
+                ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + 0 + ',' + 0 + ')';
                 ctx.fillRect(i*dx, j*dx, dx, dx);
                 // ctx.fillRect(i * dx, j * dy, dx, dy);
                 // ctx.fillRect(i * dx, j * dx, dx, dx);
@@ -1192,6 +1206,9 @@ window.addEventListener('keydown', (event) => {
     }
     hello.render();
 })
+
+const cos = x => Math.cos(x);
+const sin = x => Math.sin(x);
 let time = 0;
 function render() {
 // //     hello.rectangle(8, 8, 9, 9, 255);
@@ -1206,7 +1223,9 @@ function render() {
 // //     hello.putPixel(40,40,255);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     hello.clear(0);
-    hello.implicitFunc(x => y => 10*Math.sin((x-10*time)/7)*Math.cos(time) - (y-50),255);
+    hello.implicitFunc(x => y => 5*sin((x-10*time)/7)*sin(time/3) + 5*sin((x-10*time)/4)*cos(time/2) + 5*sin((x-10*time)/3)*sin(time/5-3) - (y-50)/2,127);
+    hello.line(1,1,10,1,255);
+    hello.polygon(255,POINT(10,10),POINT(50,10),POINT(3*time,5*time),POINT(10,50));
     hello.render();
     time += 0.1;
     requestAnimationFrame(render);
