@@ -1186,10 +1186,13 @@ window.addEventListener('keydown', (event) => {
     hello.render();
 })
 
-let demoTrue = true;
+let demoTrue = false;
 let sessionOne = true;
 let sessionTwo = false;
 let sessionThree = false;
+let sessionFour = false;
+let sessionFive = false;
+let sessionSix = false;
 function render() {
 
     if(demoTrue == true && sessionOne == true){
@@ -1371,72 +1374,68 @@ function render() {
         let h = new BITMAP();
         console.log('hej');
 
+
+            for(let i = 0; i < 50; i++){
+                    setTimeout(function (){
+                        hello.clear(200);
         
-
-            
-
-        h.spriteMaker('run2');
-
-        hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-    
-            h.spriteMaker('run1');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-            
-
+                        h.spriteMaker('run1');  
         
-
-        setTimeout(function (){
-
-            hello.clear(0);
-
-            h.spriteMaker('run1');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        }, 1);
-
-        setTimeout(function (){
-
-            hello.clear(0);
-
-            h.spriteMaker('run2');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        }, 1);
-
-        setTimeout(function (){
-
-            hello.clear(0);
-
-            h.spriteMaker('run3');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        }, 1);
-
-        setTimeout(function (){
-
-            hello.clear(0);
-
-            h.spriteMaker('run2');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        }, 1);
-
-        setTimeout(function (){
-
-            hello.clear(0);
-
-            h.spriteMaker('run1');
-
-            hello.blitToDisplay(h, 16, 16, 0, 0, 20, 20);
-
-        }, 1);
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
         
+                        h.spriteMaker('run2');  
+        
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
+        
+                        h.spriteMaker('run3');  
+        
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                    setTimeout(function (){
+                        hello.clear(200);
+        
+                        h.spriteMaker('run2');  
+        
+                        hello.blitToDisplay(h, 16, 16, 0, 0, i++, 20);
+                    }, 10);
+                
+            }
+
         timeC();
+
+    }
+
+    if(demoTrue == true && sessionFour == true){
+        for(let i = 0; i < 31; i++){
+            setTimeout(function(){console.log('hej');}, i);
+                let a = Math.floor(Math.random()*50);
+                let b = Math.floor(Math.random()*50);
+                let c = Math.floor(Math.random()*10);
+
+                hello.circle(a, b, c, i*8);
+            
+        }
+        timeD();
+    }
+
+    if(demoTrue == true && sessionFive == true){
+        for(let i = 0; i < 31; i++){
+            setTimeout(function(){console.log('hej');}, i);
+                let a = Math.floor(Math.random()*50);
+                let b = Math.floor(Math.random()*50);
+                let c = Math.floor(Math.random()*50);
+                let d = Math.floor(Math.random()*50);
+
+                hello.rectangle(a, b, c, d, i*8);
+            
+        }
+        timeE();
     }
 
     hello.render();
@@ -1446,9 +1445,21 @@ requestAnimationFrame(render);
 
 
 function demo(){
-    
-    // document.querySelector('#demo').style.display = 'none';
+    let btn = document.querySelector('#demo');
+
     demoTrue = !demoTrue;
+
+    if(demoTrue == true){
+        btn.style.color = '#fff';
+        btn.style.backgroundColor = '#333';
+        btn.innerHTML = `<i class="fas fa-pause"></i>Pause`;
+    }
+    if(demoTrue == false){
+        btn.style.color = '#333';
+        btn.style.backgroundColor = '#fff';
+        btn.innerHTML = `<i class="fas fa-play"></i>Play`;
+    }
+
     return demoTrue;
 
 }
@@ -1463,14 +1474,30 @@ function timeA(){
 function timeB(){
     setTimeout(function (){ 
         sessionTwo = false; 
-        sessionThree = true;
+        sessionFour = true;
     }, 3000);
 }
 
 function timeC(){
     setTimeout(function (){ 
         sessionThree = false;
+        sessionFour = true;
         
+    }, 3000);
+}
+
+function timeD(){
+    setTimeout(function (){ 
+        sessionFour = false;
+        sessionFive = true;
+        
+    }, 3000);
+}
+
+function timeE(){
+    setTimeout(function (){ 
+        sessionFive = false;
+        sessionSix = true;
         
     }, 3000);
 }

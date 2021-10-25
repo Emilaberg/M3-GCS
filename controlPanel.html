@@ -233,14 +233,15 @@
                         <p>scroll</p>
                     </div>
                     <div class="row" style="margin-bottom: 1px;">
-                        <button class="arrowkeys">↑</button>
+                        <button class="fas fa-arrow-up arrowkeys" onclick="startTimer(0)">↑</button>
                     </div>
-                    <div class="row" style="gap: 32px;">
-                        <button class="arrowkeys">←</button>
-                        <button class="arrowkeys">→</button>
+                    <div class="row" style="gap: 4px; display: flexbox; align-items: center;">
+                        <button class="fas fa-arrow-left arrowkeys" onclick="startTimer(1)">←</button>
+                        <button class="far fa-circle" onclick="ScrollStop()" style="width: 24px; height: 24px; border-radius: 30px;"></button>
+                        <button class="fas fa-arrow-right arrowkeys" onclick="startTimer(2)">→</button>
                     </div>
                     <div class="row" style="margin-top: 1px;">
-                        <button class="arrowkeys">↓</button>
+                        <button class="fas fa-arrow-down arrowkeys" onclick="startTimer(3)">↓</button>
                     </div>
                 </div>
             </div>
