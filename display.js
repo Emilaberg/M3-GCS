@@ -1,5 +1,6 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+// ctx.translate(0.5, 0.5);
 
 canvas.width = "1000";
 canvas.height = "1000";
@@ -736,7 +737,7 @@ let chars = {
         0, 0, 0, 0, 0, 0, 0
     ],
 }
-
+const fix = (f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v))));
 class BITMAP {                                                                                  //Class BITMAP
     constructor(width, height) {                                                                                    
         this.WIDTH = width;
@@ -806,6 +807,37 @@ class DISPLAY {
         this.PLANE[this.to1D(x, y)] = color;
     }
 
+    implicitFunc(func, color) {
+        const allEqual = a => a.every(element => element === a[0]);
+        let tempDisp = new Array(this.WIDTH+1).fill(0).map(() => new Array(this.HEIGHT+1).fill(0)).map((s1,x) => s1.map((s2,y) => Math.sign(func(x)(y))));
+
+        for(let x = 0; x < this.WIDTH; x++) {
+            for(let y = 0; y < this.HEIGHT; y++) {
+                if(!allEqual([tempDisp[x][y],tempDisp[x+1][y],tempDisp[x][y+1],tempDisp[x+1][y+1]].filter(element => element !== 0))) {
+                    this.putPixel(x,y,color);
+                }
+            }
+        }
+    }
+
+    mandelBrot() {
+        const Square = z => [z[0]**2 - z[1]**2, 2*z[0]*z[1]];
+        const abs = z => z[0]**2 + z[1]**2;
+        const Add = z => c => [z[0]+c[0],z[1]+c[1]]
+        const inMandelbrot = fix(f => (z=[0,0]) => (i=0) => c => abs(z) <= 4 ? i > 255 ? 255 : f(Add(Square(z))(c))(i+1)(c) : 2*i)()();
+        for(let x = 0; x < this.WIDTH; x++) {
+            for(let y = 0; y < this.HEIGHT; y++) {
+                // if(inMandelbrot([x/250-1.5,y/250-1.3])) {
+                //     this.putPixel(x,y,255);
+                // } else {
+                //     this.putPixel(x,y,0);
+                // }
+                this.putPixel(x,y,inMandelbrot([x/500-1.5,y/500-1.3]));
+            }
+        }
+        
+    }
+
     line(x1, y1, x2, y2, color) {
         const f = x => y => (y2-y1)*x + (x1-x2)*y + (x2*y1-x1*y2);
         const A2 = (x2 - x1) ** 2 + (y2 - y1) ** 2;
@@ -840,11 +872,6 @@ class DISPLAY {
     }
 
     rectangle(x1, y1, x2, y2, color) {
-        // for (let i = x1; i < x2; i++) {
-        //     for (let j = y1; j < y2; j++) {
-        //         this.putPixel(i, j, color);
-        //     }
-        // }
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 if (i >= x1 && i <= x2 && j >= y1 && j <= y2) {
@@ -862,15 +889,12 @@ class DISPLAY {
         this.PLANE = new Array(width * height).fill(0);
         this.WIDTH = width;
         this.HEIGHT = height;
-        // return new DISPLAY(width, height);
     }
 
     blitToDisplay(BITMAp, width, height, bx, by, dx, dy) {
         for (let i = bx; i < bx+width; i++) {
             for (let j = by; j < by+height; j++) {
                 this.PLANE[this.to1D(i-bx+dx,j-by+dy)] = BITMAp.PLANE[i][j];
-                console.log(BITMAp);
-                this.render();
             }
         }
     }
@@ -1088,9 +1112,11 @@ class DISPLAY {
 
         let offsetY = 0;
         let offsetX = w1/2 - (h1*r2)/2;
-        let dx = Math.round(((w1*r2)) / (h1));
+        // let dx = Math.round(((w1*r2)) / (h1));
         // let dx = (h1*r2) / this.WIDTH;
         // let dy = dx;
+
+        let dx = Math.floor(canvas.width / this.WIDTH);
         
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
@@ -1103,7 +1129,7 @@ class DISPLAY {
         }
     }
 }
-let hello = new DISPLAY(50,50);
+let hello = new DISPLAY(100,100);
 // hello.circle(0, 0, 40, 5);
 let presActive = false;
 function presBtn() {
@@ -1166,20 +1192,23 @@ window.addEventListener('keydown', (event) => {
     }
     hello.render();
 })
-
+let time = 0;
 function render() {
-//     hello.rectangle(8, 8, 9, 9, 255);
-//     hello.textOut(450, 450, 255, "jag vet inte 123456789");
-//     hello.textOut(10, 10, 200, "test test test");
-//     hello.circle(145, 145, 50, 255);
-//     hello.rectangle(190, 190, 210, 210, 230);
-//     hello.line(190, 190, 450, 450, 200);
-//     hello.line(450, 450, 470, 430, 200);
-//     hello.line(450, 450, 430, 445, 200);
-//     hello.line(0, 0, 10, 10, 255);
-//     hello.putPixel(40,40,255);
+// //     hello.rectangle(8, 8, 9, 9, 255);
+// //     hello.textOut(450, 450, 255, "jag vet inte 123456789");
+// //     hello.textOut(10, 10, 200, "test test test");
+// //     hello.circle(145, 145, 50, 255);
+// //     hello.rectangle(190, 190, 210, 210, 230);
+// //     hello.line(190, 190, 450, 450, 200);
+// //     hello.line(450, 450, 470, 430, 200);
+// //     hello.line(450, 450, 430, 445, 200);
+// //     hello.line(0, 0, 10, 10, 255);
+// //     hello.putPixel(40,40,255);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hello.clear(0);
+    hello.implicitFunc(x => y => 10*Math.sin((x-10*time)/7)*Math.cos(time) - (y-50),255);
     hello.render();
+    time += 0.1;
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
