@@ -1105,7 +1105,7 @@ class DISPLAY {
         for (let i = 0; i < this.WIDTH; i++) {
             for (let j = 0; j < this.HEIGHT; j++) {
                 ctx.fillStyle = 'rgb(' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ',' + this.PLANE[this.to1D(i, j)] + ')';
-                ctx.fillRect(i * dx, j * dy, dx, dy);
+                ctx.fillRect(i * dx, j * dx, dx, dx);
                 // ctx.fillRect(i * dx, j * dx, dx, dx);
             }
         }
