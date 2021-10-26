@@ -85,9 +85,12 @@
         }
 
     </style>
+    <script src="display.js"></script>
+    <script src="canvas.js"></script>
     <script>
-        function returntomain() {
-            windows.close()
+        function clearBtn() {
+            hello.clear(document.getElementById('clearInp').value);
+            hello.render();
         }
     </script>
 </head>
@@ -248,11 +251,10 @@
             <!-- clear -->
             <div class="row" style="justify-content: flex-end; gap: 4px;">
                 <input type="text" id="clearInp" placeholder="color">
-                <button id="clearBtn" style="width: 50px; height: 36px; background-color: red; border-radius: 5px;">Clear</button>
+                <button id="clearBtn" onclick="clearBtn()" style="width: 50px; height: 36px; background-color: red; border-radius: 5px;">Clear</button>
             </div>
         </div>
     </div>
-    
 </body>
 
 </html>

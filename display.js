@@ -1221,13 +1221,13 @@ function render() {
 // //     hello.line(450, 450, 430, 445, 200);
 // //     hello.line(0, 0, 10, 10, 255);
 // //     hello.putPixel(40,40,255);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    hello.clear(0);
-    hello.implicitFunc(x => y => 5*sin((x-10*time)/7)*sin(time/3) + 5*sin((x-10*time)/4)*cos(time/2) + 5*sin((x-10*time)/3)*sin(time/5-3) - (y-50)/2,127);
-    hello.line(1,1,10,1,255);
-    hello.polygon(255,POINT(10,10),POINT(50,10),POINT(3*time,5*time),POINT(10,50));
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // hello.clear(0);
+    // hello.implicitFunc(x => y => 5*sin((x-10*time)/7)*sin(time/3) + 5*sin((x-10*time)/4)*cos(time/2) + 5*sin((x-10*time)/3)*sin(time/5-3) - (y-50)/2,127);
+    // hello.line(1,1,10,1,255);
+    // hello.polygon(255,POINT(10,10),POINT(50,10),POINT(3*time,5*time),POINT(10,50));
     hello.render();
-    time += 0.1;
+    // time += 0.1;
     requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
