@@ -1188,6 +1188,8 @@ window.addEventListener('keydown', (event) => {
 
 let time = 0;
 
+let textfield = document.querySelector('.textfield');
+
 let demoTrue = false;
 let sessionOne = true;
 let sessionTwo = false;
@@ -1199,16 +1201,20 @@ let sessionSeven = false;
 function render() {
 
     if(demoTrue == true && sessionOne == true){
+        textfield.innerHTML = 'Putpixel';
         for(let i = 0; i < 256; i++){
             let b = Math.floor(Math.random()*50);
             let c = Math.floor(Math.random()*50);
             
             hello.putPixel(b, c, i);
+
         }
         timeA();
     }
 
     if(demoTrue == true && sessionTwo == true){
+
+        textfield.innerHTML = 'Putpixel and scrolldown';
 
         setTimeout(function(){ 
             hello.scrollDown();
@@ -1377,6 +1383,8 @@ function render() {
         let h = new BITMAP();
         console.log('hej');
 
+        textfield.innerHTML = 'Blit to display (Copy/Paste)';
+
 
             for(let i = 0; i < 50; i++){
                     setTimeout(function (){
@@ -1415,6 +1423,8 @@ function render() {
     }
 
     if(demoTrue == true && sessionFour == true){
+
+        textfield.innerHTML = 'Circle';
         for(let i = 0; i < 31; i++){
             setTimeout(function(){console.log('hej');}, i);
                 let a = Math.floor(Math.random()*50);
@@ -1428,6 +1438,8 @@ function render() {
     }
 
     if(demoTrue == true && sessionFive == true){
+
+        textfield.innerHTML = 'Rectangle';
         for(let i = 0; i < 31; i++){
             setTimeout(function(){console.log('hej');}, i);
                 let a = Math.floor(Math.random()*50);
@@ -1442,12 +1454,14 @@ function render() {
 
     }
     if(demoTrue == true && sessionSix == true) {
+        textfield.innerHTML = 'Implicit';
         hello.clear(0);
         hello.implicitFunc(x => y => 10*Math.sin((x-10*time)/7)*Math.cos(time) - (y-20),255);
         setTimeout(function() {
             timeF();
 
         },3000);
+        timeF();
     }
     hello.render();
     time += 0.1;
@@ -1517,6 +1531,7 @@ function timeE(){
 function timeF(){
     setTimeout(function(){
         sessionSix = false;
-        sessionSeven = true;
+        sessionOne = true;
+        // sessionSeven = true;
     },3000);
 }
