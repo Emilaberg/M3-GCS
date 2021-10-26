@@ -418,7 +418,6 @@ function startTimer(num) {
 
 function buttonPress() {
     window.open('controlPanel.html', 'name','width=750,height=390');
-    btn.style.display = 'none';
 }
 
 // window.addEventListener('click', function(){
