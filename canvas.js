@@ -196,6 +196,11 @@ function writeShape()
     let el = document.getElementById('numbers');
     let col = document.querySelector('.inputs');
 
+    if(command = true){
+        parser();
+        return;
+    }
+
     if(reText == true){
 
         let innerText = document.querySelector('#textInput');
@@ -415,9 +420,9 @@ function buttonPress() {
     btn.style.display = 'none';
 }
 
-window.addEventListener('click', function(){
-    let displayColor = document.querySelector('#displayColor');
-    displayColor.style.backgroundColor = `rgb(${shade.value}, ${shade.value}, ${shade.value})`;
-});
+// window.addEventListener('click', function(){
+//     let displayColor = document.querySelector('#displayColor');
+//     displayColor.style.backgroundColor = `rgb(${shade.value}, ${shade.value}, ${shade.value})`;
+// });
 
   
