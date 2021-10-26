@@ -196,7 +196,7 @@ function writeShape()
     let el = document.getElementById('numbers');
     let col = document.querySelector('.inputs');
 
-    if(command = true){
+    if(command == true){
         parser();
         renderParser();
         return;

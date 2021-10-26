@@ -814,7 +814,7 @@ class DISPLAY {
 
     implicitFunc(func, color) {
         const allEqual = a => a.every(element => element === a[0]);
-        let tempDisp = new Array(this.WIDTH+1).fill(0).map(() => new Array(this.HEIGHT+1).fill(0)).map((s1,x) => s1.map((s2,y) => Math.sign(func(x+0.5)(y+0.5))));
+        let tempDisp = new Array(this.WIDTH+1).fill(0).map(() => new Array(this.HEIGHT+1).fill(0)).map((s1,x) => s1.map((s2,y) => Math.sign(func(x-0.5)(y-0.5))));
 
         for(let x = 0; x < this.WIDTH; x++) {
             for(let y = 0; y < this.HEIGHT; y++) {
