@@ -206,7 +206,12 @@ button:hover{
 }
 
 #canvas {
-    width: 100%;
+    width: 100vmin;
+    height: 100vmin;
+}
+
+#canvas2{
+    width: 26%;
 }
 
 /* header */

@@ -181,7 +181,7 @@ function renderParser()
             document.querySelector('.command-btn').style.backgroundColor = '#333';
             document.querySelector('.command-btn').style.color = '#fff';
         }
-        else{
+        else if(command == false){
             document.querySelector('.command-btn').style.backgroundColor = '#fff';
             document.querySelector('.command-btn').style.color = '#333';
         }
@@ -198,6 +198,7 @@ function writeShape()
 
     if(command = true){
         parser();
+        renderParser();
         return;
     }
 
