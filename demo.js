@@ -1463,6 +1463,14 @@ function render() {
         },3000);
         timeF();
     }
+    let f = 10;
+    if(demoTrue == true && sessionSeven == true) {
+        textfield.innerHTML = 'Implicit divided by 10';
+        hello.clear(0);
+        hello.implicitFunc(x => y => Math.cos(x/f) + Math.sin(y/f),255);
+        hello.implicitFunc(x => y => Math.cos(x/5) + Math.sin(y/5),200);
+        f--;
+    }
     hello.render();
     time += 0.1;
     requestAnimationFrame(render);

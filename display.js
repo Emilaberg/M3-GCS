@@ -837,7 +837,7 @@ class DISPLAY {
                 // } else {
                 //     this.putPixel(x,y,0);
                 // }
-                this.putPixel(x,y,inMandelbrot([x/500-1.5,y/500-1.3]));
+                this.putPixel(x,y,inMandelbrot([x/(this.WIDTH/2)-1.5,y/(this.WIDTH/2)-1.3]));
             }
         }
         
